@@ -3,6 +3,8 @@ A User-Friendly Platform for Finding Roommates at Northwestern University develo
 
 Developed by Cooper Barth, Michael Ji, and Beth Mallon.
 
+Contact us at catsearchNU@gmail.com
+
 
 ## Build Instructions:
 1. git clone `https://github.com/cooperbarth/CatSearch.git`
