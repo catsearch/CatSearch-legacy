@@ -31,20 +31,27 @@ submit.addEventListener("click", () => {
 });
 
 const validInputs = () => {
-    if (email.value === "" || password.value === "") {
+    const e = email.value;
+    const p = password.value;
+    if (e === "" || p === "") {
         console.log("Empty Field(s)")
         return false;
     }
-    if (password.value.length < 8) {
+    if (!e.endsWith('u.northwestern.edu')) {
+        return false;
+    }
+    const emailPrefix = e.split('u.northwestern.edu')[0];
+    if (!emailPrefix.endsWith('@')) {
+        return false;
+    }
+    if (p.length < 8) {
         console.log("Password must be at least 8 characters in length.")
         return false;
     }
-    //you can see I hate regex
-    if (!email.value.endsWith('u.northwestern.edu')) {
-        return false;
-    }
-    const emailPrefix = email.value.split('u.northwestern.edu')[0];
-    if (!emailPrefix.endsWith('@')) {
+    const alphabetRegex = new RegExp('^[a-zA-Z]+$');
+    if (p === p.toLowerCase() || p === p.toUpperCase() || alphabetRegex.test(p)) {
+        console.log(p === p.toLowerCase(), p === p.toUpperCase(), alphabetRegex.test(p));
+        console.log("Password must contain a combination of uppercase and lowercase letters and contain at least one non-letter character.")
         return false;
     }
     return true

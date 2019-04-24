@@ -6,7 +6,7 @@ const apiUrl = 'http://localhost:8080/auth/login'
 const apiHeader = {"Content-Type": "application/json"}
 
 submit.addEventListener('click', () => {
-    if (email.value === "" || password.value === "") {
+    if (!validInputs()) {
         return;
     } else {
         const apiBody = JSON.stringify({
@@ -29,3 +29,11 @@ submit.addEventListener('click', () => {
             })
     }
 });
+
+const validInputs = () => {
+    if (email.value === "" || password.value === "") {
+        console.log("Empty Field(s)")
+        return false;
+    }
+    return true
+}
