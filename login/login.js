@@ -23,6 +23,11 @@ submit.addEventListener('click', () => {
             })
             .then(json => {
                 console.log(json.message);
+                if (json.success) {
+                    window.location.href = '../myProfile/myProfile.html';
+                } else {
+                    //show error message
+                }
             })
             .catch(err => {
                 console.log(err);

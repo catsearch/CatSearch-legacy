@@ -23,6 +23,11 @@ submit.addEventListener("click", () => {
             })
             .then(json => {
                 console.log(json.message);
+                if (json.success) {
+                    window.location.href = '../login/login.html';
+                } else {
+                    //print error message
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -50,7 +55,6 @@ const validInputs = () => {
     }
     const alphabetRegex = new RegExp('^[a-zA-Z]+$');
     if (p === p.toLowerCase() || p === p.toUpperCase() || alphabetRegex.test(p)) {
-        console.log(p === p.toLowerCase(), p === p.toUpperCase(), alphabetRegex.test(p));
         console.log("Password must contain a combination of uppercase and lowercase letters and contain at least one non-letter character.")
         return false;
     }
