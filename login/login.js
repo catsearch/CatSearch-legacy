@@ -19,7 +19,11 @@ submit.addEventListener('click', () => {
             body: apiBody
         })
             .then((response) => {
-                console.log(response.body);
+                return response.json();
+            })
+            .then((json) => {
+                console.log(json);
+                console.log(json.success);
             })
             .catch((err) => {
                 console.log(err);
