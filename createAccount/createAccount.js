@@ -18,14 +18,13 @@ submit.addEventListener("click", () => {
             headers: apiHeader,
             body: apiBody
         })
-            .then((response) => {
-                if (response.ok) {
-                    console.log("User created.")
-                } else {
-                    console.log("Failed to create user.");
-                }
+            .then(response => {
+                return response.json()
             })
-            .catch((err) => {
+            .then(json => {
+                console.log(json.message);
+            })
+            .catch(err => {
                 console.log(err);
             })
     }
