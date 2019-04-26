@@ -26,7 +26,7 @@ submit.addEventListener('click', () => {
                 if (json.success) {
                     window.location.href = '../myProfile/myProfile.html';
                 } else {
-                    //show error message
+                    console.log("Login unsuccessful.")
                 }
             })
             .catch(err => {
