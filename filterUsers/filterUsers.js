@@ -3,16 +3,11 @@ const filterButton = document.getElementById('filterButton');
 const apiUrl = 'http://localhost:8080/auth/user/';
 const apiHeader = {"Content-Type": "application/json"};
 
-const userTile = (userInfo) => {
-    const tile = document.createElement('div');
-    tile.className = 'user-tile'
-}
-
 const validInputs = () => {
 
 }
 
-filterButton.addEventListener("click", () => {
+/*filterButton.addEventListener("click", () => {
     if (!validInputs()) {
         return;
     } else {
@@ -31,10 +26,4 @@ filterButton.addEventListener("click", () => {
                 
             })
     }
-});
-
-function buildList() {
-
-}
-
-buildList();
+});*/
