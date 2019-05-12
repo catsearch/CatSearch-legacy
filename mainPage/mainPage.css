@@ -1,0 +1,43 @@
+/* Whole-page CSS */
+#page-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header Bar */
+#header-bar {
+    height: 15%;
+    border: solid black 1px;
+}
+
+/* Filter Sidebar */
+#filter-sidebar {
+    overflow-y: auto;
+    width: 30%;
+    height: 100%;
+    border: black 1px;
+    border: solid black 1px;
+}
+
+/* User List */
+#user-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding-top: 2%;
+    border: solid black 1px;
+}
+
+.user-tile {
+    border-radius: 5%;
+    width: 90%;
+    height: 20%;
+    margin: 1%;
+    border: solid black 1px;
+}
