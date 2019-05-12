@@ -1,10 +1,11 @@
 #header-bar {
-    
+    height: 10%;
+    border: black 1px;
 }
 
 #page-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
@@ -12,16 +13,10 @@
 #filter-sidebar {
     overflow-y: auto;
     width: 25%;
+    height: 100%;
+    border: black 1px;
 }
 
 #filter-button {
-    
-}
-
-#user-list {
-    overflow-y: auto;
-}
-
-.user-tile {
     
 }
