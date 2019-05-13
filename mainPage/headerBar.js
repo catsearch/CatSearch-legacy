@@ -1,5 +1,7 @@
-let headerMenu = document.getElementById("header-dropdown-content");
-let searchBar = document.getElementById("search-bar");
+const headerMenu = document.getElementById("header-dropdown-content");
+const searchBar = document.getElementById("search-bar");
+const dropdownText = document.getElementById("header-dropdown-text");
+
 let mouse = false;
 
 // search: backend call, not implemented
@@ -41,3 +43,17 @@ searchBar.addEventListener("keyup", function(event) {
       search();
     }
 });
+
+if (localStorage.getItem("userId")) {
+    fetch(apiUrl + localStorage.getItem("userId"), {
+        method: "GET",
+        headers: apiHeader
+    })
+        .then(user => {
+            dropdownText.innerHTML = `<u>${user.firstName ? user.firstName : "User"}</u> &#x25BE`;
+        })
+        .catch(err => {
+            console.log(err);
+            dropdownText.innerHTML = `<u>User</u> &#x25BE`;
+        })
+}

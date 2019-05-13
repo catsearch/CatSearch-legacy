@@ -1,7 +1,12 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: sans-serif;
     overflow-y: hidden;
-    height: 100%;
+    min-height: 100%;
+    margin: 0;
 }
 
 .disable-select {
@@ -17,12 +22,6 @@ input:focus {
     outline: none;
 }
 
-/* Header Bar */
-#header-bar {
-    height: 15%;
-    border: solid black 1px;
-}
-
 /* Whole-page CSS */
 #page-body {
     display: flex;
@@ -35,7 +34,7 @@ input:focus {
 
 /* Header Bar */
 #header-bar {
-    height: 15%;
+    height: 12%;
     border: solid black 1px;
     display: flex;
     align-items: center;
