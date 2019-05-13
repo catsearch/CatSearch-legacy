@@ -18,7 +18,7 @@ const userTile = (user) => {
     tile.appendChild(profilePicture(user.picUrl));
     tile.appendChild(userInfo(user));
 
-    document.addEventListener('click', () => {
+    tile.addEventListener('click', () => {
         const profilePage = window.open('../userProfile/userProfile.html', '_blank');
         profilePage.focus();
     })
@@ -37,7 +37,7 @@ const profilePicture = (picUrl) => {
 const userInfo = (user) => {
     const container = document.createElement('div');
     container.className = 'user-info';
-    
+
     container.appendChild(userHeader(user.firstName, user.lastName));
     container.appendChild(userBlurb(user.blurb));
     return container;

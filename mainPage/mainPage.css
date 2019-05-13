@@ -3,6 +3,20 @@ body {
     overflow-y: hidden;
     height: 100%;
 }
+
+.disable-select {
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+
+select:focus,
+button:focus,
+input:focus {
+    outline: none;
+}
+
 /* Header Bar */
 #header-bar {
     height: 15%;
