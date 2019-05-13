@@ -1,3 +1,7 @@
+body {
+    font-family: sans-serif;
+}
+
 /* Whole-page CSS */
 #page-body {
     display: flex;
@@ -26,6 +30,7 @@
     height: 78%;
     padding: 3%;
     overflow-y: auto;
+    font-size: 14px;
 }
 
 #filter-year {
@@ -38,6 +43,10 @@
     padding: 1%;
     flex-direction: row;
     margin-left: 10%;
+}
+
+button:focus {
+    outline: 0;
 }
 
 .filter-collapsible {
