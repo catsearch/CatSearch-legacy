@@ -10,6 +10,53 @@
 #header-bar {
     height: 15%;
     border: solid black 1px;
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    width: 20%;
+    height: 100%;
+    color: white;
+    background-color: rgb(78, 42, 132);
+    display: flex;
+    align-items: center;
+}
+
+#logo-content {
+    width: 100%;
+    text-align: center;
+}
+
+#search-bar-container {
+    width: 60%;
+    height: 100%;
+    display: flex;
+}
+
+#search-button {
+    width: 6%;
+    height: 40%;
+    position: relative;
+    margin-left: 12%;
+    top: 30%;
+}
+
+#search-bar {
+    width: 70%;
+    height: 40%;
+    position: relative;
+    top: 30%;
+}
+
+#header-dropdown {
+    width: 20%;
+    text-align: center;
+}
+
+#header-dropdown-content {
+    display: none;
+    position: absolute;
 }
 
 /* Filter Sidebar */
