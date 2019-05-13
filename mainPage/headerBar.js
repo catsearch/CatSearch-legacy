@@ -1,10 +1,39 @@
-let headerMenu = document.getElementById("header-dropdown-content");
-let searchBar = document.getElementById("search-bar");
+const headerMenu = document.getElementById("header-dropdown-content");
+const searchBar = document.getElementById("search-bar");
+const dropdownText = document.getElementById("header-dropdown-text");
+
 let mouse = false;
 
 // search: backend call, not implemented
 function search() {
-    console.log("wow, you searched");
+    if (searchBar.value === "") {
+        users = null;
+        getUsers();
+    } else {
+        const apiBody = JSON.stringify({
+            text: searchBar.value
+        });
+        fetch(apiUrl + `${userId}/search`, {
+            method: "POST",
+            headers: apiHeader,
+            body: apiBody
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                if (json.success) {
+                    console.log(json.users);
+                    users = json.users;
+                    getUsers();
+                } else {
+                    //rip
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 }
 
 function mouseStatus(n) {
@@ -41,3 +70,25 @@ searchBar.addEventListener("keyup", function(event) {
       search();
     }
 });
+
+if (localStorage.getItem("userId")) {
+    fetch(apiUrl + localStorage.getItem("userId"), {
+        method: "GET",
+        headers: apiHeader
+    })
+        .then(response => {
+            return response.json() 
+        })
+        .then(json => {
+            if (json.success) {
+                const user = json.user;
+                dropdownText.innerHTML = `<u>${user.firstName ? user.firstName : "User"}</u> &#x25BE`;
+            } else {
+                dropdownText.innerHTML = `<u>User</u> &#x25BE`;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            dropdownText.innerHTML = `<u>User</u> &#x25BE`;
+        })
+}

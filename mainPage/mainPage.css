@@ -1,10 +1,25 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: sans-serif;
+    overflow-y: hidden;
+    min-height: 100%;
+    margin: 0;
 }
-/* Header Bar */
-#header-bar {
-    height: 15%;
-    border: solid black 1px;
+
+.disable-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+select:focus,
+button:focus,
+input:focus {
+    outline: none;
 }
 
 /* Whole-page CSS */
@@ -12,14 +27,13 @@ body {
     display: flex;
     height: 100%;
     flex-direction: row;
-    align-items: center;
-    height: 100%;
+    align-items: flex-start;
     justify-content: center;
 }
 
 /* Header Bar */
 #header-bar {
-    height: 15%;
+    height: 12%;
     border: solid black 1px;
     display: flex;
     align-items: center;
@@ -118,7 +132,7 @@ body {
 
 #filter-all-fields {
     display: block;
-    height: 78%;
+    height: 80%;
     padding: 3%;
     overflow-y: auto;
     font-size: 14px;
@@ -197,8 +211,9 @@ button:focus {
 
 /* User List */
 #user-list {
-    height: 100%;
+    height: 88%;
     width: 100%;
+    margin: 0;
     overflow-y: auto;
 }
 
@@ -219,6 +234,7 @@ button:focus {
     border-radius: 5px;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
     border: solid black 1px;
+    cursor: pointer;
 }
 
 .profile-picture {

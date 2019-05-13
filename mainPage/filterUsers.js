@@ -1,6 +1,8 @@
 const filterButton = document.getElementById('filterButton');
 
-const apiUrl = 'http://localhost:8080/auth/user/';
+let users = sessionStorage.getItem("users");
+const userId = localStorage.getItem("userId");
+const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
 
 const validInputs = () => {

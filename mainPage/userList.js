@@ -1,23 +1,22 @@
 const userTiles = document.getElementById('user-tiles');
-let userInfos = [];
-
-const genericPic = "data:image/png;base64,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";
-let users = [
-    {
-        firstName: "Cooper",
-        lastName: "Barth",
-        picUrl: genericPic,
-        blurb: "This is NOT Michael Ji. Don't even FUCKING THINK about calling me Michael Ji or I swear to FUCKING god i will dropkick you into the sun. This part is just filler text now to see if my code works, but it's still unforgivable to think that you would even have the BALLS to call me Michael Ji."
-    },
-];
-//add in message if no users are found
+const defaultIcon = "data:image/png;base64,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";
 
 const userTile = (user) => {
     const tile = document.createElement('div');
     tile.className = 'user-tile';
 
-    tile.appendChild(profilePicture(user.picUrl));
+    if (user.picUrl && user.picUrl != "") {
+        tile.appendChild(profilePicture(user.picUrl));
+    } else {
+        tile.appendChild(profilePicture(defaultIcon));
+    }
+    
     tile.appendChild(userInfo(user));
+
+    tile.addEventListener('click', () => {
+        const profilePage = window.open('../userProfile/userProfile.html', '_blank');
+        profilePage.focus();
+    })
 
     return tile;
 }
@@ -25,6 +24,7 @@ const userTile = (user) => {
 const profilePicture = (picUrl) => {
     const profPic = document.createElement('img');
     profPic.className = 'profile-picture';
+
     profPic.src = picUrl;
     return profPic;
 }
@@ -32,17 +32,20 @@ const profilePicture = (picUrl) => {
 const userInfo = (user) => {
     const container = document.createElement('div');
     container.className = 'user-info';
-    container.appendChild(userHeader(user.firstName, user.lastName));
-    container.appendChild(userBlurb(user.blurb));
 
-    userInfos.push(container);
+    const name = (user.firstName && user.lastName) ? `${user.firstName} ${user.lastName}` : user.email;
+    container.appendChild(userHeader(name));
+
+    const blurb = user.blurb ? user.blurb : "This user has not added a blurb yet.";
+    container.appendChild(userBlurb(blurb));
+
     return container;
 }
 
-const userHeader = (firstName, lastName) => {
+const userHeader = (userName) => {
     const container = document.createElement('div');
     container.className = 'user-header';
-    container.innerHTML = `${firstName} ${lastName}`;
+    container.innerHTML = userName;
     return container;
 }
 
@@ -53,11 +56,56 @@ const userBlurb = (blurb) => {
     return container;
 }
 
-function buildList() {
+function removeChildren() {
+    while (userTiles.hasChildNodes()) {
+        userTiles.removeChild(userTiles.childNodes[0]);
+    }
+}
+
+function constructList() {
+    removeChildren();
     for (user of users) {
         const newTile = userTile(user);
         userTiles.appendChild(newTile);
     }
 }
 
-buildList();
+function getUsers() {
+    if (!users && users != []) {
+        fetch(apiUrl + `${userId}/others`, {
+            method: "GET",
+            headers: apiHeader
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                if (json.success) {
+                    users = json.users;
+                } else {
+                    //there are no users!
+                }
+            })
+            .then(() => {
+                constructList();
+            })
+            .catch(err => {
+                console.log(err);
+                return;
+            })
+    } else if (users == []) {
+        console.log("There are no users with those filters.");
+    } else {
+        constructList();
+    }
+}
+
+function init() {
+    if (!userId) {
+        window.open('../login/login.html', '_self');
+        return;
+    }
+    getUsers();
+}
+
+init();

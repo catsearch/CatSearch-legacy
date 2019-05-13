@@ -24,7 +24,8 @@ submit.addEventListener('click', () => {
             .then(json => {
                 console.log(json.message);
                 if (json.success) {
-                    window.location.href = '../myProfile/myProfile.html';
+                    localStorage.setItem('userId', json._id);
+                    window.location.href = '../mainPage/mainPage.html';
                 } else {
                     console.log("Login unsuccessful.")
                 }

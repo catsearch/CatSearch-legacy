@@ -1,4 +1,6 @@
 const email = document.getElementById("email");
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
 const password = document.getElementById("password");
 const errorText = document.getElementById("error-text");
 const submit = document.getElementById("submit");
@@ -10,6 +12,8 @@ submit.addEventListener("click", () => {
     if (invalidInputs()) {return;}
     const apiBody = JSON.stringify({
         email: email.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
         password: password.value
     });
     fetch(apiUrl, {
@@ -45,7 +49,7 @@ function showErrorText(message) {
 const invalidInputs = () => {
     const e = email.value;
     const p = password.value;
-    if (e === "" || p === "") {
+    if (e === "" || p === "" || firstName.value === "" || lastName.value === "") {
         showErrorText("Empty Field(s).");
         return true;
     }
