@@ -1,5 +1,7 @@
 body {
     font-family: sans-serif;
+    overflow-y: hidden;
+    height: 100%;
 }
 /* Header Bar */
 #header-bar {
