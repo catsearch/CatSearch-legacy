@@ -56,8 +56,22 @@ const userBlurb = (blurb) => {
     return container;
 }
 
-function buildList() {
-    if (!users) {
+function removeChildren() {
+    while (userTiles.hasChildNodes()) {
+        userTiles.removeChild(userTiles.childNodes[0]);
+    }
+}
+
+function constructList() {
+    removeChildren();
+    for (user of users) {
+        const newTile = userTile(user);
+        userTiles.appendChild(newTile);
+    }
+}
+
+function getUsers() {
+    if (!users && users != []) {
         fetch(apiUrl + `${userId}/others`, {
             method: "GET",
             headers: apiHeader
@@ -73,16 +87,17 @@ function buildList() {
                 }
             })
             .then(() => {
-                console.log(users)
-                for (user of users) {
-                    const newTile = userTile(user);
-                    userTiles.appendChild(newTile);
-                }
+                console.log(users);
+                constructList();
             })
             .catch(err => {
                 console.log(err);
                 return;
             })
+    } else if (users == []) {
+        console.log("There are no users with those filters.");
+    } else {
+        constructList();
     }
 }
 
@@ -91,7 +106,7 @@ function init() {
         window.open('../login/login.html', '_self');
         return;
     }
-    buildList();
+    getUsers();
 }
 
 init();
