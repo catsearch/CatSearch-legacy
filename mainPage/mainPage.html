@@ -12,13 +12,13 @@
             </div>
             <div id="search-bar-container">
                 <div id="search-border">
-                    <input id="search-bar">
+                    <input id="search-bar" placeholder="Search...">
                     <button id="search-button" onclick="search()"><i class="material-icons">search</i></button>
                 </div>
             </div>
-            <div id="header-dropdown" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
-                <span id="header-dropdown-text" onclick="toggleDropdown()"><u>Name</u> &#x25BE</span>
-                <div id="header-dropdown-content">
+            <div id="header-dropdown">
+                <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>Name</u> &#x25BE</span>
+                <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
                     <a href="../myProfile/myProfile.html">My Profile</a>
                     <a href="../savedUsers/savedUsers.html">Saved Users</a>
                 </div>
