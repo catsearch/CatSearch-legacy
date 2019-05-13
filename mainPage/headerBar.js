@@ -18,10 +18,10 @@ function closeDropdown() {
 }
 
 function toggleDropdown() {
-    if (headerMenu.style.display === "none"){
-        headerMenu.style.display = "block";
+    if (headerMenu.style.display === "block"){
+        headerMenu.style.display = "none";
     }
     else {
-        headerMenu.style.display = "none"; 
+        headerMenu.style.display = "block"; 
     }
 }
