@@ -5,20 +5,22 @@
         rel="stylesheet">
         <title>CatSearch</title>
     </head>
-    <body>
+    <body onclick="closeDropdown()">
         <div id="header-bar">
             <div id="logo">
                 <span id="logo-content">CS</span>
             </div>
             <div id="search-bar-container">
-                <button id="search-button" onclick="search()"><i class="material-icons">search</i></button>
-                <input id="search-bar">
+                <div id="search-border">
+                    <input id="search-bar">
+                    <button id="search-button" onclick="search()"><i class="material-icons">search</i></button>
+                </div>
             </div>
-            <div id="header-dropdown">
-                <span onclick="showDropdown()"><u>Name</u> &#x25BE</span>
+            <div id="header-dropdown" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
+                <span id="header-dropdown-text" onclick="toggleDropdown()"><u>Name</u> &#x25BE</span>
                 <div id="header-dropdown-content">
-                    <p>Hello World!</p>
-                    <p>You're cool</p>
+                    <a href="../myProfile/myProfile.html">My Profile</a>
+                    <a href="../savedUsers/savedUsers.html">Saved Users</a>
                 </div>
             </div>
         </div>
