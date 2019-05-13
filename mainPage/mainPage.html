@@ -1,10 +1,28 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="mainPage.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
         <title>CatSearch</title>
     </head>
-    <body>
+    <body onclick="closeDropdown()">
         <div id="header-bar">
+            <div id="logo">
+                <span id="logo-content">CS</span>
+            </div>
+            <div id="search-bar-container">
+                <div id="search-border">
+                    <input id="search-bar" placeholder="Search...">
+                    <button id="search-button" onclick="search()"><i class="material-icons">search</i></button>
+                </div>
+            </div>
+            <div id="header-dropdown">
+                <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>Name</u> &#x25BE</span>
+                <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
+                    <a href="../myProfile/myProfile.html">My Profile</a>
+                    <a href="../savedUsers/savedUsers.html">Saved Users</a>
+                </div>
+            </div>
         </div>
         <div id="page-body">
             <div id="filter-sidebar">
