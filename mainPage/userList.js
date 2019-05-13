@@ -33,7 +33,6 @@ const profilePicture = (picUrl) => {
 const userInfo = (user) => {
     const container = document.createElement('div');
     container.className = 'user-info';
-    container.innerHTML = '7';
     return container
 }
 
