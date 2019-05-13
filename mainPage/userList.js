@@ -87,7 +87,6 @@ function getUsers() {
                 }
             })
             .then(() => {
-                console.log(users);
                 constructList();
             })
             .catch(err => {

@@ -76,8 +76,16 @@ if (localStorage.getItem("userId")) {
         method: "GET",
         headers: apiHeader
     })
-        .then(user => {
-            dropdownText.innerHTML = `<u>${user.firstName ? user.firstName : "User"}</u> &#x25BE`;
+        .then(response => {
+            return response.json() 
+        })
+        .then(json => {
+            if (json.success) {
+                const user = json.user;
+                dropdownText.innerHTML = `<u>${user.firstName ? user.firstName : "User"}</u> &#x25BE`;
+            } else {
+                dropdownText.innerHTML = `<u>User</u> &#x25BE`;
+            }
         })
         .catch(err => {
             console.log(err);
