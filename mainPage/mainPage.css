@@ -1,3 +1,6 @@
+body {
+    font-family: sans-serif;
+}
 /* Header Bar */
 #header-bar {
     height: 15%;
@@ -7,6 +10,7 @@
 /* Whole-page CSS */
 #page-body {
     display: flex;
+    height: 100%;
     flex-direction: row;
     align-items: center;
     height: 100%;
@@ -106,12 +110,90 @@
 
 /* Filter Sidebar */
 #filter-sidebar {
-    overflow-y: auto;
-    width: 30%;
+    display: block;
+    width: 20%;
     height: 100%;
-    border: black 1px;
     border: solid black 1px;
 }
+
+#filter-all-fields {
+    display: block;
+    height: 78%;
+    padding: 3%;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+#filter-year {
+    display: flex;
+    padding: 1%;
+}
+
+.filter-container {
+    display: flex;
+    padding: 1%;
+    flex-direction: row;
+    margin-left: 10%;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.filter-collapsible {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    border: none;
+    padding: 3%;
+}
+
+.filter-collapsed {
+    display: none;
+}
+
+.filter-collapsible:after {
+    content: "\25BC"; /* Unicode character for down triange */
+    font-size: 13px;
+    color: black;
+    float: right;
+    margin-left: 5px;
+}
+
+.filter-collapsed-label:after{
+    content: "\25BA"; /* Unicode character for right triangle */
+    font-size: 13px;
+    color: black;
+    float: right;
+    margin-left: 5px;
+}
+
+.filter-time-sections {
+    display: flex;
+    flex-direction: row;
+    padding: 3%;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.filter-time-sections input {
+    width: 60%;
+}
+
+#filter-button {
+    display: flex;
+    margin: 3%;
+    padding: 3%;
+    justify-content: center;
+}
+
+#filter-actual-button {
+    width: 50%;
+    height: 10%;
+}
+
 
 /* User List */
 #user-list {
