@@ -83,10 +83,10 @@ input:focus {
 
 #search-bar {
     width: 90%;
-    height: 40%;
+    height: 70%;
     position: relative;
     border: none;
-    top: 32%;
+    top: 15%;
     padding-left: 2%;
     font-size: medium
 }

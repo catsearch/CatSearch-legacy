@@ -72,7 +72,7 @@ function constructList() {
 
 function getUsers() {
     if (!users && users != []) {
-        const fetchUrl = (userId != "null") ? `${apiUrl + userId}/others` : apiUrl;
+        const fetchUrl = (userId != "null" && userId != null) ? `${apiUrl + userId}/others` : apiUrl;
         fetch(fetchUrl, {
             method: "GET",
             headers: apiHeader
