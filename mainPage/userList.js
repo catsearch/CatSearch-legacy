@@ -72,7 +72,8 @@ function constructList() {
 
 function getUsers() {
     if (!users && users != []) {
-        fetch(apiUrl + `${userId}/others`, {
+        const fetchUrl = (userId != "null") ? `${apiUrl + userId}/others` : apiUrl;
+        fetch(fetchUrl, {
             method: "GET",
             headers: apiHeader
         })
@@ -101,10 +102,6 @@ function getUsers() {
 }
 
 function init() {
-    if (!userId) {
-        window.open('../login/login.html', '_self');
-        return;
-    }
     getUsers();
 }
 
