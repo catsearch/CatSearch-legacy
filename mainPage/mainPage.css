@@ -122,6 +122,10 @@ input:focus {
 
 #header-dropdown-content a:hover {background-color: #ddd}
 
+#login-button {
+    cursor: pointer;
+}
+
 /* Filter Sidebar */
 #filter-sidebar {
     display: block;

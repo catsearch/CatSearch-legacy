@@ -4,6 +4,7 @@ const lastName = document.getElementById("lastName");
 const password = document.getElementById("password");
 const errorText = document.getElementById("error-text");
 const submit = document.getElementById("submit");
+const login = document.getElementById("login");
 
 const apiUrl = 'http://localhost:8080/auth/createAccount/'
 const apiHeader = {"Content-Type": "application/json"}
@@ -68,3 +69,7 @@ const invalidInputs = () => {
     }
     return false;
 }
+
+login.addEventListener("click", () => {
+    window.location = "../login/login.html";
+})

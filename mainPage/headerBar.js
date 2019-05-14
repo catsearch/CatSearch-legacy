@@ -1,6 +1,7 @@
-const headerMenu = document.getElementById("header-dropdown-content");
+const headerMenu = document.getElementById("header-dropdown");
+let dropdownText = null;
+let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
-const dropdownText = document.getElementById("header-dropdown-text");
 
 let mouse = false;
 
@@ -43,9 +44,9 @@ function mouseStatus(n) {
 // closeDropdown: closes dropdown if open and mouse is not over the dropdown
 // Called when click off the dropdown
 function closeDropdown() {
-    if (!mouse){
-        if (headerMenu.style.display === "block") {
-            headerMenu.style.display = "none";
+    if (!mouse && headerMenuContent){
+        if (headerMenuContent.style.display === "block") {
+            headerMenuContent.style.display = "none";
         }
     }
 }
@@ -53,11 +54,13 @@ function closeDropdown() {
 // toggleDropdown: open or close dropdown menu
 // Called when clicking on actual text
 function toggleDropdown() {
-    if (headerMenu.style.display === "block"){
-        headerMenu.style.display = "none";
-    }
-    else {
-        headerMenu.style.display = "block"; 
+    if (headerMenuContent) {
+        if (headerMenuContent.style.display === "block"){
+            headerMenuContent.style.display = "none";
+        }
+        else {
+            headerMenuContent.style.display = "block"; 
+        }
     }
 }
 
@@ -71,8 +74,8 @@ searchBar.addEventListener("keyup", function(event) {
     }
 });
 
-if (localStorage.getItem("userId")) {
-    fetch(apiUrl + localStorage.getItem("userId"), {
+function fetchUser() {
+    fetch(apiUrl + userId, {
         method: "GET",
         headers: apiHeader
     })
@@ -82,13 +85,39 @@ if (localStorage.getItem("userId")) {
         .then(json => {
             if (json.success) {
                 const user = json.user;
-                dropdownText.innerHTML = `<u>${user.firstName ? user.firstName : "User"}</u> &#x25BE`;
+                addDropdown(user.firstName);
             } else {
-                dropdownText.innerHTML = `<u>User</u> &#x25BE`;
+                addLoginButton();
             }
         })
         .catch(err => {
             console.log(err);
-            dropdownText.innerHTML = `<u>User</u> &#x25BE`;
+            addLoginButton();
         })
+}
+
+function addDropdown(name) {
+    headerMenu.innerHTML = `
+        <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
+        <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
+            <a href="../myProfile/myProfile.html">My Profile</a>
+            <a href="../savedUsers/savedUsers.html">Saved Users</a>
+            <a href="../login/login.html">Log Out</a>
+        </div>`
+    dropdownText = document.getElementById("header-dropdown-text");
+    headerMenuContent = document.getElementById("header-dropdown-content");
+}
+
+function addLoginButton() {
+    headerMenu.innerHTML = `<div id="login-button" onclick="moveToLogin();">Login</div>`
+}
+
+function moveToLogin() {
+    window.location = "../login/login.html";
+}
+
+if (userId) {
+    fetchUser();
+} else {
+    addLoginButton();
 }
