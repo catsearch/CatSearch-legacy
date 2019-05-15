@@ -42,7 +42,6 @@ input:focus {
 #logo {
     width: 20%;
     height: 100%;
-    color: white;
     background-color: rgb(78, 42, 132);
     display: flex;
     align-items: center;
@@ -50,6 +49,8 @@ input:focus {
 
 #logo-content {
     width: 100%;
+    color: white;
+    text-decoration: none;
     text-align: center;
 }
 
@@ -71,14 +72,21 @@ input:focus {
 }
 
 #search-button {
-    width: 5%;
-    height: 100%;
+    width: 4%;
+    height: 90%;
     position: relative;
-    margin-left: 4%;
+    margin-left: 5%;
+    margin-top: 0.3%;
     padding: 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
+    border-radius: 100%;
+    transition: background-color 0.3s;
+}
+
+#search-button:hover {
+    background-color: lightgray;
 }
 
 #search-bar {
@@ -123,7 +131,12 @@ input:focus {
 #header-dropdown-content a:hover {background-color: #ddd}
 
 #login-button {
+    text-align: center;
+}
+
+#login-button-text {
     cursor: pointer;
+    text-decoration-line: underline;
 }
 
 /* Filter Sidebar */
