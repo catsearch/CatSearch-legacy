@@ -1,4 +1,4 @@
-const filterButton = document.getElementById('filterButton');
+const filterButton = document.getElementById('filter-button');
 
 let users = sessionStorage.getItem("users");
 const userId = localStorage.getItem("userId");
@@ -74,32 +74,6 @@ function buildTimeFields(){
     }
 }
 
-const validInputs = () => {
-
-}
-
-/*filterButton.addEventListener("click", () => {
-    if (!validInputs()) {
-        return;
-    } else {
-        const apiBody = JSON.stringify({
-            fieldName: yearElement.value
-        });
-        fetch(apiUrl + "filter", {
-            method: "POST", 
-            headers: apiHeader,
-            body: apiBody
-        })
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                
-            })
-    }
-});*/
-
-
 function init() {
     buildYearList();
     buildFilterCheckboxes();
@@ -118,3 +92,33 @@ function init() {
 }
 
 init();
+
+const validInputs = () => {
+    return true;
+}
+
+function filter() {
+    if (!validInputs()) {
+        return;
+    } else {
+        /*const apiBody = JSON.stringify({
+            fieldName: yearElement.value
+        });
+        fetch(apiUrl + "filter", {
+            method: "POST", 
+            headers: apiHeader,
+            body: apiBody
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                
+            })*/
+        removeChildren();
+        for (user of defaultUsers) {
+            const newTile = userTile(user);
+            userTiles.appendChild(newTile);
+        }
+    }
+};
