@@ -14,6 +14,7 @@ const userTile = (user) => {
     tile.appendChild(userInfo(user));
 
     tile.addEventListener('click', () => {
+        sessionStorage.setItem('clickedUserId', user._id);
         const profilePage = window.open('../userProfile/userProfile.html', '_blank');
         profilePage.focus();
     })
@@ -70,6 +71,40 @@ function constructList() {
     }
 }
 
+function constructSampleList() {
+    removeChildren();
+    for (user of [
+        {
+            firstName: "Cooper",
+            lastName: "Barth",
+            blurb: "This is Cooper's blurb! Isn't it nice?"
+        },
+        {
+            firstName: "Michael",
+            lastName: "Ji",
+            blurb: "This is Michael's blurb! Isn't it nice?"
+        },
+        {
+            firstName: "Beth",
+            lastName: "Mallon",
+            blurb: "This is Beth's blurb! Isn't it nice?"
+        },
+        {
+            firstName: "Sanfeng",
+            lastName: "Wang",
+            blurb: "This is Sanfeng's blurb! Isn't it nice?"
+        },
+        {
+            firstName: "Michael",
+            lastName: "Horn",
+            blurb: "This is Michael's blurb! Isn't it nice?"
+        },
+    ]) {
+        const newTile = userTile(user);
+        userTiles.appendChild(newTile);
+    }
+}
+
 function getUsers() {
     if (!users && users != []) {
         const fetchUrl = (userId != "null" && userId != null) ? `${apiUrl + userId}/others` : apiUrl;
@@ -92,6 +127,7 @@ function getUsers() {
             })
             .catch(err => {
                 console.log(err);
+                constructSampleList();
                 return;
             })
     } else if (users == []) {
