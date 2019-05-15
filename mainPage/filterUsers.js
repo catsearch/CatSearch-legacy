@@ -1,17 +1,12 @@
-const filterButton = document.getElementById('filterButton');
+const filterButton = document.getElementById('filter-button');
 
 let users = sessionStorage.getItem("users");
 const userId = localStorage.getItem("userId");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
 
-const validInputs = () => {
-
-}
-
 const yearElement = document.getElementById('filter-year');
 const yearList = ["Select year:", "2021", "2022", "2023", "2024", "2025"]
-
 
 const checkboxesElement = document.getElementById('filter-checkboxes')
 const filterFields = {
@@ -33,7 +28,7 @@ function buildYearList() {
         let yearOption = document.createElement("option");
         yearOption.setAttribute("value", i);
         yearOption.innerHTML += yr;
-        yearHTML.appendChild(yearOption);   
+        yearHTML.appendChild(yearOption);
     }
     yearElement.appendChild(yearHTML);
 }
@@ -79,9 +74,6 @@ function buildTimeFields(){
     }
 }
 
-
-
-
 function init() {
     buildYearList();
     buildFilterCheckboxes();
@@ -100,12 +92,17 @@ function init() {
 }
 
 init();
-/*filterButton.addEventListener("click", () => {
+
+const validInputs = () => {
+    return true;
+}
+
+function filter() {
     if (!validInputs()) {
         return;
     } else {
-        const apiBody = JSON.stringify({
-            //fieldName: elementName.value
+        /*const apiBody = JSON.stringify({
+            fieldName: yearElement.value
         });
         fetch(apiUrl + "filter", {
             method: "POST", 
@@ -117,6 +114,11 @@ init();
             })
             .then(json => {
                 
-            })
+            })*/
+        removeChildren();
+        for (user of defaultUsers) {
+            const newTile = userTile(user);
+            userTiles.appendChild(newTile);
+        }
     }
-});*/
+};
