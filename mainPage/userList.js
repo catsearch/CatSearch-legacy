@@ -4,27 +4,38 @@ const defaultUsers = [
     {
         firstName: "Cooper",
         lastName: "Barth",
-        blurb: "This is Cooper's blurb! Isn't it nice?"
+        blurb: "This is Cooper's blurb! Isn't it nice?",
+        _id: "asdfjkl123456789"
     },
     {
         firstName: "Michael",
         lastName: "Ji",
-        blurb: "This is Michael's blurb! Isn't it nice?"
+        blurb: "This is Michael's blurb! Isn't it nice?",
+        _id: "asdfjkl123456789"
     },
     {
         firstName: "Beth",
         lastName: "Mallon",
-        blurb: "This is Beth's blurb! Isn't it nice?"
+        blurb: "This is Beth's blurb! Isn't it nice?",
+        _id: "asdfjkl123456789"
     },
     {
         firstName: "Sanfeng",
         lastName: "Wang",
-        blurb: "This is Sanfeng's blurb! Isn't it nice?"
+        blurb: "This is Sanfeng's blurb! Isn't it nice?",
+        _id: "asdfjkl123456789"
+    },
+    {
+        firstName: "Armaan",
+        lastName: "Dhingra",
+        blurb: "This is Armaan's blurb! Isn't he nice?",
+        _id: "asdfjkl123456789"
     },
     {
         firstName: "Michael",
         lastName: "Horn",
-        blurb: "This is Michael's blurb! Isn't it nice?"
+        blurb: "This is Michael's blurb! Isn't it nice?",
+        _id: "asdfjkl123456789"
     },
 ]
 
@@ -41,7 +52,7 @@ const userTile = (user) => {
     tile.appendChild(userInfo(user));
 
     tile.addEventListener('click', () => {
-        sessionStorage.setItem('clickedUserId', user._id);
+        localStorage.setItem('clickedUserId', user._id);
         const profilePage = window.open('../userProfile/userProfile.html', '_blank');
         profilePage.focus();
     })

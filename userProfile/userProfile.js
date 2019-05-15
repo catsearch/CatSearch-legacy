@@ -32,11 +32,13 @@ function getUser() {
 }
 
 function init() {
-    userId = sessionStorage.getItem("clickedUserId");
+    // Strange bug here with localStorage, check later
+    /*userId = localStorage.getItem("clickedUserId");
     if (!userId) {
         window.location = '../mainPage/mainPage.html';
     } else {
         getUser();
-    }
+    }*/
+    getUser();
 }
 init();
