@@ -147,6 +147,21 @@ input:focus {
     padding: 1%;
 }
 
+.filter-year {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.filter-year-label {
+    padding: 3%;
+}
+
+.filter-year-select{
+    width: 60%;
+}
+
 .filter-container {
     display: flex;
     padding: 1%;
@@ -168,9 +183,18 @@ button:focus {
     padding: 3%;
 }
 
-.filter-collapsed {
-    display: none;
+.field-collapsible-content {
+    overflow: hidden;
+    
+    transition: height 600ms ease-out;
 }
+
+.filter-collapsed {
+    /*display: none;*/
+    width: 0%;
+    height: 0%;
+}
+
 
 .filter-collapsible:after {
     content: "\25BC"; /* Unicode character for down triange */
@@ -198,6 +222,7 @@ button:focus {
 
 .filter-time-sections input {
     width: 60%;
+    max-width: 100px;
 }
 
 #filter-button {
