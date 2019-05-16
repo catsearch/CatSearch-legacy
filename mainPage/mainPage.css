@@ -236,12 +236,12 @@ button:focus {
     width: 100%;
     margin: 0;
     overflow-y: auto;
+    background-color: rgb(204, 196, 223);
 }
 
 #user-tiles {
     height: 100%;
     padding: 1%;
-    background-color: rgb(204, 196, 223);
 }
 
 .user-tile {
