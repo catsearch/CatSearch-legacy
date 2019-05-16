@@ -37,19 +37,20 @@ input:focus {
     border: solid black 1px;
     display: flex;
     align-items: center;
+    background-color: rgb(78, 42, 132);
 }
 
 #logo {
     width: 20%;
     height: 100%;
-    color: white;
-    background-color: rgb(78, 42, 132);
     display: flex;
     align-items: center;
 }
 
 #logo-content {
     width: 100%;
+    color: white;
+    text-decoration: none;
     text-align: center;
 }
 
@@ -61,6 +62,7 @@ input:focus {
 
 #search-border {
     border: 1px solid black;
+    background-color: white;
     border-radius: 8px;
     width: 80%;
     height: 40%;
@@ -71,14 +73,21 @@ input:focus {
 }
 
 #search-button {
-    width: 5%;
-    height: 100%;
+    width: 4%;
+    height: 90%;
     position: relative;
-    margin-left: 4%;
+    margin-left: 5%;
+    margin-top: 0.3%;
     padding: 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
+    border-radius: 100%;
+    transition: background-color 0.3s;
+}
+
+#search-button:hover {
+    background-color: lightgray;
 }
 
 #search-bar {
@@ -86,6 +95,7 @@ input:focus {
     height: 70%;
     position: relative;
     border: none;
+    background-color: transparent;
     top: 15%;
     padding-left: 2%;
     font-size: medium
@@ -99,6 +109,7 @@ input:focus {
 }
 
 #header-dropdown-text {
+    color: white;
     cursor: pointer;
 }
 
@@ -123,7 +134,13 @@ input:focus {
 #header-dropdown-content a:hover {background-color: #ddd}
 
 #login-button {
+    text-align: center;
+}
+
+#login-button-text {
     cursor: pointer;
+    color: white;
+    text-decoration-line: underline;
 }
 
 /* Filter Sidebar */
@@ -244,6 +261,7 @@ button:focus {
     width: 100%;
     margin: 0;
     overflow-y: auto;
+    background-color: rgb(204, 196, 223);
 }
 
 #user-tiles {
@@ -262,8 +280,14 @@ button:focus {
     padding-bottom: 1%;
     border-radius: 5px;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: white;
     border: solid black 1px;
     cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+
+.user-tile:hover {
+    box-shadow: 5px 5px rgba(0,0,0, 0.4);
 }
 
 .profile-picture {
