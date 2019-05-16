@@ -27,6 +27,10 @@ const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
 
 function buildYearList() {
+    yearLabel = document.createElement("div");
+    yearLabel.setAttribute("class", "filter-year-label");
+    yearLabel.innerHTML = "Year";
+    yearElement.appendChild(yearLabel);
     yearHTML = document.createElement("select");
     yearHTML.setAttribute("class","filter-year-select");
     for (let [i, yr] of yearList.entries()) {
