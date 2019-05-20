@@ -161,21 +161,16 @@ input:focus {
 
 #filter-year {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 1%;
 }
 
-.filter-year {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 75%;
-}
-
-.filter-year-label {
+#filter-year-label {
     padding: 3%;
 }
 
-.filter-year-select{
+#filter-year-select{
     width: 60%;
 }
 
