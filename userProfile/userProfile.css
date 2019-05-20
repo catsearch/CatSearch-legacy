@@ -1,0 +1,146 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    overflow-y: hidden;
+    min-height: 100%;
+    margin: 0;
+}
+
+.disable-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+select:focus,
+button:focus,
+input:focus {
+    outline: none;
+}
+
+/* Whole-page CSS */
+#page-body {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Header Bar */
+#header-bar {
+    height: 12%;
+    border: solid black 1px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(78, 42, 132);
+}
+
+#logo {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#logo-content {
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+#search-bar-container {
+    width: 60%;
+    height: 100%;
+    display: flex;
+}
+
+#search-border {
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 8px;
+    width: 80%;
+    height: 40%;
+    top: 30%;
+    position: relative;
+    display: flex;
+    margin-left: 12%;
+}
+
+#search-button {
+    width: 4%;
+    height: 90%;
+    position: relative;
+    margin-left: 5%;
+    margin-top: 0.3%;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: background-color 0.3s;
+}
+
+#search-button:hover {
+    background-color: lightgray;
+}
+
+#search-bar {
+    width: 90%;
+    height: 70%;
+    position: relative;
+    border: none;
+    background-color: transparent;
+    top: 15%;
+    padding-left: 2%;
+    font-size: medium
+}
+
+#header-dropdown {
+    width: 20%;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+
+#header-dropdown-text {
+    color: white;
+    cursor: pointer;
+}
+
+#header-dropdown-content {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    right: 36%;
+    left: 36%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+#header-dropdown-content a {
+    color: black;
+    text-decoration: none;
+    padding: 10%;
+    display: block
+}
+
+#header-dropdown-content a:hover {background-color: #ddd}
+
+#login-button {
+    text-align: center;
+}
+
+#login-button-text {
+    cursor: pointer;
+    color: white;
+    text-decoration-line: underline;
+}
+
+/* Profile */

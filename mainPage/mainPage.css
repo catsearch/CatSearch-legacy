@@ -262,6 +262,7 @@ button:focus {
     margin: 0;
     overflow-y: auto;
     background-color: rgb(204, 196, 223);
+    border: 1px solid black;
 }
 
 #user-tiles {
