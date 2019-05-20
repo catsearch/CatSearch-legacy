@@ -101,18 +101,28 @@ const validInputs = () => {
 
 function filter() {
     let apiFields = {};
+
+    const yearSelect = document.getElementById("filter-year-select");
+    const selectedField = yearSelect.options[yearSelect.selectedIndex].text;
+    if (selectedField !== "Select year:") {
+        apiFields["year"] = selectedField;
+    }
+
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
         for (let [num, valueName] of fieldValues.entries()) {
             const currentCheckbox = document.getElementById(valueName + "Checkbox");
-            apiFields[valueName.toLowerCase()] = (currentCheckbox && currentCheckbox.checked);
+            if (currentCheckbox && currentCheckbox.checked) {
+                apiFields[valueName.toLowerCase()] = true;
+            }
         }
     }
+
     if (!validInputs()) {
         return;
     } else {
         const apiBody = JSON.stringify(apiFields);
         fetch(apiUrl + `${userId}/filter`, {
-            method: "POST", 
+            method: "POST",
             headers: apiHeader,
             body: apiBody
         })
