@@ -14,7 +14,7 @@ const filterFields = {
     "School" : ["Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
     "Area" : ["North", "Mid", "South"],
     "Cleanliness" : ["High", "Medium", "Low"],
-    "Smoking" : ["Smoking", "Non-Smoking"],
+    "Smoking" : ["Smoking", "No"],
     "Playing Music" : ["Often", "Sometimes", "Never"]
 }
 
@@ -22,12 +22,9 @@ const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
 
 function buildYearList() {
-    yearLabel = document.createElement("div");
-    yearLabel.setAttribute("class", "filter-year-label");
+    const yearLabel = document.getElementById("filter-year-label");
     yearLabel.innerHTML = "Year";
-    yearElement.appendChild(yearLabel);
-    yearHTML = document.createElement("select");
-    yearHTML.setAttribute("class","filter-year-select");
+    const yearHTML = document.getElementById("filter-year-select");
     for (let [i, yr] of yearList.entries()) {
         let yearOption = document.createElement("option");
         yearOption.setAttribute("value", i);
@@ -49,6 +46,7 @@ function buildFilterCheckboxes() {
             checkboxes.setAttribute("class", "filter-container");
             let checkboxesChild = document.createElement("input");
             checkboxesChild.setAttribute("type", "checkbox");
+            checkboxesChild.setAttribute("id", valueName + "Checkbox");
             checkboxes.appendChild(checkboxesChild);
             checkboxes.innerHTML += valueName;
             fieldSection.appendChild(checkboxes);
@@ -102,14 +100,29 @@ const validInputs = () => {
 }
 
 function filter() {
+    let apiFields = {};
+
+    const yearSelect = document.getElementById("filter-year-select");
+    const selectedField = yearSelect.options[yearSelect.selectedIndex].text;
+    if (selectedField !== "Select year:") {
+        apiFields["year"] = selectedField;
+    }
+
+    for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
+        for (let [num, valueName] of fieldValues.entries()) {
+            const currentCheckbox = document.getElementById(valueName + "Checkbox");
+            if (currentCheckbox && currentCheckbox.checked) {
+                apiFields[valueName.toLowerCase()] = true;
+            }
+        }
+    }
+
     if (!validInputs()) {
         return;
     } else {
-        /*const apiBody = JSON.stringify({
-            fieldName: yearElement.value
-        });
-        fetch(apiUrl + "filter", {
-            method: "POST", 
+        const apiBody = JSON.stringify(apiFields);
+        fetch(apiUrl + `${userId}/filter`, {
+            method: "POST",
             headers: apiHeader,
             body: apiBody
         })
@@ -117,12 +130,11 @@ function filter() {
                 return response.json();
             })
             .then(json => {
-                
-            })*/
-        removeChildren();
-        for (user of defaultUsers) {
-            const newTile = userTile(user);
-            userTiles.appendChild(newTile);
-        }
+                removeChildren();
+                for (user of json.users) {
+                    const newTile = userTile(user);
+                    userTiles.appendChild(newTile);
+                }
+            })
     }
 };
