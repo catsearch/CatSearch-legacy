@@ -11,6 +11,9 @@ let defaultUser = {
     school: "McCormick",
     year: "2022",
     area: "North",
+    cleanliness: "Medium",
+    smoking: "No",
+    music: "Sometimes",
     bedtimeStart: "21:00",
     bedtimeEnd: "00:00",
     wakeUpStart: "08:00",
@@ -18,6 +21,8 @@ let defaultUser = {
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
+const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoking", "music"];
+const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoking: ", "Playing Music: "];
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
@@ -48,29 +53,16 @@ function buildUserName() {
 }
 
 function buildDropDownFields() {
-    let genderField = document.createElement("span");
-    genderField.setAttribute("id", "gender-field");
-    genderField.setAttribute("class", "dropdown-fields");
-    genderField.innerHTML = "Gender: " + defaultUser.gender;
-    userDropdownFields.appendChild(genderField);
-
-    let schoolField = document.createElement("span");
-    schoolField.setAttribute("id", "school-field");
-    schoolField.setAttribute("class", "dropdown-fields");
-    schoolField.innerHTML = "School: " + defaultUser.school;
-    userDropdownFields.appendChild(schoolField);
-
-    let yearField = document.createElement("span");
-    yearField.setAttribute("id", "year-field");
-    yearField.setAttribute("class", "dropdown-fields");
-    yearField.innerHTML = "Year: " + defaultUser.year;
-    userDropdownFields.appendChild(yearField);
-
-    let areaField = document.createElement("span");
-    areaField.setAttribute("id", "area-field");
-    areaField.setAttribute("class", "dropdown-fields");
-    areaField.innerHTML = "Area: " + defaultUser.area;
-    userDropdownFields.appendChild(areaField);
+    dropdownFieldsList.forEach(function (fieldName, index) {
+        let tempField = document.createElement("span");
+        tempField.setAttribute("class", "dropdown-fields");
+        tempField.innerHTML = dropdownDisplayNames[index] + defaultUser[fieldName];
+        if (fieldName === "smoking" && defaultUser[fieldName] === "No") {
+            tempField.innerHTML = dropdownDisplayNames[index] + "Non-Smoking"; 
+        }
+        userDropdownFields.appendChild(tempField);
+    })
+        
 }
 
 function buildTimeFields() {
