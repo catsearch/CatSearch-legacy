@@ -152,15 +152,62 @@ input:focus {
     width: 20%;
 }
 
-#user-fields-right {
-}
-
 #user-wrapper {
     display: flex;
     height: 87%;
 }
 
+/* Right Side of Profile */
+#user-fields-right {
+    overflow-y: auto;
+    margin-left: 10%;
+}
+
 #user-dropdown-fields {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5%;
+}
+
+.dropdown-fields {
+    margin-top: 2%;
+    width: 50%;
+    font-size: 15pt;
+}
+
+#user-name-field {
+    display: block;
+    margin-top: 10%;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+#user-time-fields {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5%;
+}
+
+.time-fields {
+    margin-top: 2%;
+    width: 100%;
+    font-size: 15pt;
+}
+
+#user-blurb-field {
+    margin-top: 5%;
+    padding: 1%;
+    border: 2px solid black;
+}
+
+#blurb-field {
+    width: 100%;
+    font-size: 15pt;
+}
+
+#blurb-about-me {
+    font-size: 15pt;
+    font-weight: bold;
 }
