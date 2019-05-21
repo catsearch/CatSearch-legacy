@@ -234,9 +234,6 @@ input:focus {
     margin-bottom: 2%;
     width: 85%;
     height: 6%;
-<<<<<<< HEAD
-}
-=======
     border-radius: 5px;
     font-weight: bold;
     color: white;
@@ -256,4 +253,3 @@ input:focus {
     margin-left: 8%;
     font-size: 88%;
 }
->>>>>>> Some better styling

@@ -23,7 +23,13 @@ let defaultUser = {
     wakeUpStart: "08:00",
     wakeUpEnd: "10:00",   
     profilePicture: defaultIcon,
+<<<<<<< HEAD
     email: "michael-horn@northwestern.edu"
+=======
+    email: "michael-horn@northwestern.edu",
+    id: "235804958430",
+    blurb: "This is Michael's blurb! Isn't it nice?"
+>>>>>>> backend?(?????)
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
@@ -57,6 +63,7 @@ function getUser() {
         })
 }
 
+<<<<<<< HEAD
     userNameField.innerHTML = defaultUser.firstName + " " + defaultUser.lastName;
 }
 
@@ -118,15 +125,47 @@ function displayProfileRight() {
     buildDropDownFields();
     buildTimeFields();
     buildBlurb();
+=======
+function saveUser() {
+    const apiBody = JSON.stringify({
+        id: defaultUser.id
+    });
+    fetch(apiUrl + userId + "/saveUser", {
+        method: "PATCH",
+        headers: apiHeader,
+        body: apiBody
+    })
+        .then(response => {
+            return response.json();
+        })
+}
+
+function removeUser() {
+    const apiBody = JSON.stringify({
+        id: defaultUser.id
+    });
+    fetch(apiUrl + userId + "/removeUser", {
+        method: "PATCH",
+        headers: apiHeader,
+        body: apiBody
+    })
+        .then(response => {
+            return response.json();
+        })
+}
+
+>>>>>>> backend?(?????)
 const profilePicture = (picUrl) => {
 }
 
 function save() {
     if(saveButton.innerHTML === "Save") {
         saveButton.innerHTML = "Saved <i class=\"material-icons\">check</i>";
+        saveUser();
     }
     else {
         saveButton.innerHTML = "Save";
+        removeUser();
     }
 }
 
