@@ -230,7 +230,30 @@ input:focus {
 }
 
 #save-profile-button {
-    margin: 10%;
-    width: 80%;
+    margin-left: 7.5%;
+    margin-bottom: 2%;
+    width: 85%;
     height: 6%;
+<<<<<<< HEAD
 }
+=======
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(78, 42, 132);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contact-header {
+    margin-top: 6%;
+    margin-left: 4%;
+}
+
+#user-contact-info {
+    margin-top: 2%;
+    margin-left: 8%;
+    font-size: 88%;
+}
+>>>>>>> Some better styling

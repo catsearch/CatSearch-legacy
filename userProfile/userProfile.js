@@ -2,6 +2,7 @@ let userId = null;
 const userWrapper = document.getElementById("user-wrapper");
 const userLeft = document.getElementById("user-profile-left");
 const profPic = document.getElementById("user-profile-picture");
+const saveButton = document.getElementById("save-profile-button");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
 let user = null;
@@ -121,7 +122,12 @@ const profilePicture = (picUrl) => {
 }
 
 function save() {
-
+    if(saveButton.innerHTML === "Save") {
+        saveButton.innerHTML = "Saved <i class=\"material-icons\">check</i>";
+    }
+    else {
+        saveButton.innerHTML = "Save";
+    }
 }
 
 const contactInfo = (user) => {
