@@ -12,6 +12,7 @@ let defaultUser = {
     lastName: "Horn",
     profilePicture: defaultIcon,
     email: "michael-horn@northwestern.edu",
+    id: "235804958430",
     blurb: "This is Michael's blurb! Isn't it nice?"
 };
 
@@ -40,6 +41,34 @@ function getUser() {
         })
 }
 
+function saveUser() {
+    const apiBody = JSON.stringify({
+        id: defaultUser.id
+    });
+    fetch(apiUrl + userId + "/saveUser", {
+        method: "PATCH",
+        headers: apiHeader,
+        body: apiBody
+    })
+        .then(response => {
+            return response.json();
+        })
+}
+
+function removeUser() {
+    const apiBody = JSON.stringify({
+        id: defaultUser.id
+    });
+    fetch(apiUrl + userId + "/removeUser", {
+        method: "PATCH",
+        headers: apiHeader,
+        body: apiBody
+    })
+        .then(response => {
+            return response.json();
+        })
+}
+
 const profilePicture = (picUrl) => {
     profPic.src = picUrl;
     return profPic;
@@ -48,9 +77,11 @@ const profilePicture = (picUrl) => {
 function save() {
     if(saveButton.innerHTML === "Save") {
         saveButton.innerHTML = "Saved <i class=\"material-icons\">check</i>";
+        saveUser();
     }
     else {
         saveButton.innerHTML = "Save";
+        removeUser();
     }
 }
 
