@@ -4,7 +4,7 @@ html {
 
 body {
     font-family: sans-serif;
-    overflow-y: hidden;
+    overflow-y: auto;
     min-height: 100%;
     margin: 0;
 }
@@ -144,3 +144,23 @@ input:focus {
 }
 
 /* Profile */
+
+/*DELETE THIS*/
+#delete-this {
+    border: solid 1px black;
+    height: 100%;
+    width: 20%;
+}
+
+#user-fields-right {
+}
+
+#user-wrapper {
+    display: flex;
+    height: 87%;
+}
+
+#user-dropdown-fields {
+    display: flex;
+    flex-direction: column;
+}
