@@ -22,7 +22,7 @@ let defaultUser = {
     wakeUpStart: "08:00",
     wakeUpEnd: "10:00",   
     profilePicture: defaultIcon,
-    email: "michael-horn@northwestern.edu",
+    email: "michael-horn@northwestern.edu"
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
@@ -56,7 +56,6 @@ function getUser() {
         })
 }
 
-function buildUserName() {
     userNameField.innerHTML = defaultUser.firstName + " " + defaultUser.lastName;
 }
 
@@ -119,8 +118,6 @@ function displayProfileRight() {
     buildTimeFields();
     buildBlurb();
 const profilePicture = (picUrl) => {
-    profPic.src = picUrl;
-    return profPic;
 }
 
 function save() {
