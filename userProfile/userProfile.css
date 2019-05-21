@@ -144,3 +144,21 @@ input:focus {
 }
 
 /* Profile */
+
+/* Left Side */
+
+#user-profile-left {
+    width: 20%;
+    height: 100%;
+}
+
+#user-profile-picture {
+    width: 92%;
+    margin: 4%;
+}
+
+#save-profile-button {
+    margin: 10%;
+    width: 80%;
+    height: 6%;
+}
