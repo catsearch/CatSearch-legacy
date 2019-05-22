@@ -7,34 +7,10 @@ let mouse = false;
 
 // search: backend call, not implemented
 function search() {
-    if (searchBar.value === "") {
-        users = null;
-        getUsers();
-    } else {
-        const apiBody = JSON.stringify({
-            text: searchBar.value
-        });
-        fetch(apiUrl + `${userId}/search`, {
-            method: "POST",
-            headers: apiHeader,
-            body: apiBody
-        })
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                if (json.success) {
-                    console.log(json.users);
-                    users = json.users;
-                    window.location = "../mainPage/mainPage.html";;
-                } else {
-                    //rip
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    if (searchBar.value !== "") {
+        localStorage.setItem("externalSearch", searchBar.value);
     }
+    window.location = "../mainPage/mainPage.html";
 }
 
 function mouseStatus(n) {

@@ -149,8 +149,11 @@ function getUsers() {
     }
 }
 
-function init() {
+let externalSearch = localStorage.getItem("externalSearch");
+if (externalSearch !== null) {
+    search();
+    localStorage.removeItem("externalSearch");
+    externalSearch = null;
+} else {
     getUsers();
 }
-
-init();

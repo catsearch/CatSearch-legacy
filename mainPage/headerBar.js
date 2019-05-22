@@ -2,22 +2,21 @@ const headerMenu = document.getElementById("header-dropdown");
 let dropdownText = null;
 let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
-
 let mouse = false;
 
 // search: backend call, not implemented
 function search() {
-    if (searchBar.value === "") {
+    if (searchBar.value === "" && externalSearch === null) {
         users = null;
         getUsers();
     } else {
-        const apiBody = JSON.stringify({
-            text: searchBar.value
-        });
+        let apiBody = {};
+        apiBody.text = (externalSearch === null) ? searchBar.value : externalSearch; //externalSearch defined in userList.js
+        console.log(apiBody.text);
         fetch(apiUrl + `${userId}/search`, {
             method: "POST",
             headers: apiHeader,
-            body: apiBody
+            body: JSON.stringify(apiBody)
         })
             .then(response => {
                 return response.json();
