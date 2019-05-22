@@ -243,6 +243,7 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 #contact-header {
@@ -252,5 +253,5 @@ input:focus {
 #user-contact-info {
     margin-top: 2%;
     margin-left: 4%;
-    font-size: 88%;
+    font-size: 86%;
 }

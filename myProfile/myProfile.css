@@ -230,21 +230,6 @@ input:focus {
     width: 92%;
 }
 
-#save-profile-button {
-    margin-bottom: 2%;
-    margin-top: 4%;
-    margin-left: 3%;
-    width: 85%;
-    height: 6%;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(78, 42, 132);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 #contact-header {
     margin-top: 6%;
 }
@@ -252,7 +237,7 @@ input:focus {
 #user-contact-info {
     margin-top: 2%;
     margin-left: 4%;
-    font-size: 88%;
+    font-size: 86%;
 }
 
 
@@ -265,6 +250,30 @@ input:focus {
 
 #user-edit-button {
     margin-top: 5%;
-    margin-right: 7%;
+    margin-right: 8%;
     width: 15%;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(78, 42, 132);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.edit-field-wrapper {
+    margin-top: 1%;
+    width: 30%;
+    min-width: 200px;
+    font-size: 12pt;
+    display: flex;
+}
+
+.edit-field-select {
+    margin-right: 20%;
+}
+
+.edit-field-active {
+    justify-content: space-between;
 }

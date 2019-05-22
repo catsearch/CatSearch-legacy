@@ -175,13 +175,10 @@ const contactInfo = (user) => {
 
 function init() {
     // Strange bug here with localStorage, check later
-    /*userId = localStorage.getItem("clickedUserId");
-    if (!userId) {
-        window.location = '../mainPage/mainPage.html';
-    } else {
+    userId = localStorage.getItem("clickedUserId");
+    if (userId) {
         getUser();
-    }*/
-    //getUser();
+    }
     displayProfileRight();
     getUser();
 }

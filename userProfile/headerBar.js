@@ -9,7 +9,7 @@ let mouse = false;
 function search() {
     if (searchBar.value === "") {
         users = null;
-        getUsers();
+        window.location = "../mainPage/mainPage.html"
     } else {
         const apiBody = JSON.stringify({
             text: searchBar.value
