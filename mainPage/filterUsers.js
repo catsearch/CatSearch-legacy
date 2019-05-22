@@ -21,20 +21,6 @@ const filterFields = {
 
 const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
-/*
-function buildYearList() {
-    const yearLabel = document.getElementById("filter-year-label");
-    yearLabel.innerHTML = "Year";
-    const yearHTML = document.getElementById("filter-year-select");
-    for (let [i, yr] of yearList.entries()) {
-        let yearOption = document.createElement("option");
-        yearOption.setAttribute("value", i);
-        yearOption.innerHTML += yr;
-        yearHTML.appendChild(yearOption);
-    }
-    yearElement.appendChild(yearHTML);
-}
-*/
 
 function buildFilterCheckboxes() {
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
@@ -59,7 +45,6 @@ function buildFilterCheckboxes() {
 }
 
 function gray(elem) {
-    console.log(elem.getAttribute("id") + "-right");
     let changeElement = document.getElementById(elem.getAttribute("id") + "-right");
     changeElement.classList.toggle("time-label-right-not-gray");
 }
@@ -104,14 +89,14 @@ function buildTimeFields(){
         }
         let timeLabelRightSection = document.createElement("div");
         timeLabelRightSection.setAttribute("class", "time-label-right");
+        /* id is to find the correct section to gray things out */
         timeLabelRightSection.setAttribute("id", name + "-time-checked-right");
         timeLabelRightSection.appendChild(timeInputFromLabel);
         timeLabelRightSection.appendChild(timeInputFrom);
         timeLabelRightSection.appendChild(timeInputToLabel);
         timeLabelRightSection.appendChild(timeInputTo);
         fieldSection.appendChild(timeLabel);
-        fieldSection.append(timeLabelRightSection);
-        
+        fieldSection.append(timeLabelRightSection);   
     }
     timeElement.appendChild(fieldHTML);
     timeElement.appendChild(fieldSection);
