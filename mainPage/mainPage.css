@@ -197,7 +197,6 @@ button:focus {
 
 .field-collapsible-content {
     overflow: hidden;
-    
     transition: height 600ms ease-out;
 }
 
@@ -224,17 +223,16 @@ button:focus {
     margin-left: 5px;
 }
 
-.filter-time-sections {
-    display: flex;
-    flex-direction: row;
-    padding: 3%;
-    justify-content: space-between;
-    width: 75%;
-}
-
-.filter-time-sections input {
+.time-label-right input {
     width: 60%;
     max-width: 100px;
+}
+
+.time-label-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 20%;
 }
 
 #filter-button {

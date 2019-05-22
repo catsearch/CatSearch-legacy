@@ -44,7 +44,7 @@ function buildFilterCheckboxes() {
         let fieldSection = document.createElement("div");
         fieldSection.setAttribute("class", "field-collapsible-content");
         for (let [num, valueName] of fieldValues.entries()) {
-            checkboxes = document.createElement("label");
+            let checkboxes = document.createElement("label");
             checkboxes.setAttribute("class", "filter-container");
             let checkboxesChild = document.createElement("input");
             checkboxesChild.setAttribute("type", "checkbox");
@@ -59,23 +59,47 @@ function buildFilterCheckboxes() {
 }
 
 function buildTimeFields(){
+    let fieldHTML = document.createElement("button");
+        fieldHTML.setAttribute("class", "filter-collapsible");
+        fieldHTML.innerHTML = "Sleep Schedule";
+        let fieldSection = document.createElement("div");
+        fieldSection.setAttribute("class", "field-collapsible-content");
     for (let name of timeFields){
-        let timeSection = document.createElement("div");
-        timeSection.setAttribute("class", "filter-time-sections");
         let timeLabel = document.createElement("label");
-        timeLabel.setAttribute("class", "time-label");
+        timeLabel.setAttribute("class", "filter-container");
+        let timeLabelSelect = document.createElement("input");
+        timeLabelSelect.setAttribute("type", "checkbox");
+        timeLabelSelect.setAttribute("id", name + "-time-input");
+        timeLabel.appendChild(timeLabelSelect);
         timeLabel.innerHTML += name;
-        let timeInput = document.createElement("input");
-        timeInput.setAttribute("type", "time");
+        let timeInputFromLabel = document.createElement("label");
+        timeInputFromLabel.setAttribute("class", "from-time-label");
+        timeInputFromLabel.innerHTML = "From: ";
+        let timeInputFrom = document.createElement("input");
+        timeInputFrom.setAttribute("type", "time");
+        let timeInputToLabel = document.createElement("label");
+        timeInputToLabel.setAttribute("class", "to-time-label");
+        timeInputToLabel.innerHTML = "To: ";
+        let timeInputTo = document.createElement("input");
+        timeInputTo.setAttribute("type", "time");
         if (name === "Bedtime") {
-            timeInput.defaultValue = "00:00";
+            timeInputFrom.defaultValue = "23:00";
+            timeInputTo.defaultValue = "00:00"
         } else {
-            timeInput.defaultValue = "10:00";
+            timeInputFrom.defaultValue = "09:00";
+            timeInputTo.defaultValue = "10:00"
         }
-        timeSection.append(timeLabel);
-        timeSection.append(timeInput);
-        timeElement.appendChild(timeSection);
+        let timeLabelRightSection = document.createElement("div");
+        timeLabelRightSection.setAttribute("class", "time-label-right");
+        timeLabelRightSection.appendChild(timeInputFromLabel);
+        timeLabelRightSection.appendChild(timeInputFrom);
+        timeLabelRightSection.appendChild(timeInputToLabel);
+        timeLabelRightSection.appendChild(timeInputTo);
+        fieldSection.appendChild(timeLabel);
+        fieldSection.append(timeLabelRightSection);
     }
+    timeElement.appendChild(fieldHTML);
+    timeElement.appendChild(fieldSection);
 }
 
 function init() {
