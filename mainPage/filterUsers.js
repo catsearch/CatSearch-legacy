@@ -58,18 +58,27 @@ function buildFilterCheckboxes() {
     }
 }
 
+function gray(elem) {
+    console.log(elem.getAttribute("id") + "-right");
+    let changeElement = document.getElementById(elem.getAttribute("id") + "-right");
+    changeElement.classList.toggle("time-label-right-not-gray");
+}
+
 function buildTimeFields(){
+    /* creating the drop down part of the section*/
     let fieldHTML = document.createElement("button");
-        fieldHTML.setAttribute("class", "filter-collapsible");
-        fieldHTML.innerHTML = "Sleep Schedule";
-        let fieldSection = document.createElement("div");
-        fieldSection.setAttribute("class", "field-collapsible-content");
+    fieldHTML.setAttribute("class", "filter-collapsible");
+    fieldHTML.innerHTML = "Sleep Schedule";
+    let fieldSection = document.createElement("div");
+    fieldSection.setAttribute("class", "field-collapsible-content");
     for (let name of timeFields){
         let timeLabel = document.createElement("label");
         timeLabel.setAttribute("class", "filter-container");
         let timeLabelSelect = document.createElement("input");
         timeLabelSelect.setAttribute("type", "checkbox");
-        timeLabelSelect.setAttribute("id", name + "-time-input");
+        /* id to see if a checkbox is clicked */
+        timeLabelSelect.setAttribute("id", name + "-time-checked");
+        timeLabelSelect.setAttribute("onclick", "gray(this)");
         timeLabel.appendChild(timeLabelSelect);
         timeLabel.innerHTML += name;
         let timeInputFromLabel = document.createElement("label");
@@ -77,11 +86,15 @@ function buildTimeFields(){
         timeInputFromLabel.innerHTML = "From: ";
         let timeInputFrom = document.createElement("input");
         timeInputFrom.setAttribute("type", "time");
+        /* id to get the value from specific input element */
+        timeInputFrom.setAttribute("id", name + "-time-input-from");
         let timeInputToLabel = document.createElement("label");
         timeInputToLabel.setAttribute("class", "to-time-label");
         timeInputToLabel.innerHTML = "To: ";
         let timeInputTo = document.createElement("input");
         timeInputTo.setAttribute("type", "time");
+        /* id to get the value from specific input element */
+        timeInputTo.setAttribute("id", name + "-time-input-to");
         if (name === "Bedtime") {
             timeInputFrom.defaultValue = "23:00";
             timeInputTo.defaultValue = "00:00"
@@ -91,12 +104,14 @@ function buildTimeFields(){
         }
         let timeLabelRightSection = document.createElement("div");
         timeLabelRightSection.setAttribute("class", "time-label-right");
+        timeLabelRightSection.setAttribute("id", name + "-time-checked-right");
         timeLabelRightSection.appendChild(timeInputFromLabel);
         timeLabelRightSection.appendChild(timeInputFrom);
         timeLabelRightSection.appendChild(timeInputToLabel);
         timeLabelRightSection.appendChild(timeInputTo);
         fieldSection.appendChild(timeLabel);
         fieldSection.append(timeLabelRightSection);
+        
     }
     timeElement.appendChild(fieldHTML);
     timeElement.appendChild(fieldSection);

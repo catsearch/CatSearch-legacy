@@ -233,6 +233,27 @@ button:focus {
     flex-direction: column;
     width: 100%;
     margin-left: 20%;
+    opacity: 0.5;
+}
+
+.time-label-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 20%;
+    opacity: 0.5;
+}
+
+.time-checked {
+    border: 1px solid black;
+}
+
+.time-label-right-not-gray{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 20%;
+    opacity: 1;
 }
 
 #filter-button {
