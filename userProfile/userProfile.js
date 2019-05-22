@@ -138,6 +138,9 @@ function saveUser() {
         .then(response => {
             return response.json();
         })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 function removeUser() {
@@ -151,6 +154,9 @@ function removeUser() {
     })
         .then(response => {
             return response.json();
+        })
+        .catch(err => {
+            console.log(err);
         })
 }
 
