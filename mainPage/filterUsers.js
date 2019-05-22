@@ -10,6 +10,7 @@ const yearList = ["Select year:", "2021", "2022", "2023", "2024", "2025"]
 
 const checkboxesElement = document.getElementById('filter-checkboxes')
 const filterFields = {
+    "Year" : ["2021", "2022", "2023", "2024", "2025"],
     "Gender" : ["Male", "Female", "Other"],
     "School" : ["Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
     "Area" : ["North", "Mid", "South"],
@@ -20,7 +21,7 @@ const filterFields = {
 
 const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
-
+/*
 function buildYearList() {
     const yearLabel = document.getElementById("filter-year-label");
     yearLabel.innerHTML = "Year";
@@ -33,6 +34,7 @@ function buildYearList() {
     }
     yearElement.appendChild(yearHTML);
 }
+*/
 
 function buildFilterCheckboxes() {
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
@@ -77,7 +79,7 @@ function buildTimeFields(){
 }
 
 function init() {
-    buildYearList();
+    /*buildYearList();*/
     buildFilterCheckboxes();
     buildTimeFields();
 
@@ -101,12 +103,13 @@ const validInputs = () => {
 
 function filter() {
     let apiFields = {};
-
+    /*
     const yearSelect = document.getElementById("filter-year-select");
     const selectedField = yearSelect.options[yearSelect.selectedIndex].text;
     if (selectedField !== "Select year:") {
         apiFields["year"] = selectedField;
     }
+    */
 
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
         for (let [num, valueName] of fieldValues.entries()) {
