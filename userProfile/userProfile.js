@@ -22,7 +22,7 @@ let defaultUser = {
     bedtimeEnd: "00:00",
     wakeUpStart: "08:00",
     wakeUpEnd: "10:00",   
-    profilePicture: defaultIcon,
+    picUrl: "",
     email: "michael-horn@northwestern.edu",
     id: "235804958430"
 };
@@ -42,64 +42,66 @@ function getUser() {
             return response.json();
         })
         .then(json => {
-            if (json.success) {
-                user = json.user;
-            } else {
-                user = defaultUser;
-            }
-            //userWrapper.innerHTML = JSON.stringify(user);
-            profilePicture(user.profilePicture);
+            user = json.success? json.user : defaultUser;
+            console.log(user);
+            profilePicture(user.picUrl);
+            displayProfileRight();
         })
         .catch(err => {
             console.log(err);
-            //userWrapper.innerHTML = JSON.stringify(defaultUser);
-            profilePicture(defaultUser.profilePicture);
-            userLeft.appendChild(contactInfo(defaultUser))
+            //window.location = "../mainPage/mainPage.html";
         })
 }
 
+function displayProfileRight() {
+    buildUserName();
+    buildDropDownFields();
+    buildTimeFields();
+    buildBlurb();
+}
+
 function buildUserName() {
-    userNameField.innerHTML = defaultUser.firstName + " " + defaultUser.lastName;
+    userNameField.innerHTML = (user == null) ? `${defaultUser.firstName} ${defaultUser.lastName}` : `${user.firstName} ${user.lastName}`;
 }
 
 function buildDropDownFields() {
     dropdownFieldsList.forEach(function (fieldName, index) {
         let tempField = document.createElement("span");
         tempField.setAttribute("class", "dropdown-fields");
-        tempField.innerHTML = dropdownDisplayNames[index] + defaultUser[fieldName];
-        if (fieldName === "smoking" && defaultUser[fieldName] === "No") {
+        tempField.innerHTML = dropdownDisplayNames[index] + user[fieldName];
+        if (fieldName === "smoking" && user[fieldName] === "No") {
             tempField.innerHTML = dropdownDisplayNames[index] + "Non-Smoking"; 
         }
         userDropdownFields.appendChild(tempField);
-    })
-        
+    })   
 }
 
 function buildTimeFields() {
     let bedtimeField = document.createElement("span");
     bedtimeField.setAttribute("class", "time-fields");
     bedtimeField.innerHTML = "Bedtime: ";
-    bedtimeField.innerHTML += "From " + millitaryToRegular(defaultUser.bedtimeStart);
-    bedtimeField.innerHTML += " To " + millitaryToRegular(defaultUser.bedtimeEnd);
+    bedtimeField.innerHTML += "From " + millitaryToRegular(user.bedtimeStart);
+    bedtimeField.innerHTML += " To " + millitaryToRegular(user.bedtimeEnd);
     userTimeFields.appendChild(bedtimeField);
 
     
     let wakeUpField = document.createElement("span");
     wakeUpField.setAttribute("class", "time-fields");
     wakeUpField.innerHTML = "Wake-Up: ";
-    wakeUpField.innerHTML += "From " + millitaryToRegular(defaultUser.wakeUpStart);
-    wakeUpField.innerHTML += " To " + millitaryToRegular(defaultUser.wakeUpEnd);
+    wakeUpField.innerHTML += "From " + millitaryToRegular(user.wakeUpStart);
+    wakeUpField.innerHTML += " To " + millitaryToRegular(user.wakeUpEnd);
     userTimeFields.appendChild(wakeUpField);
 }
 
 function buildBlurb() {
     let blurbField = document.createElement("p");
     blurbField.setAttribute("id", "blurb-field");
-    blurbField.innerHTML = defaultUser.blurb;
+    blurbField.innerHTML = user.blurb;
     userBlurbField.appendChild(blurbField);
 }
 
 function millitaryToRegular(inputTime) {
+    if (!inputTime || inputTime === "") {return "";}
     let timeComponents = inputTime.split(":");
     let hh = parseInt(timeComponents[0]);
     let mins = timeComponents[1];
@@ -115,16 +117,9 @@ function millitaryToRegular(inputTime) {
     return hh.toString() + ":" + mins + " " + dd;
 }
 
-function displayProfileRight() {
-    buildUserName();
-    buildDropDownFields();
-    buildTimeFields();
-    buildBlurb();
-}
-
 function saveUser() {
     const apiBody = JSON.stringify({
-        id: defaultUser.id
+        id: user.id
     });
     fetch(apiUrl + userId + "/saveUser", {
         method: "PATCH",
@@ -138,7 +133,7 @@ function saveUser() {
 
 function removeUser() {
     const apiBody = JSON.stringify({
-        id: defaultUser.id
+        id: user.id
     });
     fetch(apiUrl + userId + "/removeUser", {
         method: "PATCH",
@@ -151,8 +146,7 @@ function removeUser() {
 }
 
 const profilePicture = (picUrl) => {
-    profPic.src = picUrl;
-    return profPic;
+    profPic.src = picUrl === ""? defaultIcon : picUrl;
 }
 
 function save() {
@@ -176,16 +170,9 @@ const contactInfo = (user) => {
     return container;
 }
 
-function init() {
-    // Strange bug here with localStorage, check later
-    /*userId = localStorage.getItem("clickedUserId");
-    if (!userId) {
-        window.location = '../mainPage/mainPage.html';
-    } else {
-        getUser();
-    }*/
-    //getUser();
-    displayProfileRight();
+userId = localStorage.getItem("clickedUserId");
+if (userId !== null && userId !== "null") {
     getUser();
+} else {
+    window.location = '../mainPage/mainPage.html';
 }
-init();
