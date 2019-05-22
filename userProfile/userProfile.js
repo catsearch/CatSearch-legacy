@@ -23,13 +23,8 @@ let defaultUser = {
     wakeUpStart: "08:00",
     wakeUpEnd: "10:00",   
     profilePicture: defaultIcon,
-<<<<<<< HEAD
-    email: "michael-horn@northwestern.edu"
-=======
     email: "michael-horn@northwestern.edu",
-    id: "235804958430",
-    blurb: "This is Michael's blurb! Isn't it nice?"
->>>>>>> backend?(?????)
+    id: "235804958430"
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
@@ -63,7 +58,7 @@ function getUser() {
         })
 }
 
-<<<<<<< HEAD
+function buildUserName() {
     userNameField.innerHTML = defaultUser.firstName + " " + defaultUser.lastName;
 }
 
@@ -125,7 +120,8 @@ function displayProfileRight() {
     buildDropDownFields();
     buildTimeFields();
     buildBlurb();
-=======
+}
+
 function saveUser() {
     const apiBody = JSON.stringify({
         id: defaultUser.id
@@ -137,9 +133,6 @@ function saveUser() {
     })
         .then(response => {
             return response.json();
-        })
-        .catch(err => {
-            console.log(err);
         })
 }
 
@@ -155,13 +148,11 @@ function removeUser() {
         .then(response => {
             return response.json();
         })
-        .catch(err => {
-            console.log(err);
-        })
 }
 
->>>>>>> backend?(?????)
 const profilePicture = (picUrl) => {
+    profPic.src = picUrl;
+    return profPic;
 }
 
 function save() {
@@ -195,5 +186,6 @@ function init() {
     }*/
     //getUser();
     displayProfileRight();
+    getUser();
 }
 init();
