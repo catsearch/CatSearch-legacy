@@ -145,13 +145,6 @@ input:focus {
 
 /* Profile */
 
-/*DELETE THIS*/
-#delete-this {
-    border: solid 1px black;
-    height: 100%;
-    width: 20%;
-}
-
 #user-wrapper {
     display: flex;
     height: 87%;
@@ -201,23 +194,26 @@ input:focus {
     font-size: 12pt;
 }
 
+#user-blurb-about-me {
+    margin-bottom: 0.5%;
+    margin-top: 3%;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
 #user-blurb-field {
     width: 80%;
-    margin-top: 2%;
     margin-bottom: 2%;
-    padding: 1%;
     border: 2px solid black;
     flex-grow: 1;
     overflow-y: auto;
 }
 
 #blurb-field {
-    width: 100%;
+    margin: 0%;
+    padding: 1%;
+    width: 98%;
     font-size: 12pt;
     line-height: 1.5;
 }
 
-#blurb-about-me {
-    font-size: 15pt;
-    font-weight: bold;
-}
