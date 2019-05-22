@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="myProfile.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+        <title>CatSearch</title>
+    </head>
+    <body>
+        <div id="header-bar">
+            <div id="logo">
+                <a id="logo-content" href="../mainPage/mainPage.html">CatSearch</a>
+            </div>
+            <div id="search-bar-container">
+                <div id="search-border">
+                    <input id="search-bar" placeholder="Search...">
+                    <button id="search-button" onclick="search()"><i class="material-icons">search</i></button>
+                </div>
+            </div>
+            <div id="header-dropdown">
+            </div>
+        </div>
+        <div id="user-wrapper">
+            <div id="user-profile-left">
+                <img id="user-profile-picture">
+                <div id="contact-header"><b>Contact</b></div>
+                <div id="contact-info-wrapper"></div>
+            </div>
+            <div id="user-fields-right">
+                <div id="name-and-edit">
+                    <span id="user-name-field"></span>
+                    <button id="user-edit-button">Edit</button>
+                </div>
+                <div id="user-dropdown-fields">
+                </div>
+                <div id="user-time-fields">
+                </div>
+                <span id="user-blurb-about-me">
+                    About Me: 
+                </span>
+                <div id="user-blurb-field">
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="myProfile.js"></script>
+    <script src="../mainPage/headerBar.js"></script>
+</html>
