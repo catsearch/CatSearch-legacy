@@ -232,27 +232,12 @@ button:focus {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-left: 20%;
+    margin-left: 25%;
     opacity: 0.5;
-}
-
-.time-label-right {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: 20%;
-    opacity: 0.5;
-}
-
-.time-checked {
-    border: 1px solid black;
+    font-style: italic;
 }
 
 .time-label-right-not-gray{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: 20%;
     opacity: 1;
 }
 
