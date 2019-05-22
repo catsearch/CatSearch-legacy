@@ -28,7 +28,6 @@ let defaultUser = {
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
-const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoking", "music"];
 const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoking: ", "Playing Music: "];
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
@@ -65,31 +64,107 @@ function buildUserName() {
 }
 
 function buildDropDownFields() {
-    dropdownFieldsList.forEach(function (fieldName, index) {
+    dropdownDisplayNames.forEach(function (fieldName, index) {
         let tempField = document.createElement("span");
         tempField.setAttribute("class", "dropdown-fields");
-        tempField.innerHTML = dropdownDisplayNames[index] + user[fieldName];
-        if (fieldName === "smoking" && user[fieldName] === "No") {
-            tempField.innerHTML = dropdownDisplayNames[index] + "Non-Smoking"; 
+        if (fieldName === "Gender: ") {
+            let fieldValue = "";
+            if (user.male) {
+                fieldValue = "Male";
+            } else if (user.female) {
+                fieldValue = "Female";
+            } else if (user.other) {
+                fieldValue = "Other";
+            } else {
+                fieldValue = "N/A";
+            }
+            tempField.innerHTML = fieldName + fieldValue;
+        } else if (fieldName === "School: ") {
+            let fieldValue = "";
+            if (user.bienen) {
+                fieldValue = "Bienen";
+            } else if (user.mccormick) {
+                fieldValue = "McCormick";
+            } else if (user.medill) {
+                fieldValue = "Medill";
+            } else if (user.sesp) {
+                fieldValue = "SESP";
+            } else if (user.soc) {
+                fieldValue = "SoC";
+            } else if (user.wcas) {
+                fieldValue = "Weinberg";
+            } else {
+                fieldValue = "N/A";
+            }
+            tempField.innerHTML = fieldName + fieldValue;
+        } else if (fieldName === "Year: ") {
+            tempField.innerHTML = fieldName + (user.year? user.year : "N/A");
+        } else if (fieldName === "Area: ") {
+            let fieldValue = "";
+            if (user.north) {
+                fieldValue = "North Campus";
+            } else if (user.mid) {
+                fieldValue = "Mid-Campus";
+            } else if (user.south) {
+                fieldValue = "South Campus";
+            } else {
+                fieldValue = "N/A";
+            }
+            tempField.innerHTML = fieldName + fieldValue;
+        } else if (fieldName === "Cleanliness: ") {
+            let fieldValue = "";
+            if (user.high) {
+                fieldValue = "High";
+            } else if (user.medium) {
+                fieldValue = "Medium";
+            } else if (user.low) {
+                fieldValue = "Don't Care";
+            } else {
+                fieldValue = "N/A";
+            }
+            tempField.innerHTML = fieldName + fieldValue;
+        } else if (fieldName === "Smoking: ") {
+            let fieldValue = "";
+            if (user.smoking) {
+                fieldValue = "Yes";
+            } else if (user.no) {
+                fieldValue = "No";
+            } else {
+                fieldValue = "N/A";
+            }
+            tempField.innerHTML = fieldName + fieldValue;
+        } else if (fieldName === "Playing Music: ") {
+            let fieldValue = "";
+            if (user.often) {
+                fieldValue = "Often";
+            } else if (user.sometimes) {
+                fieldValue = "Sometimes";
+            } else if (user.never) {
+                fieldValue = "Never";
+            } else {
+                fieldValue = "N/A";
+            }
+            tempField.innerHTML = fieldName + fieldValue;
         }
+        //tempField.innerHTML = fieldName + user[fieldName];
         userDropdownFields.appendChild(tempField);
-    })   
+    })
 }
 
 function buildTimeFields() {
     let bedtimeField = document.createElement("span");
     bedtimeField.setAttribute("class", "time-fields");
     bedtimeField.innerHTML = "Bedtime: ";
-    bedtimeField.innerHTML += "From " + millitaryToRegular(user.bedtimeStart);
-    bedtimeField.innerHTML += " To " + millitaryToRegular(user.bedtimeEnd);
+    bedtimeField.innerHTML += "From: " + millitaryToRegular(user.bedtimeStart);
+    bedtimeField.innerHTML += " To: " + millitaryToRegular(user.bedtimeEnd);
     userTimeFields.appendChild(bedtimeField);
 
     
     let wakeUpField = document.createElement("span");
     wakeUpField.setAttribute("class", "time-fields");
     wakeUpField.innerHTML = "Wake-Up: ";
-    wakeUpField.innerHTML += "From " + millitaryToRegular(user.wakeUpStart);
-    wakeUpField.innerHTML += " To " + millitaryToRegular(user.wakeUpEnd);
+    wakeUpField.innerHTML += "From: " + millitaryToRegular(user.wakeUpStart);
+    wakeUpField.innerHTML += " To: " + millitaryToRegular(user.wakeUpEnd);
     userTimeFields.appendChild(wakeUpField);
 }
 
@@ -101,7 +176,7 @@ function buildBlurb() {
 }
 
 function millitaryToRegular(inputTime) {
-    if (!inputTime || inputTime === "") {return "";}
+    if (!inputTime || inputTime === "") {return "N/A";}
     let timeComponents = inputTime.split(":");
     let hh = parseInt(timeComponents[0]);
     let mins = timeComponents[1];
