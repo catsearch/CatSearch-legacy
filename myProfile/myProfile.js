@@ -33,6 +33,17 @@ const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Clean
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
+
+const filterFields = {
+    "Gender" : ["Select:", "Male", "Female", "Other"],
+    "School" : ["Select:", "Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
+    "Area" : ["Select:", "North", "Mid", "South"],
+    "Cleanliness" : ["Select:", "High", "Medium", "Low"],
+    "Smoking" : ["Select:", "Smoking", "No"],
+    "Playing Music" : ["Select:", "Often", "Sometimes", "Never"],
+    "Year" : ["Select:", "2021", "2022", "2023", "2024", "2025"]
+}
+
 function getUser() {
     fetch(apiUrl + userId, {
         method: "GET",
@@ -68,8 +79,7 @@ function buildDropDownFields() {
         tempField.setAttribute("class", "dropdown-fields");
         tempField.innerHTML = dropdownDisplayNames[index] + defaultUser[fieldName];
         userDropdownFields.appendChild(tempField);
-    })
-        
+    })   
 }
 
 function buildTimeFields() {
@@ -117,6 +127,29 @@ function displayProfileRight() {
     buildDropDownFields();
     buildTimeFields();
     buildBlurb();
+}
+
+function edit() {
+    userDropdownFields.innerHTML = ""
+    for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
+        const tempHTML = document.createElement("div");
+        tempHTML.setAttribute("class", "edit-field-wrapper");
+        const label = document.createElement("label");
+        label.innerHTML = fieldName;
+        label.setAttribute("class", "edit-field-label");
+        const select = document.createElement("select");
+        select.setAttribute("class", "edit-field-select");
+        for (let [i, val] of fieldValues.entries()) {
+            let option = document.createElement("option");
+            option.setAttribute("value", i);
+            option.innerHTML += val;
+            select.appendChild(option);
+        }
+        tempHTML.appendChild(label);
+        tempHTML.appendChild(select);
+        tempHTML.classList.toggle("edit-field-active");
+        userDropdownFields.appendChild(tempHTML);
+    }
 }
 
 function saveUser() {

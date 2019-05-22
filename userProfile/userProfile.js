@@ -28,12 +28,8 @@ let defaultUser = {
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
-<<<<<<< HEAD
-const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoking: ", "Playing Music: "];
-=======
 const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoking", "music"];
 const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoker: ", "Playing Music: "];
->>>>>>> spelling and smoker
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
