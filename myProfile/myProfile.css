@@ -262,6 +262,10 @@ input:focus {
     cursor: pointer;
 }
 
+#edit-icon {
+    margin-left: 5%;
+}
+
 .edit-field-wrapper {
     margin-top: 1%;
     width: 30%;
