@@ -10,6 +10,7 @@ const yearList = ["Select year:", "2021", "2022", "2023", "2024", "2025"]
 
 const checkboxesElement = document.getElementById('filter-checkboxes')
 const filterFields = {
+    "Year" : ["2021", "2022", "2023", "2024", "2025"],
     "Gender" : ["Male", "Female", "Other"],
     "School" : ["Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
     "Area" : ["North", "Mid", "South"],
@@ -21,19 +22,6 @@ const filterFields = {
 const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
 
-function buildYearList() {
-    const yearLabel = document.getElementById("filter-year-label");
-    yearLabel.innerHTML = "Year";
-    const yearHTML = document.getElementById("filter-year-select");
-    for (let [i, yr] of yearList.entries()) {
-        let yearOption = document.createElement("option");
-        yearOption.setAttribute("value", i);
-        yearOption.innerHTML += yr;
-        yearHTML.appendChild(yearOption);
-    }
-    yearElement.appendChild(yearHTML);
-}
-
 function buildFilterCheckboxes() {
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
         let fieldHTML = document.createElement("button");
@@ -42,7 +30,7 @@ function buildFilterCheckboxes() {
         let fieldSection = document.createElement("div");
         fieldSection.setAttribute("class", "field-collapsible-content");
         for (let [num, valueName] of fieldValues.entries()) {
-            checkboxes = document.createElement("label");
+            let checkboxes = document.createElement("label");
             checkboxes.setAttribute("class", "filter-container");
             let checkboxesChild = document.createElement("input");
             checkboxesChild.setAttribute("type", "checkbox");
@@ -56,28 +44,66 @@ function buildFilterCheckboxes() {
     }
 }
 
+function gray(elem) {
+    let changeElement = document.getElementById(elem.getAttribute("id") + "-right");
+    changeElement.classList.toggle("time-label-right-not-gray");
+}
+
 function buildTimeFields(){
+    /* creating the drop down part of the section*/
+    let fieldHTML = document.createElement("button");
+    fieldHTML.setAttribute("class", "filter-collapsible");
+    fieldHTML.innerHTML = "Sleep Schedule";
+    let fieldSection = document.createElement("div");
+    fieldSection.setAttribute("class", "field-collapsible-content");
     for (let name of timeFields){
-        let timeSection = document.createElement("div");
-        timeSection.setAttribute("class", "filter-time-sections");
         let timeLabel = document.createElement("label");
-        timeLabel.setAttribute("class", "time-label");
+        timeLabel.setAttribute("class", "filter-container");
+        let timeLabelSelect = document.createElement("input");
+        timeLabelSelect.setAttribute("type", "checkbox");
+        /* id to see if a checkbox is clicked */
+        timeLabelSelect.setAttribute("id", name + "-time-checked");
+        timeLabelSelect.setAttribute("onclick", "gray(this)");
+        timeLabel.appendChild(timeLabelSelect);
         timeLabel.innerHTML += name;
-        let timeInput = document.createElement("input");
-        timeInput.setAttribute("type", "time");
+        let timeInputFromLabel = document.createElement("label");
+        timeInputFromLabel.setAttribute("class", "from-time-label");
+        timeInputFromLabel.innerHTML = "From: ";
+        let timeInputFrom = document.createElement("input");
+        timeInputFrom.setAttribute("type", "time");
+        /* id to get the value from specific input element */
+        timeInputFrom.setAttribute("id", name + "-time-input-from");
+        let timeInputToLabel = document.createElement("label");
+        timeInputToLabel.setAttribute("class", "to-time-label");
+        timeInputToLabel.innerHTML = "To: ";
+        let timeInputTo = document.createElement("input");
+        timeInputTo.setAttribute("type", "time");
+        /* id to get the value from specific input element */
+        timeInputTo.setAttribute("id", name + "-time-input-to");
         if (name === "Bedtime") {
-            timeInput.defaultValue = "00:00";
+            timeInputFrom.defaultValue = "23:00";
+            timeInputTo.defaultValue = "00:00"
         } else {
-            timeInput.defaultValue = "10:00";
+            timeInputFrom.defaultValue = "09:00";
+            timeInputTo.defaultValue = "10:00"
         }
-        timeSection.append(timeLabel);
-        timeSection.append(timeInput);
-        timeElement.appendChild(timeSection);
+        let timeLabelRightSection = document.createElement("div");
+        timeLabelRightSection.setAttribute("class", "time-label-right");
+        /* id is to find the correct section to gray things out */
+        timeLabelRightSection.setAttribute("id", name + "-time-checked-right");
+        timeLabelRightSection.appendChild(timeInputFromLabel);
+        timeLabelRightSection.appendChild(timeInputFrom);
+        timeLabelRightSection.appendChild(timeInputToLabel);
+        timeLabelRightSection.appendChild(timeInputTo);
+        fieldSection.appendChild(timeLabel);
+        fieldSection.append(timeLabelRightSection);   
     }
+    timeElement.appendChild(fieldHTML);
+    timeElement.appendChild(fieldSection);
 }
 
 function init() {
-    buildYearList();
+    /*buildYearList();*/
     buildFilterCheckboxes();
     buildTimeFields();
 
@@ -101,12 +127,13 @@ const validInputs = () => {
 
 function filter() {
     let apiFields = {};
-
+    /*
     const yearSelect = document.getElementById("filter-year-select");
     const selectedField = yearSelect.options[yearSelect.selectedIndex].text;
     if (selectedField !== "Select year:") {
         apiFields["year"] = selectedField;
     }
+    */
 
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
         for (let [num, valueName] of fieldValues.entries()) {
