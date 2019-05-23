@@ -214,6 +214,7 @@ input:focus {
     margin: 0%;
     padding: 1%;
     width: 98%;
+    height:100%;
     font-size: 12pt;
     line-height: 1.5;
 }
@@ -280,4 +281,30 @@ input:focus {
 
 .edit-field-active {
     justify-content: space-between;
+}
+
+.time-sections-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.time-sections {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.time-input-wrapper input {
+    width: 80%;
+    max-width: 100px;
+    margin-right: 20%;
+
 }

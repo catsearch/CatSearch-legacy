@@ -33,6 +33,7 @@ const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "
 const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoker: ", "Playing Music: "];
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
+let blurbField = document.getElementById("blurb-field");
 
 
 const filterFields = {
@@ -101,7 +102,7 @@ function buildTimeFields() {
 }
 
 function buildBlurb() {
-    let blurbField = document.createElement("p");
+    blurbField = document.createElement("p");
     blurbField.setAttribute("id", "blurb-field");
     blurbField.innerHTML = defaultUser.blurb;
     userBlurbField.appendChild(blurbField);
@@ -166,8 +167,63 @@ function edit() {
             userDropdownFields.appendChild(tempHTML);
         }
 
+        // Time
+        userTimeFields.innerHTML = ""
+        for (let name of ["Bedtime", "Wake-up"]){
+            // Big container
+            let timeSection = document.createElement("div");
+            timeSection.setAttribute("class", "time-sections-wrapper");
+            // Label
+            let timeLabel = document.createElement("label");
+            timeLabel.setAttribute("class", "time-label");
+            timeLabel.innerHTML += name;
+            // input container
+            let timeInputs = document.createElement("div");
+            timeInputs.setAttribute("class","time-sections")
+            // Start stuff
+            let timeStart = document.createElement("div");
+            timeStart.setAttribute("class", "time-input-wrapper");
+            let timeInputStart = document.createElement("input");
+            let timeLabelFrom = document.createElement("label");
+            
+            // End stuff
+            let timeEnd = document.createElement("div");
+            timeEnd.setAttribute("class", "time-input-wrapper");
+            let timeLabelTo = document.createElement("label");
+            let timeInputEnd = document.createElement("input");
+
+            timeInputStart.setAttribute("type", "time");
+            timeInputStart.setAttribute("id", name+"-start");
+            timeLabelFrom.innerHTML = "From:";
+
+            timeInputEnd.setAttribute("type", "time");
+            timeInputEnd.setAttribute("id", name+"-end");
+            timeLabelTo.innerHTML = "To:";
+            if (name === "Bedtime") {
+                timeInputStart.defaultValue = "21:00";
+                timeInputEnd.defaultValue = "00:00";
+            } else {
+                timeInputStart.defaultValue = "08:00";
+                timeInputEnd.defaultValue = "10:00";
+            }
+            timeStart.appendChild(timeLabelFrom);
+            timeStart.appendChild(timeInputStart);
+
+            timeEnd.appendChild(timeLabelTo);
+            timeEnd.appendChild(timeInputEnd);
+
+            timeInputs.appendChild(timeStart);
+            timeInputs.appendChild(timeEnd);
+
+            timeSection.appendChild(timeLabel);
+            timeSection.appendChild(timeInputs);
+            userTimeFields.append(timeSection)
+        }
+
         // Blurb
-        
+        userBlurbField.innerHTML = "<textarea id=\"blurb-field\"></textarea>";
+        blurbField = document.getElementById("blurb-field");
+        blurbField.innerHTML = defaultUser.blurb
     }
     // saving
     else {
@@ -187,6 +243,19 @@ function edit() {
         }) 
         userDropdownFields.innerHTML = ""; 
         buildDropDownFields();
+
+        // Time
+        defaultUser["bedtimeStart"] = document.getElementById("Bedtime-start").value;
+        defaultUser["bedtimeEnd"] = document.getElementById("Bedtime-end").value;
+        defaultUser["wakeUpStart"] = document.getElementById("Wake-up-start").value;
+        defaultUser["wakeUpEnd"] = document.getElementById("Wake-up-end").value;
+        userTimeFields.innerHTML = "";
+        buildTimeFields();
+
+        // Blurb
+        defaultUser["blurb"] = blurbField.value;
+        userBlurbField.innerHTML = "";
+        buildBlurb();
     }
 }
 
