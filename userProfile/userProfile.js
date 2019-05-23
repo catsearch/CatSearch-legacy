@@ -28,7 +28,8 @@ let defaultUser = {
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
-const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoking: ", "Playing Music: "];
+const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoking", "music"];
+const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoker: ", "Playing Music: "];
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
@@ -155,16 +156,16 @@ function buildTimeFields() {
     let bedtimeField = document.createElement("span");
     bedtimeField.setAttribute("class", "time-fields");
     bedtimeField.innerHTML = "Bedtime: ";
-    bedtimeField.innerHTML += "From: " + millitaryToRegular(user.bedtimeStart);
-    bedtimeField.innerHTML += " To: " + millitaryToRegular(user.bedtimeEnd);
+    bedtimeField.innerHTML += "From " + militaryToRegular(defaultUser.bedtimeStart);
+    bedtimeField.innerHTML += " To " + militaryToRegular(defaultUser.bedtimeEnd);
     userTimeFields.appendChild(bedtimeField);
 
     
     let wakeUpField = document.createElement("span");
     wakeUpField.setAttribute("class", "time-fields");
     wakeUpField.innerHTML = "Wake-Up: ";
-    wakeUpField.innerHTML += "From: " + millitaryToRegular(user.wakeUpStart);
-    wakeUpField.innerHTML += " To: " + millitaryToRegular(user.wakeUpEnd);
+    wakeUpField.innerHTML += "From " + militaryToRegular(defaultUser.wakeUpStart);
+    wakeUpField.innerHTML += " To " + militaryToRegular(defaultUser.wakeUpEnd);
     userTimeFields.appendChild(wakeUpField);
 }
 
@@ -175,8 +176,7 @@ function buildBlurb() {
     userBlurbField.appendChild(blurbField);
 }
 
-function millitaryToRegular(inputTime) {
-    if (!inputTime || inputTime === "") {return "N/A";}
+function militaryToRegular(inputTime) {
     let timeComponents = inputTime.split(":");
     let hh = parseInt(timeComponents[0]);
     let mins = timeComponents[1];
