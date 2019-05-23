@@ -7,34 +7,10 @@ let mouse = false;
 
 // search: backend call, not implemented
 function search() {
-    if (searchBar.value === "") {
-        users = null;
-        getUsers();
-    } else {
-        const apiBody = JSON.stringify({
-            text: searchBar.value
-        });
-        fetch(apiUrl + `${userId}/search`, {
-            method: "POST",
-            headers: apiHeader,
-            body: apiBody
-        })
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                if (json.success) {
-                    console.log(json.users);
-                    users = json.users;
-                    window.location = "../mainPage/mainPage.html";;
-                } else {
-                    //rip
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    if (searchBar.value !== "") {
+        localStorage.setItem("externalSearch", searchBar.value);
     }
+    window.location = "../mainPage/mainPage.html";
 }
 
 function mouseStatus(n) {
@@ -101,8 +77,7 @@ function addDropdown(name) {
         <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
-            <a href="../savedUsers/savedUsers.html">Saved Users</a>
-            <a href="../login/login.html">Log Out</a>
+            <a href="../login/login.html" onclick="logout();>Log Out</a>
         </div>`
     dropdownText = document.getElementById("header-dropdown-text");
     headerMenuContent = document.getElementById("header-dropdown-content");
@@ -110,6 +85,11 @@ function addDropdown(name) {
 
 function addLoginButton() {
     headerMenu.innerHTML = `<div id="login-button"><span id="login-button-text" onclick="moveToLogin();">Login</span></div>`
+}
+
+function logout() {
+    localStorage.removeItem("userId");
+    moveToLogin();
 }
 
 function moveToLogin() {
