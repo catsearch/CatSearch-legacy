@@ -1,4 +1,4 @@
-let userId = null;
+let userId = localStorage.getItem("clickedUserId");
 const userWrapper = document.getElementById("user-wrapper");
 const userLeft = document.getElementById("user-profile-left");
 const profPic = document.getElementById("user-profile-picture");
@@ -33,6 +33,9 @@ const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
 function getUser() {
+    if (userId !== null && userId !== "null") {
+
+    }
     fetch(apiUrl + userId, {
         method: "GET",
         headers: apiHeader
@@ -42,13 +45,16 @@ function getUser() {
         })
         .then(json => {
             user = json.success? json.user : defaultUser;
-            console.log(user);
             profilePicture(user.picUrl);
             displayProfileRight();
         })
         .catch(err => {
             console.log(err);
-            //window.location = "../mainPage/mainPage.html";
+            //THESE ARE JUST HERE FOR DEMO SO IT DOESN'T BREAK WHEN SERVER IS OFF
+            //window.location = "../mainPage/mainPage.html"; //<--this should be here instead
+            user = defaultUser;
+            profilePicture(user.picUrl);
+            displayProfileRight(); 
         })
 }
 
@@ -171,7 +177,7 @@ function buildTimeFields() {
 function buildBlurb() {
     let blurbField = document.createElement("p");
     blurbField.setAttribute("id", "blurb-field");
-    blurbField.innerHTML = user.blurb;
+    blurbField.innerHTML = user.blurb ? user.blurb : "This user has not yet added a blurb.";
     userBlurbField.appendChild(blurbField);
 }
 
@@ -239,15 +245,10 @@ const contactInfo = (user) => {
     const container = document.createElement('div');
     container.id = 'user-contact-info';
 
-    container.append("Email: ")
-    container.append(user.email)
+    container.append("Email: ");
+    container.append(user.email);
 
     return container;
 }
 
-userId = localStorage.getItem("clickedUserId");
-if (userId !== null && userId !== "null") {
-    getUser();
-} else {
-    window.location = '../mainPage/mainPage.html';
-}
+getUser();
