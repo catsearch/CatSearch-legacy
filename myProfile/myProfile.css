@@ -214,6 +214,7 @@ input:focus {
     margin: 0%;
     padding: 1%;
     width: 98%;
+    height:100%;
     font-size: 12pt;
     line-height: 1.5;
 }
@@ -252,7 +253,7 @@ input:focus {
 #user-contact-info {
     margin-top: 2%;
     margin-left: 4%;
-    font-size: 88%;
+    font-size: 86%;
 }
 
 
@@ -265,6 +266,59 @@ input:focus {
 
 #user-edit-button {
     margin-top: 5%;
-    margin-right: 7%;
+    margin-right: 8%;
     width: 15%;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(78, 42, 132);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#edit-icon {
+    margin-left: 5%;
+}
+
+.edit-field-wrapper {
+    margin-top: 1%;
+    width: 30%;
+    min-width: 200px;
+    font-size: 12pt;
+    display: flex;
+}
+
+.edit-field-select {
+    margin-right: 20%;
+}
+
+.edit-field-active {
+    justify-content: space-between;
+}
+
+.time-sections-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.time-sections {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.time-input-wrapper input {
+    width: 80%;
+    max-width: 100px;
+    margin-right: 20%;
 }
