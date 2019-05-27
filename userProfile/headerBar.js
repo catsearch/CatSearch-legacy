@@ -61,7 +61,7 @@ function fetchUser() {
         .then(json => {
             if (json.success) {
                 const user = json.user;
-                addDropdown(user.firstName);
+                addDropdown(user.name.split(""));
             } else {
                 addLoginButton();
             }
