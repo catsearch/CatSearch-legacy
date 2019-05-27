@@ -61,7 +61,7 @@ function fetchUser() {
         .then(json => {
             if (json.success) {
                 const user = json.user;
-                addDropdown(user.name.split(""));
+                addDropdown(user.name.split(" ")[0]);
             } else {
                 addLoginButton();
             }
@@ -77,7 +77,7 @@ function addDropdown(name) {
         <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
-            <a href="../login/login.html" onclick="logout();>Log Out</a>
+            <a href="../login/login.html" onclick="logout();">Log Out</a>
         </div>`
     dropdownText = document.getElementById("header-dropdown-text");
     headerMenuContent = document.getElementById("header-dropdown-content");
