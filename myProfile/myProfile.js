@@ -312,14 +312,12 @@ const contactInfo = (user) => {
 
 function init() {
     // Strange bug here with localStorage, check later
-    /*userId = localStorage.getItem("clickedUserId");
+    userId = localStorage.getItem("userId");
     if (!userId) {
         window.location = '../mainPage/mainPage.html';
     } else {
+        displayProfileRight();
         getUser();
-    }*/
-    //getUser();
-    displayProfileRight();
-    getUser();
+    }
 }
 init();

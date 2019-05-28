@@ -2,6 +2,7 @@ const headerMenu = document.getElementById("header-dropdown");
 let dropdownText = null;
 let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
+const userId = localStorage.getItem("userId");
 
 let mouse = false;
 
@@ -62,6 +63,8 @@ function fetchUser() {
             if (json.success) {
                 const user = json.user;
                 addDropdown(user.name.split(" ")[0]);
+                console.log(user);
+                saveButton.innerHTML = (clickedUserId && user.savedUsers.includes(clickedUserId))? "Saved <i class=\"material-icons\">check</i>" : "Save";
             } else {
                 addLoginButton();
             }

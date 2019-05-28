@@ -1,4 +1,4 @@
-let userId = localStorage.getItem("clickedUserId");
+let clickedUserId = localStorage.getItem("clickedUserId");
 const userWrapper = document.getElementById("user-wrapper");
 const userLeft = document.getElementById("user-profile-left");
 const profPic = document.getElementById("user-profile-picture");
@@ -33,10 +33,10 @@ const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
 function getUser() {
-    if (userId !== null && userId !== "null") {
+    if (clickedUserId !== null && clickedUserId !== "null") {
         //window.location = "../mainPage/mainPage.html";
     }
-    fetch(apiUrl + userId, {
+    fetch(apiUrl + clickedUserId, {
         method: "GET",
         headers: apiHeader
     })
@@ -70,89 +70,26 @@ function buildUserName() {
 }
 
 function buildDropDownFields() {
-    dropdownDisplayNames.forEach(function (fieldName, index) {
+    dropdownDisplayNames.forEach((fieldName, index) => {
         let tempField = document.createElement("span");
         tempField.setAttribute("class", "dropdown-fields");
+        fieldValue = "N/A";
         if (fieldName === "Gender: ") {
-            let fieldValue = "";
-            if (user.male) {
-                fieldValue = "Male";
-            } else if (user.female) {
-                fieldValue = "Female";
-            } else if (user.other) {
-                fieldValue = "Other";
-            } else {
-                fieldValue = "N/A";
-            }
-            tempField.innerHTML = fieldName + fieldValue;
+            fieldValue = user.gender === ""? "N/A" : user.gender;
         } else if (fieldName === "School: ") {
-            let fieldValue = "";
-            if (user.bienen) {
-                fieldValue = "Bienen";
-            } else if (user.mccormick) {
-                fieldValue = "McCormick";
-            } else if (user.medill) {
-                fieldValue = "Medill";
-            } else if (user.sesp) {
-                fieldValue = "SESP";
-            } else if (user.soc) {
-                fieldValue = "SoC";
-            } else if (user.wcas) {
-                fieldValue = "Weinberg";
-            } else {
-                fieldValue = "N/A";
-            }
-            tempField.innerHTML = fieldName + fieldValue;
+            fieldValue = user.school === ""? "N/A" : user.school;
         } else if (fieldName === "Year: ") {
-            tempField.innerHTML = fieldName + (user.year? user.year : "N/A");
+            fieldValue = user.year === ""? "N/A" : user.year;
         } else if (fieldName === "Area: ") {
-            let fieldValue = "";
-            if (user.north) {
-                fieldValue = "North Campus";
-            } else if (user.mid) {
-                fieldValue = "Mid-Campus";
-            } else if (user.south) {
-                fieldValue = "South Campus";
-            } else {
-                fieldValue = "N/A";
-            }
-            tempField.innerHTML = fieldName + fieldValue;
+            fieldValue = user.area === ""? "N/A" : user.area;
         } else if (fieldName === "Cleanliness: ") {
-            let fieldValue = "";
-            if (user.high) {
-                fieldValue = "High";
-            } else if (user.medium) {
-                fieldValue = "Medium";
-            } else if (user.low) {
-                fieldValue = "Don't Care";
-            } else {
-                fieldValue = "N/A";
-            }
-            tempField.innerHTML = fieldName + fieldValue;
+            fieldValue = user.cleanliness === ""? "N/A" : user.cleanliness;
         } else if (fieldName === "Smoking: ") {
-            let fieldValue = "";
-            if (user.smoking) {
-                fieldValue = "Yes";
-            } else if (user.no) {
-                fieldValue = "No";
-            } else {
-                fieldValue = "N/A";
-            }
-            tempField.innerHTML = fieldName + fieldValue;
+            fieldValue = user.smoking === ""? "N/A" : user.smoking;
         } else if (fieldName === "Playing Music: ") {
-            let fieldValue = "";
-            if (user.often) {
-                fieldValue = "Often";
-            } else if (user.sometimes) {
-                fieldValue = "Sometimes";
-            } else if (user.never) {
-                fieldValue = "Never";
-            } else {
-                fieldValue = "N/A";
-            }
-            tempField.innerHTML = fieldName + fieldValue;
+            fieldValue = user.music === ""? "N/A" : user.music;
         }
-        //tempField.innerHTML = fieldName + user[fieldName];
+        tempField.innerHTML = fieldName + fieldValue;
         userDropdownFields.appendChild(tempField);
     })
 }
@@ -199,30 +136,24 @@ function militaryToRegular(inputTime) {
 
 function saveUser() {
     const apiBody = JSON.stringify({
-        id: user.id
+        id: user._id
     });
     fetch(apiUrl + userId + "/saveUser", {
         method: "PATCH",
         headers: apiHeader,
         body: apiBody
     })
-        .then(response => {
-            return response.json();
-        })
 }
 
 function removeUser() {
     const apiBody = JSON.stringify({
-        id: user.id
+        id: user._id
     });
-    fetch(apiUrl + userId + "/removeUser", {
+    fetch(apiUrl + userId + "/removeSaved", {
         method: "PATCH",
         headers: apiHeader,
         body: apiBody
     })
-        .then(response => {
-            return response.json();
-        })
 }
 
 const profilePicture = (picUrl) => {
