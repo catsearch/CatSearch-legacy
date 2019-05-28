@@ -1,7 +1,6 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
-const createAccount = document.getElementById("createAccount");
 
 const apiUrl = 'http://localhost:8080/auth/login/'
 const apiHeader = {"Content-Type": "application/json"}
@@ -45,6 +44,10 @@ const validInputs = () => {
     return true
 }
 
-createAccount.addEventListener("click", () => {
+document.getElementById("createAccount").addEventListener("click", () => {
     window.location = "../createAccount/createAccount.html";
+})
+
+document.getElementById("goToMain").addEventListener("click", () => {
+    window.location = "../mainPage/mainPage.html";
 })

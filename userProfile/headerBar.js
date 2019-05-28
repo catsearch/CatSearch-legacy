@@ -2,6 +2,7 @@ const headerMenu = document.getElementById("header-dropdown");
 let dropdownText = null;
 let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
+const userId = localStorage.getItem("userId");
 
 let mouse = false;
 
@@ -61,7 +62,9 @@ function fetchUser() {
         .then(json => {
             if (json.success) {
                 const user = json.user;
-                addDropdown(user.firstName);
+                addDropdown(user.name.split(" ")[0]);
+                console.log(user);
+                saveButton.innerHTML = (clickedUserId && user.savedUsers.includes(clickedUserId))? "Saved <i class=\"material-icons\">check</i>" : "Save";
             } else {
                 addLoginButton();
             }
@@ -77,7 +80,7 @@ function addDropdown(name) {
         <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
-            <a href="../login/login.html" onclick="logout();>Log Out</a>
+            <a href="../login/login.html" onclick="logout();">Log Out</a>
         </div>`
     dropdownText = document.getElementById("header-dropdown-text");
     headerMenuContent = document.getElementById("header-dropdown-content");

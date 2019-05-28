@@ -127,6 +127,7 @@ const validInputs = () => {
 
 function filter() {
     let apiFields = {};
+
     /*
     const yearSelect = document.getElementById("filter-year-select");
     const selectedField = yearSelect.options[yearSelect.selectedIndex].text;
@@ -136,13 +137,16 @@ function filter() {
     */
 
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
+        let currentArray = [];
         for (let [num, valueName] of fieldValues.entries()) {
             const currentCheckbox = document.getElementById(valueName + "Checkbox");
             if (currentCheckbox && currentCheckbox.checked) {
-                apiFields[valueName.toLowerCase()] = true;
+                currentArray.push(valueName);
             }
         }
+        apiFields[fieldName === "Playing Music"? "music" : fieldName.toLowerCase()] = currentArray;
     }
+    console.log(apiFields);
 
     if (!validInputs()) {
         return;
