@@ -240,7 +240,7 @@ function goToPage(event) {
         if (isNaN(newPageNum) || newPageNum < 0 || newPageNum > maxPage) {
             if (!errorMessageDisplayed) {
                 toggleErrorMessage();
-        }
+            }
         } else {
             pageNum = newPageNum;
             constructList();
