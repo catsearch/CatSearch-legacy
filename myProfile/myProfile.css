@@ -40,22 +40,31 @@ input:focus {
     background-color: rgb(78, 42, 132);
 }
 
-#logo {
-    width: 20%;
+#logo-wrapper {
+    width: 40%;
     height: 100%;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    padding-left: 2%;
 }
 
-#logo-content {
-    width: 100%;
-    color: white;
-    text-decoration: none;
-    text-align: center;
+#logo-icon {
+    height: 90%;
+}
+
+#logo-text {
+    display: block;
+    max-width: 100%;
+    max-height: 65%;
+    width: auto;
+    height: auto;
+    padding-left: 3%;
 }
 
 #search-bar-container {
-    width: 60%;
+    width: 70%;
     height: 100%;
     display: flex;
 }

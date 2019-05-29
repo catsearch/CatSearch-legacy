@@ -2,11 +2,10 @@ const headerMenu = document.getElementById("header-dropdown");
 let dropdownText = null;
 let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
+const saveButton = document.getElementById("save-profile-button");
+let mouse = false;
 const userId = localStorage.getItem("userId");
 
-let mouse = false;
-
-// search: backend call, not implemented
 function search() {
     if (searchBar.value !== "") {
         localStorage.setItem("externalSearch", searchBar.value);
@@ -63,8 +62,9 @@ function fetchUser() {
             if (json.success) {
                 const user = json.user;
                 addDropdown(user.name.split(" ")[0]);
-                console.log(user);
-                saveButton.innerHTML = (clickedUserId && user.savedUsers.includes(clickedUserId))? "Saved <i class=\"material-icons\">check</i>" : "Save";
+                if (saveButton != null) {
+                    saveButton.innerHTML = (clickedUserId && user.savedUsers.includes(clickedUserId))? "Saved <i class=\"material-icons\">check</i>" : "Save";
+                }
             } else {
                 addLoginButton();
             }
