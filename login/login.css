@@ -43,7 +43,7 @@ input:focus {
 /* Main body */
 #whole-login-wrapper {
     display: flex;
-    height: 88%;
+    height: 80%;
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -98,4 +98,11 @@ input:focus {
     border-radius: 5px;
     line-height: 2em;
     cursor: pointer;
+}
+
+#error-text {
+    font-size: 0.8em;
+    color: red;
+    display: none;
+    margin-bottom: 2%;
 }
