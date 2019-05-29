@@ -1,0 +1,108 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    overflow-y: hidden;
+    min-height: 100%;
+    margin: 0;
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVQYlWNgYGBg8NNq+c+AB8Dl/bRa/uNSjCIHY8AEkTGGiURbjS6ITQzDRJx8dN3onkPRiM/XWAWx+ZokAACxsENXP0OMDwAAAABJRU5ErkJggg==) repeat;
+    background-color: rgb(118, 093, 160);
+}
+
+.disable-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+select:focus,
+button:focus,
+input:focus {
+    outline: none;
+}
+
+/* Header */
+
+#logo {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#logo-content {
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Main body */
+#whole-login-wrapper {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#whole-login-border {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 4%;
+    background-color: white;
+}
+
+#login-text {
+    font-size: 1.8em;
+    margin-bottom: 10%;
+}
+
+#email-label {
+    margin-bottom: 5%;
+}
+
+#email {
+    font-size: 1.2em;
+    margin-bottom: 10%;
+}
+
+#password-label {
+    margin-bottom: 5%;
+}
+
+#password {
+    font-size: 1.2em;
+    margin-bottom: 10%;
+}
+
+#submit {
+    line-height: 2em;
+    margin-bottom: 5%;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgb(78, 42, 132);
+    color: white;
+}
+
+#createAccount {
+    border-radius: 5px;
+    line-height: 2em;
+    cursor: pointer;
+}
+
+#error-text {
+    font-size: 0.8em;
+    color: red;
+    display: none;
+    margin-bottom: 2%;
+}

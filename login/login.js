@@ -1,6 +1,7 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
+const errorText = document.getElementById("error-text");
 
 const apiUrl = 'http://localhost:8080/auth/login/'
 const apiHeader = {"Content-Type": "application/json"}
@@ -27,21 +28,33 @@ submit.addEventListener('click', () => {
                     localStorage.setItem('userId', json._id);
                     window.location.href = '../mainPage/mainPage.html';
                 } else {
-                    console.log("Login unsuccessful.")
+                    console.log("Login unsuccessful.");
+                    showErrorText("Incorrect email or password");
                 }
             })
             .catch(err => {
                 console.log(err);
+                showErrorText("Incorrect email or password");
             })
     }
 });
 
 const validInputs = () => {
     if (email.value === "" || password.value === "") {
-        console.log("Empty Field(s)")
+        console.log("Empty Field(s)");
+        showErrorText("Empty Field(s)");
         return false;
     }
     return true
+}
+
+const hideErrorText = () => {errorText.style.display = "none";}
+email.addEventListener("focus", hideErrorText);
+password.addEventListener("focus", hideErrorText);
+
+function showErrorText(message) {
+    errorText.style.display = "inherit";
+    errorText.innerHTML = message;
 }
 
 document.getElementById("createAccount").addEventListener("click", () => {
