@@ -1,4 +1,4 @@
-let userId = null;
+//let userId = null;
 const userWrapper = document.getElementById("user-wrapper");
 const userLeft = document.getElementById("user-profile-left");
 const profPic = document.getElementById("user-profile-picture");
