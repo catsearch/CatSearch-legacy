@@ -6,7 +6,11 @@ const errorText = document.getElementById("error-text");
 const apiUrl = 'http://localhost:8080/auth/login/'
 const apiHeader = {"Content-Type": "application/json"}
 
-submit.addEventListener('click', () => {
+submit.addEventListener('click', function() {
+    login();
+});
+
+function login() {
     if (!validInputs()) {
         return;
     } else {
@@ -37,7 +41,7 @@ submit.addEventListener('click', () => {
                 showErrorText("Incorrect email or password");
             })
     }
-});
+}
 
 const validInputs = () => {
     if (email.value === "" || password.value === "") {
@@ -47,6 +51,26 @@ const validInputs = () => {
     }
     return true
 }
+
+email.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      login();
+    }
+});
+
+password.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      login();
+    }
+});
 
 const hideErrorText = () => {errorText.style.display = "none";}
 email.addEventListener("focus", hideErrorText);

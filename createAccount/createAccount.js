@@ -8,7 +8,11 @@ const login = document.getElementById("login");
 const apiUrl = 'http://localhost:8080/auth/createAccount/'
 const apiHeader = {"Content-Type": "application/json"}
 
-submit.addEventListener("click", () => {
+submit.addEventListener('click', function() {
+    createAccount();
+});
+
+function createAccount() {
     if (invalidInputs()) {return;}
     const apiBody = JSON.stringify({
         email: email.value,
@@ -26,7 +30,8 @@ submit.addEventListener("click", () => {
         .then(json => {
             console.log(json.message);
             if (json.success) {
-                window.location.href = '../login/login.html';
+                localStorage.setItem('userId', json._id);
+                window.location.href = '../mainPage/mainPage.html';
             } else {
                 showErrorText("Account creation was unsuccessful.");
             }
@@ -34,6 +39,36 @@ submit.addEventListener("click", () => {
         .catch(err => {
             console.log(err);
         })
+}
+
+name.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      createAccount();
+    }
+});
+
+email.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      createAccount();
+    }
+});
+
+password.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      createAccount();
+    }
 });
 
 const hideErrorText = () => {errorText.style.display = "none";}
