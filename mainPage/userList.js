@@ -39,6 +39,10 @@ const defaultUsers = [
     },
 ]
 let pageNum = 0;
+const prevButton = document.getElementById("prev-page");
+const nextButton = document.getElementById("next-page");
+let prevGray = false;
+let nextGray = false;
 
 const userTile = (user) => {
     const tile = document.createElement('div');
@@ -143,6 +147,7 @@ function getUsers() {
             .then(() => {
                 if (users.length !== 0) {
                     constructList();
+                    setPageButtonColors();
                 } else {
                     console.log("You deleted this user via Postman but didn't log out first :(");
                     constructSampleList();
@@ -157,6 +162,7 @@ function getUsers() {
         console.log("There are no users with those filters.");
     } else {
         constructList();
+        setPageButtonColors();
     }
 }
 
@@ -173,6 +179,7 @@ function prevPage() {
     if (pageNum > 0) {
         pageNum--;
         constructList();
+        setPageButtonColors();
     }
 }
 
@@ -180,5 +187,24 @@ function nextPage() {
     if (pageNum < Math.floor(users.length / 10)) {
         pageNum++;
         constructList();
+        setPageButtonColors();
+    }
+}
+
+/// i dunno i just wanna make it obvious if you can click or not
+function setPageButtonColors() {
+    if (pageNum === 0 && !prevGray) {
+        prevButton.classList.toggle("page-buttons-gray");
+        prevGray = true;
+    } else if (pageNum > 0 && prevGray) {
+        prevButton.classList.toggle("page-buttons-gray");
+        prevGray = false;
+    }
+    if (pageNum === Math.floor(users.length / 10) && !nextGray) {
+        nextButton.classList.toggle("page-buttons-gray");  
+        nextGray = true;    
+    } else if (pageNum < Math.floor(users.length / 10) && nextGray) {
+        nextButton.classList.toggle("page-buttons-gray");
+        nextGray = false;
     }
 }
