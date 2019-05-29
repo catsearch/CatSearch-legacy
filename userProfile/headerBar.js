@@ -80,7 +80,7 @@ function addDropdown(name) {
         <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
-            <a href="../login/login.html" onclick="logout();">Log Out</a>
+            <a onclick="logout();">Log Out</a>
         </div>`
     dropdownText = document.getElementById("header-dropdown-text");
     headerMenuContent = document.getElementById("header-dropdown-content");
@@ -90,9 +90,11 @@ function addLoginButton() {
     headerMenu.innerHTML = `<div id="login-button"><span id="login-button-text" onclick="moveToLogin();">Login</span></div>`
 }
 
-function logout() {
-    localStorage.removeItem("userId");
-    moveToLogin();
+function logout() { 
+    if (window.confirm("Are you sure you want to logout?")) {
+        localStorage.removeItem("userId");
+        moveToLogin();
+    }
 }
 
 function moveToLogin() {
