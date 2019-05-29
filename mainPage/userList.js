@@ -228,7 +228,7 @@ function setTotalPageNumber() {
 
 function goToPage(event) {
     if (event.keyCode === 13) {
-        newPageNum = parseInt(pageInput.value);
+        newPageNum = parseInt(pageInput.value) - 1;
         if (isNaN(newPageNum) || newPageNum < 0 || newPageNum > maxPage) {
             // display an error message
         } else {
