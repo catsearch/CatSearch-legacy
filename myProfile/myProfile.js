@@ -45,6 +45,7 @@ const filterFields = {
 }
 
 function getUser() {
+    console.log(userId)
     fetch(apiUrl + userId, {
         method: "GET",
         headers: apiHeader
@@ -59,23 +60,27 @@ function getUser() {
                 user = defaultUser;
             }
             profilePicture(user.profilePicture);
+            displayProfileRight();
+            userLeft.appendChild(contactInfo(user));
         })
         .catch(err => {
             console.log(err);
-            profilePicture(defaultUser.profilePicture);
-            userLeft.appendChild(contactInfo(defaultUser))
+            user = defaultUser
+            profilePicture(user.profilePicture);
+            displayProfileRight();
+            userLeft.appendChild(contactInfo(user))
         })
 }
 
 function buildUserName() {
-    userNameField.innerHTML = name;
+    userNameField.innerHTML = user.name;
 }
 
 function buildDropDownFields() {
     dropdownFieldsList.forEach(function (fieldName, index) {
         let tempField = document.createElement("span");
         tempField.setAttribute("class", "dropdown-fields");
-        tempField.innerHTML = dropdownDisplayNames[index] + defaultUser[fieldName];
+        tempField.innerHTML = dropdownDisplayNames[index] + user[fieldName];
         userDropdownFields.appendChild(tempField);
     })   
 }
@@ -84,23 +89,23 @@ function buildTimeFields() {
     let bedtimeField = document.createElement("span");
     bedtimeField.setAttribute("class", "time-fields");
     bedtimeField.innerHTML = "Bedtime: ";
-    bedtimeField.innerHTML += "From " + militaryToRegular(defaultUser.bedtimeStart);
-    bedtimeField.innerHTML += " To " + militaryToRegular(defaultUser.bedtimeEnd);
+    bedtimeField.innerHTML += "From " + militaryToRegular(user.bedtimeStart);
+    bedtimeField.innerHTML += " To " + militaryToRegular(user.bedtimeEnd);
     userTimeFields.appendChild(bedtimeField);
 
     
     let wakeUpField = document.createElement("span");
     wakeUpField.setAttribute("class", "time-fields");
     wakeUpField.innerHTML = "Wake-Up: ";
-    wakeUpField.innerHTML += "From " + militaryToRegular(defaultUser.wakeUpStart);
-    wakeUpField.innerHTML += " To " + militaryToRegular(defaultUser.wakeUpEnd);
+    wakeUpField.innerHTML += "From " + militaryToRegular(user.wakeUpStart);
+    wakeUpField.innerHTML += " To " + militaryToRegular(user.wakeUpEnd);
     userTimeFields.appendChild(wakeUpField);
 }
 
 function buildBlurb() {
     blurbField = document.createElement("p");
     blurbField.setAttribute("id", "blurb-field");
-    blurbField.innerHTML = defaultUser.blurb;
+    blurbField.innerHTML = user.blurb;
     userBlurbField.appendChild(blurbField);
 }
 
@@ -134,7 +139,7 @@ function edit() {
         editing = true;
 
         // Name
-        userNameField.innerHTML = "<input id=\"name-input\" type=\"text\" value=\"" + defaultUser.name + "\">";
+        userNameField.innerHTML = "<input id=\"name-input\" type=\"text\" value=\"" + user.name + "\">";
 
         // Dropdown fields
         userDropdownFields.innerHTML = "";
@@ -151,7 +156,7 @@ function edit() {
                 let option = document.createElement("option");
                 option.setAttribute("value", i);
                 option.innerHTML += val;
-                if(val === defaultUser[fieldName.toLowerCase()]){
+                if(val === user[fieldName.toLowerCase()]){
                     option.selected = true;
                 }
                 select.appendChild(option);
@@ -219,35 +224,35 @@ function edit() {
         // Blurb
         userBlurbField.innerHTML = "<textarea id=\"blurb-field\"></textarea>";
         blurbField = document.getElementById("blurb-field");
-        blurbField.innerHTML = defaultUser.blurb
+        blurbField.innerHTML = user.blurb
     }
     // saving
     else {
         editButton.innerHTML = "Edit<i id=\"edit-icon\" class=\"material-icons\">edit</i>";
         editing = false;
         // Name
-        defaultUser["name"] = document.getElementById("name-input").value;
+        user["name"] = document.getElementById("name-input").value;
         
         buildUserName();
 
         // Dropdown fields
         dropdownFieldsList.forEach(function (fieldName, index) {
             const selected = document.getElementById(fieldName);
-            defaultUser[fieldName] = selected.options[selected.selectedIndex].text;
+            user[fieldName] = selected.options[selected.selectedIndex].text;
         }) 
         userDropdownFields.innerHTML = ""; 
         buildDropDownFields();
 
         // Time
-        defaultUser["bedtimeStart"] = document.getElementById("Bedtime-start").value;
-        defaultUser["bedtimeEnd"] = document.getElementById("Bedtime-end").value;
-        defaultUser["wakeUpStart"] = document.getElementById("Wake-up-start").value;
-        defaultUser["wakeUpEnd"] = document.getElementById("Wake-up-end").value;
+        user["bedtimeStart"] = document.getElementById("Bedtime-start").value;
+        user["bedtimeEnd"] = document.getElementById("Bedtime-end").value;
+        user["wakeUpStart"] = document.getElementById("Wake-up-start").value;
+        user["wakeUpEnd"] = document.getElementById("Wake-up-end").value;
         userTimeFields.innerHTML = "";
         buildTimeFields();
 
         // Blurb
-        defaultUser["blurb"] = blurbField.value;
+        user["blurb"] = blurbField.value;
         userBlurbField.innerHTML = "";
         buildBlurb();
     }
@@ -255,7 +260,7 @@ function edit() {
 
 function saveUser() {
     const apiBody = JSON.stringify({
-        id: defaultUser.id
+        id: user.id
     });
     fetch(apiUrl + userId + "/saveUser", {
         method: "PATCH",
@@ -269,7 +274,7 @@ function saveUser() {
 
 function removeUser() {
     const apiBody = JSON.stringify({
-        id: defaultUser.id
+        id: user.id
     });
     fetch(apiUrl + userId + "/removeUser", {
         method: "PATCH",
@@ -302,7 +307,6 @@ function init() {
     if (!userId) {
         window.location = '../mainPage/mainPage.html';
     } else {
-        displayProfileRight();
         getUser();
     }
 }
