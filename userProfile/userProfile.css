@@ -215,7 +215,7 @@ input:focus {
 #user-blurb-field {
     width: 92%;
     margin-bottom: 2%;
-    border: 2px solid black;
+    border: 2px dotted black;
     flex-grow: 1;
     overflow-y: auto;
     cursor: default;
@@ -246,8 +246,9 @@ input:focus {
     margin-top: 4%;
     margin-left: 3%;
     width: 85%;
-    height: 6%;
+    height: 8%;
     border-radius: 5px;
+    font-size: 1em;
     font-weight: bold;
     color: white;
     background-color: rgb(78, 42, 132);
