@@ -322,3 +322,13 @@ button:focus {
     margin: 1%;
     width: 98%;
 }
+
+.page-buttons {
+    color: white;
+    background-color: purple;
+}
+
+.page-buttons-gray {
+    color: black;
+    background-color: gray;
+}
