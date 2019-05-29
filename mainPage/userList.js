@@ -39,10 +39,13 @@ const defaultUsers = [
     },
 ]
 let pageNum = 0;
+let maxPage = 0;
 const prevButton = document.getElementById("prev-page");
 const nextButton = document.getElementById("next-page");
 let prevGray = false;
 let nextGray = false;
+const totalPages = document.getElementById("total-number-pages");
+let pageInput = document.getElementById("page-number-input");
 
 const userTile = (user) => {
     const tile = document.createElement('div');
@@ -147,7 +150,9 @@ function getUsers() {
             .then(() => {
                 if (users.length !== 0) {
                     constructList();
+                    maxPage = Math.floor(users.length  / 10);
                     setPageButtonColors();
+                    setTotalPageNumber();
                 } else {
                     console.log("You deleted this user via Postman but didn't log out first :(");
                     constructSampleList();
@@ -162,7 +167,9 @@ function getUsers() {
         console.log("There are no users with those filters.");
     } else {
         constructList();
+        maxPage = Math.floor(users.length  / 10);
         setPageButtonColors();
+        setTotalPageNumber();
     }
 }
 
@@ -178,14 +185,16 @@ if (externalSearch !== null) {
 function prevPage() {
     if (pageNum > 0) {
         pageNum--;
+        pageInput.value = pageNum;
         constructList();
         setPageButtonColors();
     }
 }
 
 function nextPage() {
-    if (pageNum < Math.floor(users.length / 10)) {
+    if (pageNum < maxPage) {
         pageNum++;
+        pageInput.value = pageNum;
         constructList();
         setPageButtonColors();
     }
@@ -200,11 +209,28 @@ function setPageButtonColors() {
         prevButton.classList.toggle("page-buttons-gray");
         prevGray = false;
     }
-    if (pageNum === Math.floor(users.length / 10) && !nextGray) {
+    if (pageNum === maxPage && !nextGray) {
         nextButton.classList.toggle("page-buttons-gray");  
         nextGray = true;    
-    } else if (pageNum < Math.floor(users.length / 10) && nextGray) {
+    } else if (pageNum < maxPage && nextGray) {
         nextButton.classList.toggle("page-buttons-gray");
         nextGray = false;
+    }
+}
+
+function setTotalPageNumber() {
+    totalPages.innerHTML = "of " + maxPage.toString();
+}
+
+function goToPage(event) {
+    if (event.keyCode === 13) {
+        newPageNum = parseInt(pageInput.value);
+        if (isNaN(newPageNum) || newPageNum < 0 || newPageNum > maxPage) {
+            // display an error message
+        } else {
+            pageNum = newPageNum;
+            constructList();
+            setPageButtonColors();
+        } 
     }
 }
