@@ -44,14 +44,13 @@ input:focus {
     width: 20%;
     height: 100%;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 #logo-content {
-    width: 100%;
-    color: white;
-    text-decoration: none;
-    text-align: center;
+    height: 100%;
 }
 
 #search-bar-container {
