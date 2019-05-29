@@ -318,6 +318,7 @@ button:focus {
 
 #page-controls {
     display: flex;
+    justify-content: space-between;
     margin: 1%;
-    width: 100%;
+    width: 98%;
 }
