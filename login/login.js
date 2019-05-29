@@ -7,7 +7,7 @@ const apiUrl = 'http://localhost:8080/auth/login/'
 const apiHeader = {"Content-Type": "application/json"}
 
 submit.addEventListener('click', function() {
-    login();;
+    login();
 });
 
 function login() {

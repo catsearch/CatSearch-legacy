@@ -8,7 +8,7 @@ const login = document.getElementById("login");
 const apiUrl = 'http://localhost:8080/auth/createAccount/'
 const apiHeader = {"Content-Type": "application/json"}
 
-submit.addEventListener("click", fucntion() {
+submit.addEventListener('click', function() {
     createAccount();
 });
 
