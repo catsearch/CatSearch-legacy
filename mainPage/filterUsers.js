@@ -22,6 +22,26 @@ const filterFields = {
 const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
 
+function buildSavedCheckbox() {
+    let fieldHTML = document.createElement("button");
+    fieldHTML.setAttribute("class", "filter-collapsible");
+    fieldHTML.innerHTML += "Saved Users";
+    let fieldSection = document.createElement("div");
+    fieldSection.setAttribute("class", "field-collapsible-content");
+    
+    let checkboxes = document.createElement("label");
+    checkboxes.setAttribute("class", "filter-container");
+    let checkboxesChild = document.createElement("input");
+    checkboxesChild.setAttribute("type", "checkbox");
+    checkboxesChild.setAttribute("id", "savedCheckbox");
+    checkboxes.appendChild(checkboxesChild);
+    checkboxes.innerHTML += "Saved";
+    fieldSection.appendChild(checkboxes);
+
+    checkboxesElement.appendChild(fieldHTML);
+    checkboxesElement.appendChild(fieldSection);
+}
+
 function buildFilterCheckboxes() {
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
         let fieldHTML = document.createElement("button");
@@ -103,6 +123,9 @@ function buildTimeFields(){
 }
 
 function init() {
+    if(userId) {
+        buildSavedCheckbox();
+    }
     /*buildYearList();*/
     buildFilterCheckboxes();
     buildTimeFields();
