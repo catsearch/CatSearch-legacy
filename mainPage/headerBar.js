@@ -111,7 +111,7 @@ function addLoginButton() {
 }
 
 function logout() { 
-    if (window.confirm("logout?")) {
+    if (window.confirm("Are you sure you want to logout?")) {
         localStorage.removeItem("userId");
         moveToLogin();
     }
