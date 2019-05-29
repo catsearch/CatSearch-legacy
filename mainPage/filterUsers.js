@@ -1,6 +1,7 @@
 const filterButton = document.getElementById('filter-button');
 
 let users = sessionStorage.getItem("users");
+let user = null;
 const userId = localStorage.getItem("userId");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
@@ -192,3 +193,26 @@ function filter() {
             })
     }
 };
+
+function getUser() {
+    fetch(apiUrl + userId, {
+        method: "GET",
+        headers: apiHeader
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            console.log("hi")
+            if (json.success) {
+                user = json.user;
+            } else {
+                user = defaultUser;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            //THESE ARE JUST FOR OFF_SERVER STUFF
+            user = defaultUser
+        })
+}
