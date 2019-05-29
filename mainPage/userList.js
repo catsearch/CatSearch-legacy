@@ -185,7 +185,7 @@ if (externalSearch !== null) {
 function prevPage() {
     if (pageNum > 0) {
         pageNum--;
-        pageInput.value = pageNum;
+        pageInput.value = pageNum + 1;
         constructList();
         setPageButtonColors();
     }
@@ -194,7 +194,7 @@ function prevPage() {
 function nextPage() {
     if (pageNum < maxPage) {
         pageNum++;
-        pageInput.value = pageNum;
+        pageInput.value = pageNum + 1;
         constructList();
         setPageButtonColors();
     }
@@ -204,22 +204,26 @@ function nextPage() {
 function setPageButtonColors() {
     if (pageNum === 0 && !prevGray) {
         prevButton.classList.toggle("page-buttons-gray");
+        prevButton.disabled = true;
         prevGray = true;
     } else if (pageNum > 0 && prevGray) {
         prevButton.classList.toggle("page-buttons-gray");
         prevGray = false;
+        prevButton.disabled = false;
     }
     if (pageNum === maxPage && !nextGray) {
         nextButton.classList.toggle("page-buttons-gray");  
-        nextGray = true;    
+        nextGray = true;
+        nextButton.disabled = true;
     } else if (pageNum < maxPage && nextGray) {
         nextButton.classList.toggle("page-buttons-gray");
         nextGray = false;
+        nextButton.disabled = false;
     }
 }
 
 function setTotalPageNumber() {
-    totalPages.innerHTML = "of " + maxPage.toString();
+    totalPages.innerHTML = "of " + (maxPage + 1).toString();
 }
 
 function goToPage(event) {
