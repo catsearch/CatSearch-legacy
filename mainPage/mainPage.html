@@ -43,7 +43,7 @@
                     <button id="prev-page" class="page-buttons" onclick="prevPage();">Previous</button>
                     <div id="select-page">
                         <label>Page Number: </label>
-                        <input id="page-number-input" value=1 onkeyup="goToPage(event);">
+                        <input id="page-number-input" value=1 onkeyup="goToPage(event);" onfocusout="stayAtPage();">
                         <label id="total-number-pages">of </label>
                     </div>
                     <button id="next-page" class = "page-buttons" onclick="nextPage();">Next</button>

@@ -240,7 +240,7 @@ function goToPage(event) {
         if (isNaN(newPageNum) || newPageNum < 0 || newPageNum > maxPage) {
             if (!errorMessageDisplayed) {
                 toggleErrorMessage();
-            }
+        }
         } else {
             pageNum = newPageNum;
             constructList();
@@ -255,4 +255,11 @@ function goToPage(event) {
 function toggleErrorMessage() {
     errorPageControls[0].classList.toggle("error-page-controls-displayed");
     errorMessageDisplayed = !errorMessageDisplayed;
+}
+
+function stayAtPage() {
+    pageInput.value = pageNum + 1;
+    if (errorMessageDisplayed) {
+        toggleErrorMessage();
+    }
 }
