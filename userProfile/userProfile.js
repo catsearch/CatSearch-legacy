@@ -51,6 +51,7 @@ function getUser() {
             if(!userId) {
                 buttonWrapper.innerHTML = "";
             }
+            userLeft.appendChild(contactInfo(user));
         })
         .catch(err => {
             console.log(err);
@@ -59,6 +60,7 @@ function getUser() {
             user = defaultUser;
             profilePicture(user.picUrl);
             displayProfileRight(); 
+            userLeft.appendChild(contactInfo(user));
         })
 }
 
