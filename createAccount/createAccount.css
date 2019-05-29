@@ -59,58 +59,58 @@ input:focus {
 
 #whole-create-border {
     width: 20%;
+    height: 70%;
     margin-bottom: 3.5%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    justify-content: flex-start;
     border: 2px solid black;
     border-radius: 8px;
-    padding: 4%;
+    padding: 3%;
     background-color: white;
 }
 
 #create-text {
     font-size: 1.8em;
-    margin-bottom: 8%;
+    margin-bottom: 4%;
     font-weight: bold;
 }
 
 #email-label {
-    margin-bottom: 4%;
+    margin-bottom: 3%;
 }
 
 #email {
     font-size: 1.2em;
-    margin-bottom: 1%;
 }
 
 #name-label{
-    margin-bottom: 4%;
+    margin-bottom: 3%;
 }
 
 #name {
     font-size: 1.2em;
-    margin-bottom: 8%;
+    margin-bottom: 6%;
 }
 
 #password-label {
-    margin-bottom: 4%;
+    margin-bottom: 3%;
 }
 
 #password {
     font-size: 1.2em;
-    margin-bottom: 1%;
 }
 
 .criteria {
     font-size: 0.65em;
     color: gray;
-    margin-bottom: 8%;
+    margin-bottom: 6%;
 }
 
 #submit {
     line-height: 2em;
-    margin-bottom: 5%;
+    margin-bottom: 0%;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
