@@ -168,3 +168,17 @@ if (externalSearch !== null) {
 } else {
     getUsers();
 }
+
+function prevPage() {
+    if (pageNum > 0) {
+        pageNum--;
+        constructList();
+    }
+}
+
+function nextPage() {
+    if (pageNum < Math.floor(users.length / 10)) {
+        pageNum++;
+        constructList();
+    }
+}
