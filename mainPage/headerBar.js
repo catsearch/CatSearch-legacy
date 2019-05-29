@@ -2,9 +2,9 @@ const headerMenu = document.getElementById("header-dropdown");
 let dropdownText = null;
 let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
+
 let mouse = false;
 
-// search: backend call, not implemented
 function search() {
     if (searchBar.value === "" && externalSearch === null) {
         users = null;
