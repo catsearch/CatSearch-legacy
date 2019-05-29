@@ -46,6 +46,8 @@ let prevGray = false;
 let nextGray = false;
 const totalPages = document.getElementById("total-number-pages");
 let pageInput = document.getElementById("page-number-input");
+const errorPageControls = document.getElementsByClassName("error-page-controls");
+let errorMessageDisplayed = false;
 
 const userTile = (user) => {
     const tile = document.createElement('div');
@@ -188,6 +190,9 @@ function prevPage() {
         pageInput.value = pageNum + 1;
         constructList();
         setPageButtonColors();
+        if (errorMessageDisplayed) {
+            toggleErrorMessage();
+        }
     }
 }
 
@@ -197,6 +202,9 @@ function nextPage() {
         pageInput.value = pageNum + 1;
         constructList();
         setPageButtonColors();
+        if (errorMessageDisplayed) {
+            toggleErrorMessage();
+        }
     }
 }
 
@@ -230,11 +238,21 @@ function goToPage(event) {
     if (event.keyCode === 13) {
         newPageNum = parseInt(pageInput.value) - 1;
         if (isNaN(newPageNum) || newPageNum < 0 || newPageNum > maxPage) {
-            // display an error message
+            if (!errorMessageDisplayed) {
+                toggleErrorMessage();
+            }
         } else {
             pageNum = newPageNum;
             constructList();
             setPageButtonColors();
+            if (errorMessageDisplayed) {
+                toggleErrorMessage();
+            }
         } 
     }
+}
+
+function toggleErrorMessage() {
+    errorPageControls[0].classList.toggle("error-page-controls-displayed");
+    errorMessageDisplayed = !errorMessageDisplayed;
 }
