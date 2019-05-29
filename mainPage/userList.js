@@ -38,6 +38,16 @@ const defaultUsers = [
         _id: "asdfjkl123456789"
     },
 ]
+let pageNum = 0;
+let maxPage = 0;
+const prevButton = document.getElementById("prev-page");
+const nextButton = document.getElementById("next-page");
+let prevGray = false;
+let nextGray = false;
+const totalPages = document.getElementById("total-number-pages");
+let pageInput = document.getElementById("page-number-input");
+const errorPageControls = document.getElementsByClassName("error-page-controls");
+let errorMessageDisplayed = false;
 
 const userTile = (user) => {
     const tile = document.createElement('div');
@@ -103,9 +113,14 @@ function removeChildren() {
 
 function constructList() {
     removeChildren();
-    for (user of users) {
-        const newTile = userTile(user);
-        userTiles.appendChild(newTile);
+    let start = pageNum * 10;
+    for (let i = start; i < start + 10; i++) {
+        if (i >= users.length) {
+            break;
+        } else {
+            const newTile = userTile(users[i]);
+            userTiles.appendChild(newTile);
+        }
     }
 }
 
@@ -137,6 +152,9 @@ function getUsers() {
             .then(() => {
                 if (users.length !== 0) {
                     constructList();
+                    maxPage = Math.floor(users.length  / 10);
+                    setPageButtonColors();
+                    setTotalPageNumber();
                 } else {
                     console.log("You deleted this user via Postman but didn't log out first :(");
                     constructSampleList();
@@ -151,6 +169,9 @@ function getUsers() {
         console.log("There are no users with those filters.");
     } else {
         constructList();
+        maxPage = Math.floor(users.length  / 10);
+        setPageButtonColors();
+        setTotalPageNumber();
     }
 }
 
@@ -161,4 +182,84 @@ if (externalSearch !== null) {
     externalSearch = null;
 } else {
     getUsers();
+}
+
+function prevPage() {
+    if (pageNum > 0) {
+        pageNum--;
+        pageInput.value = pageNum + 1;
+        constructList();
+        setPageButtonColors();
+        if (errorMessageDisplayed) {
+            toggleErrorMessage();
+        }
+    }
+}
+
+function nextPage() {
+    if (pageNum < maxPage) {
+        pageNum++;
+        pageInput.value = pageNum + 1;
+        constructList();
+        setPageButtonColors();
+        if (errorMessageDisplayed) {
+            toggleErrorMessage();
+        }
+    }
+}
+
+/// i dunno i just wanna make it obvious if you can click or not
+function setPageButtonColors() {
+    if (pageNum === 0 && !prevGray) {
+        prevButton.classList.toggle("page-buttons-gray");
+        prevButton.disabled = true;
+        prevGray = true;
+    } else if (pageNum > 0 && prevGray) {
+        prevButton.classList.toggle("page-buttons-gray");
+        prevGray = false;
+        prevButton.disabled = false;
+    }
+    if (pageNum === maxPage && !nextGray) {
+        nextButton.classList.toggle("page-buttons-gray");  
+        nextGray = true;
+        nextButton.disabled = true;
+    } else if (pageNum < maxPage && nextGray) {
+        nextButton.classList.toggle("page-buttons-gray");
+        nextGray = false;
+        nextButton.disabled = false;
+    }
+}
+
+function setTotalPageNumber() {
+    totalPages.innerHTML = "of " + (maxPage + 1).toString();
+}
+
+function goToPage(event) {
+    if (event.keyCode === 13) {
+        newPageNum = parseInt(pageInput.value) - 1;
+        if (isNaN(newPageNum) || newPageNum < 0 || newPageNum > maxPage) {
+            if (!errorMessageDisplayed) {
+                toggleErrorMessage();
+            }
+        } else {
+            pageNum = newPageNum;
+            constructList();
+            setPageButtonColors();
+            if (errorMessageDisplayed) {
+                toggleErrorMessage();
+            }
+        } 
+    }
+}
+
+function toggleErrorMessage() {
+    errorPageControls[0].classList.toggle("error-page-controls-displayed");
+    errorMessageDisplayed = !errorMessageDisplayed;
+}
+
+function stayAtPage() {
+    pageInput.value = pageNum + 1;
+    if (errorMessageDisplayed) {
+        toggleErrorMessage();
+    }
 }
