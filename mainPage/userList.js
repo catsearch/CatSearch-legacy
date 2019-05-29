@@ -38,6 +38,7 @@ const defaultUsers = [
         _id: "asdfjkl123456789"
     },
 ]
+let pageNum = 0;
 
 const userTile = (user) => {
     const tile = document.createElement('div');
@@ -103,9 +104,14 @@ function removeChildren() {
 
 function constructList() {
     removeChildren();
-    for (user of users) {
-        const newTile = userTile(user);
-        userTiles.appendChild(newTile);
+    let start = pageNum * 10;
+    for (let i = start; i < start + 10; i++) {
+        if (i >= users.length) {
+            break;
+        } else {
+            const newTile = userTile(users[i]);
+            userTiles.appendChild(newTile);
+        }
     }
 }
 

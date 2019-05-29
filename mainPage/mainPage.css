@@ -256,6 +256,7 @@ button:focus {
 
 /* User List */
 #user-list {
+    display: block;
     height: 88%;
     width: 100%;
     margin: 0;
@@ -265,8 +266,9 @@ button:focus {
 }
 
 #user-tiles {
-    height: 100%;
+    display: block;
     padding: 1%;
+    padding-bottom: 0%;
 }
 
 .user-tile {
@@ -315,5 +317,7 @@ button:focus {
 }
 
 #page-controls {
-
+    display: flex;
+    margin: 1%;
+    width: 100%;
 }
