@@ -4,14 +4,20 @@
         <title>CatSearch</title>
     </head>
     <body>
-        <text><b>Login</b></text></br>
-        <label for="email">Email: </label>
-        <input id="email" type="text"><br>
-        <label for="password">Password: </label>
-        <input id="password" type="password"><br>
-        <input type="submit" value="Login" id="submit"><br>
-        <input type="submit" value="Create Account" id="createAccount"><br><br>
-        <input type="submit" value="Go to Main Page" id="goToMain">
+        <div id="whole-login-wrapper">
+            <div id="logo">
+                <a id="logo-content" href="../mainPage/mainPage.html">CatSearch</a>
+            </div>
+            <div id="whole-login-border">
+                <text id="login-text"><b>Login</b></text></br>
+                <label id="email-label" for="email">Email: </label>
+                <input id="email" type="text"><br>
+                <label id="password-label" for="password">Password: </label>
+                <input id="password" type="password"><br>
+                <input type="submit" value="Login" id="submit"><br>
+                <input type="submit" value="Create Account" id="createAccount"><br><br>
+            </div>
+        </div>
     </body>
     <script src="login.js"></script>
 </html>
