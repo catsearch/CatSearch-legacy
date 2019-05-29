@@ -32,7 +32,7 @@ const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
 function getUser() {
-    if (clickedUserId !== null && clickedUserId !== "null") {
+    if (clickedUserId === null || clickedUserId === "null") {
         //window.location = "../mainPage/mainPage.html";
     }
     fetch(apiUrl + clickedUserId, {
@@ -134,6 +134,7 @@ function militaryToRegular(inputTime) {
 }
 
 function saveUser() {
+    console.log(user, userId)
     const apiBody = JSON.stringify({
         id: user._id
     });

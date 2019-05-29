@@ -15,7 +15,7 @@ let defaultUser = {
     year: "2022",
     area: "North",
     cleanliness: "Medium",
-    smoker: "No",
+    smoking: "No",
     music: "Sometimes",
     bedtimeStart: "21:00",
     bedtimeEnd: "00:00",
@@ -27,8 +27,8 @@ let defaultUser = {
 };
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
-const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoker", "music"];
-const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoker: ", "Playing Music: "];
+const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoking", "music"];
+const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoking: ", "Playing Music: "];
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 let blurbField = document.getElementById("blurb-field");
@@ -40,12 +40,11 @@ const filterFields = {
     "Year" : ["Select:", "2021", "2022", "2023", "2024", "2025"],
     "Area" : ["Select:", "North", "Mid", "South"],
     "Cleanliness" : ["Select:", "High", "Medium", "Low"],
-    "Smoker" : ["Select:", "Yes", "No"],
+    "Smoking" : ["Select:", "Yes", "No"],
     "Music" : ["Select:", "Often", "Sometimes", "Never"]
 }
 
 function getUser() {
-    console.log(userId)
     fetch(apiUrl + userId, {
         method: "GET",
         headers: apiHeader
@@ -54,6 +53,7 @@ function getUser() {
             return response.json();
         })
         .then(json => {
+            console.log("hi")
             if (json.success) {
                 user = json.user;
             } else {
@@ -65,6 +65,7 @@ function getUser() {
         })
         .catch(err => {
             console.log(err);
+            //THESE ARE JUST FOR OFF_SERVER STUFF
             user = defaultUser
             profilePicture(user.profilePicture);
             displayProfileRight();
@@ -80,7 +81,7 @@ function buildDropDownFields() {
     dropdownFieldsList.forEach(function (fieldName, index) {
         let tempField = document.createElement("span");
         tempField.setAttribute("class", "dropdown-fields");
-        tempField.innerHTML = dropdownDisplayNames[index] + user[fieldName];
+        tempField.innerHTML = dropdownDisplayNames[index] + ((user[fieldName] === "")? "N/A" : user[fieldName]);
         userDropdownFields.appendChild(tempField);
     })   
 }
@@ -128,7 +129,7 @@ function militaryToRegular(inputTime) {
 function displayProfileRight() {
     buildUserName();
     buildDropDownFields();
-    buildTimeFields();
+    //buildTimeFields();
     buildBlurb();
 }
 
@@ -236,11 +237,12 @@ function edit() {
         buildUserName();
 
         // Dropdown fields
-        dropdownFieldsList.forEach(function (fieldName, index) {
+        dropdownFieldsList.forEach((fieldName, index) => {
             const selected = document.getElementById(fieldName);
-            user[fieldName] = selected.options[selected.selectedIndex].text;
-        }) 
-        userDropdownFields.innerHTML = ""; 
+            const text = selected.options[selected.selectedIndex].text
+            user[fieldName] = (text === "Select:")? "" : text;
+        })
+        userDropdownFields.innerHTML = "";
         buildDropDownFields();
 
         // Time
@@ -255,35 +257,20 @@ function edit() {
         user["blurb"] = blurbField.value;
         userBlurbField.innerHTML = "";
         buildBlurb();
+
+        saveUserInfo();
     }
 }
 
-function saveUser() {
+function saveUserInfo() {
     const apiBody = JSON.stringify({
-        id: user.id
+        user: user
     });
-    fetch(apiUrl + userId + "/saveUser", {
-        method: "PATCH",
+    fetch(apiUrl + userId, {
+        method: "PUT",
         headers: apiHeader,
         body: apiBody
     })
-        .then(response => {
-            return response.json();
-        })
-}
-
-function removeUser() {
-    const apiBody = JSON.stringify({
-        id: user.id
-    });
-    fetch(apiUrl + userId + "/removeUser", {
-        method: "PATCH",
-        headers: apiHeader,
-        body: apiBody
-    })
-        .then(response => {
-            return response.json();
-        })
 }
 
 const profilePicture = (picUrl) => {
@@ -295,8 +282,8 @@ const contactInfo = (user) => {
     const container = document.createElement('div');
     container.id = 'user-contact-info';
 
-    container.append("Email: ")
-    container.append(user.email)
+    container.append("Email: ");
+    container.append(user.email);
 
     return container;
 }
