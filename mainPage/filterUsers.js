@@ -309,24 +309,6 @@ function buildHourArray(start, end) {
     }
     validHours[end] = true;
     return validHours;
-    let checkTimeArray = [];
-    for (let name of timeFields) {
-        const currentCheckbox = document.getElementById(name + "-time-checked");
-        if (currentCheckbox && currentCheckbox.checked) {
-            checkTimeArray.push(name);
-        }
-    }
-
-    filterTime(checkTimeArray);
-
-};
-
-function filterTime(checkTimeArray) {
-    console.log(checkTimeArray);
-    for (let name of checkTimeArray) {
-        
-    }
-
 }
 
 function getUser() {
