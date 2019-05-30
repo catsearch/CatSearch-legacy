@@ -22,8 +22,8 @@ let defaultUser = {
     music: "Sometimes",
     bedtimeStart: "21:00",
     bedtimeEnd: "00:00",
-    wakeUpStart: "08:00",
-    wakeUpEnd: "10:00",   
+    wakeupStart: "08:00",
+    wakeupEnd: "10:00",   
     picUrl: defaultIcon,
     email: "michael-horn@northwestern.edu",
     id: "235804958430"
@@ -106,8 +106,8 @@ function buildTimeFields() {
     let wakeUpField = document.createElement("span");
     wakeUpField.setAttribute("class", "time-fields");
     wakeUpField.innerHTML = "Wake-Up: ";
-    wakeUpField.innerHTML += "From " + militaryToRegular(user.wakeUpStart);
-    wakeUpField.innerHTML += " To " + militaryToRegular(user.wakeUpEnd);
+    wakeUpField.innerHTML += "From " + militaryToRegular(user.wakeupStart);
+    wakeUpField.innerHTML += " To " + militaryToRegular(user.wakeupEnd);
     userTimeFields.appendChild(wakeUpField);
 }
 
@@ -138,7 +138,7 @@ function militaryToRegular(inputTime) {
 function displayProfileRight() {
     buildUserName();
     buildDropDownFields();
-    //buildTimeFields();
+    buildTimeFields();
     buildBlurb();
 }
 
