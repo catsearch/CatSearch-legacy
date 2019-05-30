@@ -311,7 +311,8 @@ function buildHourArray(start, end) {
 }
 
 function getUser() {
-    fetch(apiUrl + userId, {
+    const fetchUrl = (userId !== null && userId !== "null")? apiUrl + userId : apiUrl;
+    fetch(fetchUrl, {
         method: "GET",
         headers: apiHeader
     })
@@ -319,7 +320,6 @@ function getUser() {
             return response.json();
         })
         .then(json => {
-            console.log("hi")
             if (json.success) {
                 myUser = json.user;
             } else {
