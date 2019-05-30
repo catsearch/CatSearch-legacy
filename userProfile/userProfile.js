@@ -164,7 +164,11 @@ function removeUser() {
 }
 
 const profilePicture = (picUrl) => {
-    profPic.src = picUrl === ""? defaultIcon : picUrl;
+    profPic.src = picUrl;
+}
+
+function setDefaultPic() {
+    profPic.src = defaultIcon;
 }
 
 function save() {
