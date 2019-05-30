@@ -205,8 +205,6 @@ function filter() {
             .then(json => {
                 removeChildren();
                 let newUsers = json.users;
-                console.log(newUsers);
-                console.log(filterTime);
                 newUsers = filterTime(checkTimeArray, newUsers);
                 for (filteredUser of newUsers) {
                     if(getSaved){
@@ -227,21 +225,18 @@ function filter() {
 };
 
 function filterTime(checkTimeArray, jsonUsers) {
-    console.log("ahhhhhhhhh");
     let newUsers = [];
-    let keepUserIndex = [];
-    console.log(checkTimeArray.length);
+    let keepUserIndex = {};
     if (checkTimeArray.length === 0) {
-        console.log("wut");
         return jsonUsers;
     }
 
     for (let name of checkTimeArray) {
-        console.log("here1");
         let jsonFieldName = "bedtime";
         if (name === "Wake-up") {
             const jsonFieldName = "wakeup";
         }
+        keepUserIndex[jsonFieldName] = [];
         let fromInput = document.getElementById(name + "-time-input-from");
         let toInput = document.getElementById(name + "-time-input-to");
         let fromInputArray = parseTime(fromInput.value);
@@ -249,9 +244,7 @@ function filterTime(checkTimeArray, jsonUsers) {
         const validHours = buildHourArray(fromInputArray[0], toInputArray[0]);
         // splice removes an item at an index
         for(let i = 0; i < jsonUsers.length; i++) {
-            console.log("here2");
             currUser = jsonUsers[i];
-            console.log(currUser);
             startJsonField = currUser[jsonFieldName + "Start"];
             endJsonField = currUser[jsonFieldName + "End"];
             if (startJsonField === "" || endJsonField === "") {
@@ -260,9 +253,7 @@ function filterTime(checkTimeArray, jsonUsers) {
             const currStart = parseTime(startJsonField);
             const currEnd = parseTime(endJsonField);
             const currUserHours = buildHourArray(currStart[0], currEnd[0]);
-            console.log(currUserHours, "returned from build array");
             for(let j = 0; j < 24; j++) {
-                console.log("innermost for loop");
                 if (validHours[j] === true && currUserHours[j] === true) {
                     if (fromInput[0] === toInput[0]) {
                         if (fromInput[1] > currStart[1] || toInput[1] < currEnd[1]) {
@@ -273,21 +264,32 @@ function filterTime(checkTimeArray, jsonUsers) {
                     } else if (j === toInputArray[0] && toInput[1] < currEnd[1]) {
                         continue;
                     }
-                    keepUserIndex.push(i);
+                    keepUserIndex[jsonFieldName].push(i);
                     break;
                 }
             }
         }
     }
 
-    for (index of keepUserIndex) {
-        newUsers.push(jsonUsers[index]);
+    if (checkTimeArray.length === 2) {
+        for (index1 of keepUserIndex["bedtime"]) {
+            for (index2 of keepUserIndex["wakeup"])
+            if (index1 === index2){
+                newUsers.push(jsonUsers[index1]);
+            }
+        }
+    } else {
+        for (let key in keepUserIndex) {
+            for (index of keepUserIndex[key]) {
+                newUsers.push(jsonUsers[index]);
+            }
+        }
     }
+    
     return newUsers;
 }
 
 function parseTime(timeField) {
-    console.log("time field");
     let timeArray = timeField.split(":");
     timeArray[0] = parseInt(timeArray[0]);
     timeArray[1] = parseInt(timeArray[1]);
@@ -295,15 +297,12 @@ function parseTime(timeField) {
 }
 
 function buildHourArray(start, end) {
-    console.log("buildHour");
     let validHours = [];
     for(let i = 0; i < 24; i++) {
         validHours.push(false);
     }
     let current = start;
-    console.log(end);
     while(current != end) {
-        console.log(current);
         validHours[current] = true;
         current = (current + 1) % 24;
     }
