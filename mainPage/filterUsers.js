@@ -205,8 +205,9 @@ function filter() {
             .then(json => {
                 removeChildren();
                 let newUsers = json.users;
-                newUsers = filterTime(checkTimeArray, newUsers);
                 console.log(newUsers);
+                console.log(filterTime);
+                newUsers = filterTime(checkTimeArray, newUsers);
                 for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
@@ -226,10 +227,12 @@ function filter() {
 };
 
 function filterTime(checkTimeArray, jsonUsers) {
+    console.log("ahhhhhhhhh");
     let newUsers = [];
     let keepUserIndex = [];
-
-    if(checkTimeArray.length === 0) {
+    console.log(checkTimeArray.length);
+    if (checkTimeArray.length === 0) {
+        console.log("wut");
         return jsonUsers;
     }
 
@@ -306,6 +309,24 @@ function buildHourArray(start, end) {
     }
     validHours[end] = true;
     return validHours;
+    let checkTimeArray = [];
+    for (let name of timeFields) {
+        const currentCheckbox = document.getElementById(name + "-time-checked");
+        if (currentCheckbox && currentCheckbox.checked) {
+            checkTimeArray.push(name);
+        }
+    }
+
+    filterTime(checkTimeArray);
+
+};
+
+function filterTime(checkTimeArray) {
+    console.log(checkTimeArray);
+    for (let name of checkTimeArray) {
+        
+    }
+
 }
 
 function getUser() {
