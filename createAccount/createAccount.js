@@ -14,13 +14,14 @@ submit.addEventListener('click', function() {
 
 function createAccount() {
     if (invalidInputs()) {return;}
+    submit.disabled = true;
     const apiBody = JSON.stringify({
         email: email.value,
         name: name.value,
         password: password.value
     });
     fetch(apiUrl, {
-        method: "POST", 
+        method: "POST",
         headers: apiHeader,
         body: apiBody
     })
@@ -29,6 +30,7 @@ function createAccount() {
         })
         .then(json => {
             console.log(json.message);
+            submit.disabled = false;
             if (json.success) {
                 localStorage.setItem('userId', json._id);
                 window.location.href = '../mainPage/mainPage.html';
@@ -37,6 +39,7 @@ function createAccount() {
             }
         })
         .catch(err => {
+            submit.disabled = false;
             console.log(err);
         })
 }
