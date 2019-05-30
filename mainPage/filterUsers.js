@@ -181,6 +181,15 @@ function filter() {
         getUser();
     }
 
+    let checkTimeArray = [];
+    for (let name of timeFields) {
+        const currentCheckbox = document.getElementById(name + "-time-checked");
+        if (currentCheckbox && currentCheckbox.checked) {
+            checkTimeArray.push(name);
+            timeChecked = true;
+        }
+    }
+
     if (!validInputs()) {
         return;
     } else {
@@ -195,7 +204,10 @@ function filter() {
             })
             .then(json => {
                 removeChildren();
-                for (filteredUser of json.users) {
+                let newUsers = json.users;
+                newUsers = filterTime(checkTimeArray, newUsers);
+                console.log(newUsers);
+                for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
                             const newTile = userTile(filteredUser);
@@ -209,24 +221,91 @@ function filter() {
                 }
             })
     }
-    let checkTimeArray = [];
-    for (let name of timeFields) {
-        const currentCheckbox = document.getElementById(name + "-time-checked");
-        if (currentCheckbox && currentCheckbox.checked) {
-            checkTimeArray.push(name);
-        }
-    }
-
-    filterTime(checkTimeArray);
+    
 
 };
 
-function filterTime(checkTimeArray) {
-    console.log(checkTimeArray);
-    for (let name of checkTimeArray) {
-        
+function filterTime(checkTimeArray, jsonUsers) {
+    let newUsers = [];
+    let keepUserIndex = [];
+
+    if(checkTimeArray.length === 0) {
+        return jsonUsers;
     }
 
+    for (let name of checkTimeArray) {
+        console.log("here1");
+        let jsonFieldName = "bedtime";
+        if (name === "Wake-up") {
+            const jsonFieldName = "wakeup";
+        }
+        let fromInput = document.getElementById(name + "-time-input-from");
+        let toInput = document.getElementById(name + "-time-input-to");
+        let fromInputArray = parseTime(fromInput.value);
+        let toInputArray = parseTime(toInput.value);
+        const validHours = buildHourArray(fromInputArray[0], toInputArray[0]);
+        // splice removes an item at an index
+        for(let i = 0; i < jsonUsers.length; i++) {
+            console.log("here2");
+            currUser = jsonUsers[i];
+            console.log(currUser);
+            startJsonField = currUser[jsonFieldName + "Start"];
+            endJsonField = currUser[jsonFieldName + "End"];
+            if (startJsonField === "" || endJsonField === "") {
+                continue;
+            }
+            const currStart = parseTime(startJsonField);
+            const currEnd = parseTime(endJsonField);
+            const currUserHours = buildHourArray(currStart[0], currEnd[0]);
+            console.log(currUserHours, "returned from build array");
+            for(let j = 0; j < 24; j++) {
+                console.log("innermost for loop");
+                if (validHours[j] === true && currUserHours[j] === true) {
+                    if (fromInput[0] === toInput[0]) {
+                        if (fromInput[1] > currStart[1] || toInput[1] < currEnd[1]) {
+                            continue; // this doens't count keep looking
+                        }
+                    } else if (j === fromInputArray[0] && fromInput[1] > currStart[1]) {
+                        continue;
+                    } else if (j === toInputArray[0] && toInput[1] < currEnd[1]) {
+                        continue;
+                    }
+                    keepUserIndex.push(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    for (index of keepUserIndex) {
+        newUsers.push(jsonUsers[index]);
+    }
+    return newUsers;
+}
+
+function parseTime(timeField) {
+    console.log("time field");
+    let timeArray = timeField.split(":");
+    timeArray[0] = parseInt(timeArray[0]);
+    timeArray[1] = parseInt(timeArray[1]);
+    return timeArray;
+}
+
+function buildHourArray(start, end) {
+    console.log("buildHour");
+    let validHours = [];
+    for(let i = 0; i < 24; i++) {
+        validHours.push(false);
+    }
+    let current = start;
+    console.log(end);
+    while(current != end) {
+        console.log(current);
+        validHours[current] = true;
+        current = (current + 1) % 24;
+    }
+    validHours[end] = true;
+    return validHours;
 }
 
 function getUser() {
