@@ -22,8 +22,8 @@ let defaultUser = {
     music: "Sometimes",
     bedtimeStart: "21:00",
     bedtimeEnd: "00:00",
-    wakeUpStart: "08:00",
-    wakeUpEnd: "10:00",   
+    wakeupStart: "08:00",
+    wakeupEnd: "10:00",   
     picUrl: defaultIcon,
     email: "michael-horn@northwestern.edu",
     id: "235804958430"
@@ -106,8 +106,8 @@ function buildTimeFields() {
     let wakeUpField = document.createElement("span");
     wakeUpField.setAttribute("class", "time-fields");
     wakeUpField.innerHTML = "Wake-Up: ";
-    wakeUpField.innerHTML += "From " + militaryToRegular(user.wakeUpStart);
-    wakeUpField.innerHTML += " To " + militaryToRegular(user.wakeUpEnd);
+    wakeUpField.innerHTML += "From " + militaryToRegular(user.wakeupStart);
+    wakeUpField.innerHTML += " To " + militaryToRegular(user.wakeupEnd);
     userTimeFields.appendChild(wakeUpField);
 }
 
@@ -116,6 +116,7 @@ function buildBlurb() {
     blurbField.setAttribute("id", "blurb-field");
     blurbField.innerHTML = user.blurb;
     userBlurbField.appendChild(blurbField);
+    userBlurbField.style.border = "2px dotted black";
 }
 
 function militaryToRegular(inputTime) {
@@ -137,7 +138,7 @@ function militaryToRegular(inputTime) {
 function displayProfileRight() {
     buildUserName();
     buildDropDownFields();
-    //buildTimeFields();
+    buildTimeFields();
     buildBlurb();
 }
 
@@ -234,6 +235,7 @@ function edit() {
 
         // Blurb
         userBlurbField.innerHTML = "<textarea id=\"blurb-field\"></textarea>";
+        userBlurbField.style.border = "2px solid black";
         blurbField = document.getElementById("blurb-field");
         blurbField.innerHTML = user.blurb
     }
@@ -258,8 +260,8 @@ function edit() {
         // Time
         user["bedtimeStart"] = document.getElementById("Bedtime-start").value;
         user["bedtimeEnd"] = document.getElementById("Bedtime-end").value;
-        user["wakeUpStart"] = document.getElementById("Wake-up-start").value;
-        user["wakeUpEnd"] = document.getElementById("Wake-up-end").value;
+        user["wakeupStart"] = document.getElementById("Wake-up-start").value;
+        user["wakeupEnd"] = document.getElementById("Wake-up-end").value;
         userTimeFields.innerHTML = "";
         buildTimeFields();
 

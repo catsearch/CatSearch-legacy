@@ -161,6 +161,7 @@ input:focus {
     width: 20%;
     height: 100%;
     border: solid black 1px;
+    background-color: rgb(78, 42, 132);
 }
 
 #filter-all-fields {
@@ -169,6 +170,7 @@ input:focus {
     padding: 3%;
     overflow-y: auto;
     font-size: 14px;
+    background-color: white;
 }
 
 #filter-year {
@@ -262,7 +264,6 @@ button:focus {
     align-items: center;
     border-top: 2px solid black;
     height: 5.5%;
-    background-color: rgb(78, 42, 132);
 }
 
 #filter-actual-button {

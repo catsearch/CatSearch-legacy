@@ -177,7 +177,7 @@ input:focus {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 2%;
+    margin-top: 3%;
 }
 
 .dropdown-fields {
@@ -217,7 +217,7 @@ input:focus {
 #user-blurb-field {
     width: 92%;
     margin-bottom: 2%;
-    border: 2px solid black;
+    border: 2px dotted black;
     flex-grow: 1;
     overflow-y: auto;
 }
@@ -300,13 +300,16 @@ input:focus {
 #name-and-edit {
     display: flex;
     justify-content: space-between;
+    height: 15%;
 }
 
 #user-edit-button {
-    margin-top: 5%;
+    margin-top: 3%;
     margin-right: 8%;
     width: 15%;
     border-radius: 5px;
+    height: 70%;
+    font-size: 1em;
     font-weight: bold;
     color: white;
     background-color: rgb(78, 42, 132);
