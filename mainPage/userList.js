@@ -57,8 +57,10 @@ const userTile = (user) => {
 
     tile.appendChild(userInfo(user));
 
-    if(myUser.savedUsers.includes(user._id)){
-        tile.appendChild(saveIndicate(user));
+    if(myUser){
+        if(myUser.savedUsers.includes(user._id)){
+            tile.appendChild(saveIndicate(user));
+        }
     }
 
     tile.addEventListener('click', () => {
