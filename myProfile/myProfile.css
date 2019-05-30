@@ -253,26 +253,10 @@ input:focus {
 #prof-pic-input {
     display: none;
     border: 1px solid black;
-    border-radius: 5px;
     height: 5%;
     width: 100%;
     margin-top: 1%;
     padding-left: 2%;
-}
-
-#save-profile-button {
-    margin-bottom: 2%;
-    margin-top: 4%;
-    margin-left: 3%;
-    width: 85%;
-    height: 6%;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(78, 42, 132);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #contact-header {
@@ -285,6 +269,28 @@ input:focus {
     font-size: 86%;
 }
 
+#searching {
+    display: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 5%;
+    margin-top: 6%;
+    width: 92%;
+    background-color: rgb(78, 42, 132);
+    border: solid rgb(78, 42, 132) 2px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.75em;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 /* Edit Styling */
 

@@ -4,6 +4,7 @@ const profPic = document.getElementById("user-profile-picture");
 const editButton = document.getElementById("user-edit-button");
 const profPicTitle = document.getElementById("prof-pic-header");
 const profPicInput = document.getElementById("prof-pic-input");
+const searchingButton = document.getElementById("searching");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
 let user = null;
@@ -35,7 +36,6 @@ const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 let blurbField = document.getElementById("blurb-field");
 
-
 const filterFields = {
     "Gender" : ["Select:", "Male", "Female", "Other"],
     "School" : ["Select:", "Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
@@ -62,7 +62,14 @@ function getUser() {
             }
             profilePicture(user.picUrl);
             displayProfileRight();
-            userLeft.appendChild(contactInfo(user));
+            contactInfo(user);
+            if (user.searching) {
+                searchingButton.innerHTML = "Visible to Users";
+            } else {
+                searchingButton.style.backgroundColor = "#ffffff";
+                searchingButton.style.color = "#4E2A84";
+                searchingButton.innerHTML = "Invisible";
+            }
         })
         .catch(err => {
             console.log(err);
@@ -70,7 +77,7 @@ function getUser() {
             user = defaultUser
             profilePicture(user.picUrl);
             displayProfileRight();
-            userLeft.appendChild(contactInfo(user))
+            contactInfo(user);
         })
 }
 
@@ -136,6 +143,7 @@ function displayProfileRight() {
 
 function edit() {
     toggleProfPicLink();
+    toggleSearchingButton();
     // editing
     if(!editing) {
         editButton.innerHTML = "Save";
@@ -289,22 +297,39 @@ function setDefaultPic() {
 }
 
 const contactInfo = (user) => {
-    const container = document.createElement('div');
-    container.id = 'user-contact-info';
-
-    container.append("Email: ");
-    container.append(user.email);
-
-    return container;
+    const container = document.getElementById("user-contact-info");
+    container.innerHTML = `Email: ${user.email}`
 }
 
 function toggleProfPicLink() {
-    if (profPicTitle.style.display === "none" || profPicTitle.style.display === "" ) {
+    if (profPicTitle.style.display === "none" || profPicTitle.style.display === "") {
         profPicTitle.style.display = "block";
         profPicInput.style.display = "block";
     } else {
         profPicTitle.style.display = "none";
         profPicInput.style.display = "none";
+    }
+}
+
+function toggleSearchingButton() {
+    if (searchingButton.style.display === "none" || searchingButton.style.display === "") {
+        searchingButton.style.display = "flex";
+    } else {
+        searchingButton.style.display = "none";
+    }
+}
+
+function searchingPressed() {
+    if (searchingButton.innerHTML === "Visible to Users") {
+        searchingButton.innerHTML = "Invisible";
+        searchingButton.style.backgroundColor = "#ffffff";
+        searchingButton.style.color = "#4E2A84";
+        user.searching = false;
+    } else {
+        searchingButton.innerHTML = "Visible to Users";
+        searchingButton.style.backgroundColor = "#4E2A84";
+        searchingButton.style.color = "#ffffff";
+        user.searching = true;
     }
 }
 
