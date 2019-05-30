@@ -29,7 +29,7 @@ let defaultUser = {
 const userNameField = document.getElementById("user-name-field");
 const userDropdownFields = document.getElementById("user-dropdown-fields");
 const dropdownFieldsList = ["gender", "school", "year", "area", "cleanliness", "smoking", "music"];
-const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoker: ", "Playing Music: "];
+const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Cleanliness: ", "Smoking: ", "Playing Music: "];
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 
