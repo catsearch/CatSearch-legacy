@@ -116,6 +116,7 @@ function buildBlurb() {
     blurbField.setAttribute("id", "blurb-field");
     blurbField.innerHTML = user.blurb;
     userBlurbField.appendChild(blurbField);
+    userBlurbField.style.border = "2px dotted black";
 }
 
 function militaryToRegular(inputTime) {
@@ -234,6 +235,7 @@ function edit() {
 
         // Blurb
         userBlurbField.innerHTML = "<textarea id=\"blurb-field\"></textarea>";
+        userBlurbField.style.border = "2px solid black";
         blurbField = document.getElementById("blurb-field");
         blurbField.innerHTML = user.blurb
     }
