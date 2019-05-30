@@ -120,6 +120,7 @@ function buildBlurb() {
 }
 
 function militaryToRegular(inputTime) {
+    if (inputTime === "") {return "N/A";}
     let timeComponents = inputTime.split(":");
     let hh = parseInt(timeComponents[0]);
     let mins = timeComponents[1];
