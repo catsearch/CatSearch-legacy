@@ -53,11 +53,7 @@ const userTile = (user) => {
     const tile = document.createElement('div');
     tile.className = 'user-tile';
 
-    if (user.picUrl && user.picUrl != "") {
-        tile.appendChild(profilePicture(user.picUrl));
-    } else {
-        tile.appendChild(profilePicture(defaultIcon));
-    }
+    tile.appendChild(profilePicture(user.picUrl));
 
     tile.appendChild(userInfo(user));
 
@@ -77,8 +73,11 @@ const userTile = (user) => {
 const profilePicture = (picUrl) => {
     const profPic = document.createElement('img');
     profPic.className = 'profile-picture';
-
     profPic.src = picUrl;
+    profPic.onerror = () => {
+        profPic.src = defaultIcon;
+    }
+
     return profPic;
 }
 

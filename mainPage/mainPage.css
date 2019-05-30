@@ -127,8 +127,10 @@ input:focus {
     position: absolute;
     cursor: pointer;
     background-color: #f1f1f1;
-    right: 36%;
-    left: 36%;
+    margin-top: 2%;
+    right: 15%;
+    left: 15%;
+    width: 70%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -136,8 +138,9 @@ input:focus {
 #header-dropdown-content a {
     color: black;
     text-decoration: none;
-    padding: 10%;
-    display: block
+    padding: 8%;
+    display: block;
+    border-top: 1px solid #9d9d9d;
 }
 
 #header-dropdown-content a:hover {background-color: #ddd}

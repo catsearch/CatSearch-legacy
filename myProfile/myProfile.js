@@ -2,6 +2,9 @@ const userWrapper = document.getElementById("user-wrapper");
 const userLeft = document.getElementById("user-profile-left");
 const profPic = document.getElementById("user-profile-picture");
 const editButton = document.getElementById("user-edit-button");
+const profPicTitle = document.getElementById("prof-pic-header");
+const profPicInput = document.getElementById("prof-pic-input");
+const searchingButton = document.getElementById("searching");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
 let user = null;
@@ -21,7 +24,7 @@ let defaultUser = {
     bedtimeEnd: "00:00",
     wakeUpStart: "08:00",
     wakeUpEnd: "10:00",   
-    profilePicture: defaultIcon,
+    picUrl: defaultIcon,
     email: "michael-horn@northwestern.edu",
     id: "235804958430"
 };
@@ -32,7 +35,6 @@ const dropdownDisplayNames = ["Gender: ", "School: ", "Year: ", "Area: ", "Clean
 const userTimeFields = document.getElementById("user-time-fields");
 const userBlurbField = document.getElementById("user-blurb-field");
 let blurbField = document.getElementById("blurb-field");
-
 
 const filterFields = {
     "Gender" : ["Select:", "Male", "Female", "Other"],
@@ -53,23 +55,29 @@ function getUser() {
             return response.json();
         })
         .then(json => {
-            console.log("hi")
             if (json.success) {
                 user = json.user;
             } else {
                 user = defaultUser;
             }
-            profilePicture(user.profilePicture);
+            profilePicture(user.picUrl);
             displayProfileRight();
-            userLeft.appendChild(contactInfo(user));
+            contactInfo(user);
+            if (user.searching) {
+                searchingButton.innerHTML = "Visible to Users";
+            } else {
+                searchingButton.style.backgroundColor = "#ffffff";
+                searchingButton.style.color = "#4E2A84";
+                searchingButton.innerHTML = "Invisible";
+            }
         })
         .catch(err => {
             console.log(err);
-            //THESE ARE JUST FOR OFF_SERVER STUFF
+            //THESE ARE JUST FOR OFF-SERVER STUFF
             user = defaultUser
-            profilePicture(user.profilePicture);
+            profilePicture(user.picUrl);
             displayProfileRight();
-            userLeft.appendChild(contactInfo(user))
+            contactInfo(user);
         })
 }
 
@@ -134,6 +142,8 @@ function displayProfileRight() {
 }
 
 function edit() {
+    toggleProfPicLink();
+    toggleSearchingButton();
     // editing
     if(!editing) {
         editButton.innerHTML = "Save";
@@ -258,6 +268,9 @@ function edit() {
         userBlurbField.innerHTML = "";
         buildBlurb();
 
+        user["picUrl"] = profPicInput.value;
+        profilePicture(profPicInput.value);
+
         saveUserInfo();
     }
 }
@@ -273,19 +286,51 @@ function saveUserInfo() {
     })
 }
 
-const profilePicture = (picUrl) => {
-    profPic.src = (picUrl === "")? picUrl : defaultIcon;
-    return profPic;
+function profilePicture(picUrl) {
+    profPic.src = picUrl;
+    profPicInput.value = picUrl;
+}
+
+function setDefaultPic() {
+    profPic.src = defaultIcon;
+    profPicInput.value = "";
 }
 
 const contactInfo = (user) => {
-    const container = document.createElement('div');
-    container.id = 'user-contact-info';
+    const container = document.getElementById("user-contact-info");
+    container.innerHTML = `Email: ${user.email}`
+}
 
-    container.append("Email: ");
-    container.append(user.email);
+function toggleProfPicLink() {
+    if (profPicTitle.style.display === "none" || profPicTitle.style.display === "") {
+        profPicTitle.style.display = "block";
+        profPicInput.style.display = "block";
+    } else {
+        profPicTitle.style.display = "none";
+        profPicInput.style.display = "none";
+    }
+}
 
-    return container;
+function toggleSearchingButton() {
+    if (searchingButton.style.display === "none" || searchingButton.style.display === "") {
+        searchingButton.style.display = "flex";
+    } else {
+        searchingButton.style.display = "none";
+    }
+}
+
+function searchingPressed() {
+    if (searchingButton.innerHTML === "Visible to Users") {
+        searchingButton.innerHTML = "Invisible";
+        searchingButton.style.backgroundColor = "#ffffff";
+        searchingButton.style.color = "#4E2A84";
+        user.searching = false;
+    } else {
+        searchingButton.innerHTML = "Visible to Users";
+        searchingButton.style.backgroundColor = "#4E2A84";
+        searchingButton.style.color = "#ffffff";
+        user.searching = true;
+    }
 }
 
 function init() {

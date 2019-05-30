@@ -63,7 +63,6 @@ function fetchUser() {
             if (json.success) {
                 const user = json.user;
                 addDropdown(user.name.split(" ")[0]);
-                console.log(user);
             } else {
                 addLoginButton();
             }

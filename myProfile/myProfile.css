@@ -127,8 +127,10 @@ input:focus {
     position: absolute;
     cursor: pointer;
     background-color: #f1f1f1;
-    right: 36%;
-    left: 36%;
+    margin-top: 2%;
+    right: 15%;
+    left: 15%;
+    width: 70%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -136,8 +138,9 @@ input:focus {
 #header-dropdown-content a {
     color: black;
     text-decoration: none;
-    padding: 10%;
-    display: block
+    padding: 8%;
+    display: block;
+    border-top: 1px solid #9d9d9d;
 }
 
 #header-dropdown-content a:hover {background-color: #ddd}
@@ -228,6 +231,10 @@ input:focus {
     line-height: 1.5;
 }
 
+#name-input {
+    width: 200%;
+}
+
 /* Left Side */
 
 #user-profile-left {
@@ -240,19 +247,19 @@ input:focus {
     width: 92%;
 }
 
-#save-profile-button {
-    margin-bottom: 2%;
-    margin-top: 4%;
-    margin-left: 3%;
-    width: 85%;
-    height: 6%;
-    border-radius: 5px;
+#prof-pic-header {
+    display: none;
+    margin-top: 5%;
     font-weight: bold;
-    color: white;
-    background-color: rgb(78, 42, 132);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+#prof-pic-input {
+    display: none;
+    border: 1px solid black;
+    height: 5%;
+    width: 100%;
+    margin-top: 1%;
+    padding-left: 2%;
 }
 
 #contact-header {
@@ -265,6 +272,28 @@ input:focus {
     font-size: 86%;
 }
 
+#searching {
+    display: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 5%;
+    margin-top: 6%;
+    width: 92%;
+    background-color: rgb(78, 42, 132);
+    border: solid rgb(78, 42, 132) 2px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.75em;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 /* Edit Styling */
 

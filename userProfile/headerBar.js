@@ -2,7 +2,6 @@ const headerMenu = document.getElementById("header-dropdown");
 let dropdownText = null;
 let headerMenuContent = null;
 const searchBar = document.getElementById("search-bar");
-const saveButton = document.getElementById("save-profile-button");
 let mouse = false;
 const userId = localStorage.getItem("userId");
 
