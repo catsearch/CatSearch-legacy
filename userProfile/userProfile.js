@@ -2,7 +2,6 @@ let clickedUserId = localStorage.getItem("clickedUserId");
 const userWrapper = document.getElementById("user-wrapper");
 const userLeft = document.getElementById("user-profile-left");
 const profPic = document.getElementById("user-profile-picture");
-const saveButton = document.getElementById("save-profile-button");
 const buttonWrapper = document.getElementById("button-wrapper");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
