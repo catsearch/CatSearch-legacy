@@ -1,6 +1,7 @@
 const filterButton = document.getElementById('filter-button');
 
 let users = sessionStorage.getItem("users");
+let myUser = null;
 const userId = localStorage.getItem("userId");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
@@ -21,6 +22,26 @@ const filterFields = {
 
 const timeElement = document.getElementById("filter-time");
 const timeFields = ["Bedtime", "Wake-Up"];
+
+function buildSavedCheckbox() {
+    let fieldHTML = document.createElement("button");
+    fieldHTML.setAttribute("class", "filter-collapsible");
+    fieldHTML.innerHTML += "Saved Users";
+    let fieldSection = document.createElement("div");
+    fieldSection.setAttribute("class", "field-collapsible-content");
+    
+    let checkboxes = document.createElement("label");
+    checkboxes.setAttribute("class", "filter-container");
+    let checkboxesChild = document.createElement("input");
+    checkboxesChild.setAttribute("type", "checkbox");
+    checkboxesChild.setAttribute("id", "savedCheckbox");
+    checkboxes.appendChild(checkboxesChild);
+    checkboxes.innerHTML += "Saved";
+    fieldSection.appendChild(checkboxes);
+
+    checkboxesElement.appendChild(fieldHTML);
+    checkboxesElement.appendChild(fieldSection);
+}
 
 function buildFilterCheckboxes() {
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
@@ -103,6 +124,9 @@ function buildTimeFields(){
 }
 
 function init() {
+    if(userId) {
+        buildSavedCheckbox();
+    }
     /*buildYearList();*/
     buildFilterCheckboxes();
     buildTimeFields();
@@ -148,6 +172,14 @@ function filter() {
     }
     console.log(apiFields);
 
+    const savedCheckbox = document.getElementById("savedCheckbox");
+
+    let getSaved = savedCheckbox && savedCheckbox.checked;
+
+    if(getSaved) {
+        getUser();
+    }
+
     if (!validInputs()) {
         return;
     } else {
@@ -162,10 +194,42 @@ function filter() {
             })
             .then(json => {
                 removeChildren();
-                for (user of json.users) {
-                    const newTile = userTile(user);
-                    userTiles.appendChild(newTile);
+                for (filteredUser of json.users) {
+                    if(getSaved){
+                        if(myUser.savedUsers.includes(filteredUser._id)) {
+                            const newTile = userTile(filteredUser);
+                            userTiles.appendChild(newTile);
+                        }
+                    }
+                    else {
+                        const newTile = userTile(filteredUser);
+                        userTiles.appendChild(newTile);
+                    }
                 }
             })
     }
 };
+
+function getUser() {
+    fetch(apiUrl + userId, {
+        method: "GET",
+        headers: apiHeader
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            console.log("hi")
+            if (json.success) {
+                myUser = json.user;
+            } else {
+                myUser = null;
+            }
+            constructList();
+        })
+        .catch(err => {
+            console.log(err);
+            //THESE ARE JUST FOR OFF_SERVER STUFF
+            myUser = null;
+        })
+}

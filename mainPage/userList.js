@@ -58,8 +58,12 @@ const userTile = (user) => {
     } else {
         tile.appendChild(profilePicture(defaultIcon));
     }
-    
+
     tile.appendChild(userInfo(user));
+
+    if(myUser.savedUsers.includes(user._id)){
+        tile.appendChild(saveIndicate(user));
+    }
 
     tile.addEventListener('click', () => {
         localStorage.setItem('clickedUserId', user._id);
@@ -76,6 +80,16 @@ const profilePicture = (picUrl) => {
 
     profPic.src = picUrl;
     return profPic;
+}
+
+const saveIndicate = (user) => {
+    const star = document.createElement("div");
+    star.id = "save-star"
+    if(myUser.savedUsers.includes(user._id)){
+        star.innerHTML = "<i class=\"material-icons\">star</i>";
+    }
+
+    return star;
 }
 
 const userInfo = (user) => {
@@ -151,7 +165,8 @@ function getUsers() {
             })
             .then(() => {
                 if (users.length !== 0) {
-                    constructList();
+                    getUser();
+                    //constructList();
                     maxPage = Math.floor(users.length  / 10);
                     setPageButtonColors();
                     setTotalPageNumber();
