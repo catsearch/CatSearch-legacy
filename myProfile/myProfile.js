@@ -260,8 +260,8 @@ function edit() {
         // Time
         user["bedtimeStart"] = document.getElementById("Bedtime-start").value;
         user["bedtimeEnd"] = document.getElementById("Bedtime-end").value;
-        user["wakeUpStart"] = document.getElementById("Wake-up-start").value;
-        user["wakeUpEnd"] = document.getElementById("Wake-up-end").value;
+        user["wakeupStart"] = document.getElementById("Wake-up-start").value;
+        user["wakeupEnd"] = document.getElementById("Wake-up-end").value;
         userTimeFields.innerHTML = "";
         buildTimeFields();
 

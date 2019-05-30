@@ -177,7 +177,7 @@ input:focus {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 2%;
+    margin-top: 3%;
 }
 
 .dropdown-fields {
