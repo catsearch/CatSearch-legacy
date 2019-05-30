@@ -1,7 +1,7 @@
 const filterButton = document.getElementById('filter-button');
 
 let users = sessionStorage.getItem("users");
-let user = null;
+let myUser = null;
 const userId = localStorage.getItem("userId");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
@@ -172,6 +172,14 @@ function filter() {
     }
     console.log(apiFields);
 
+    const savedCheckbox = document.getElementById("savedCheckbox");
+
+    let getSaved = savedCheckbox && savedCheckbox.checked;
+
+    if(getSaved) {
+        getUser();
+    }
+
     if (!validInputs()) {
         return;
     } else {
@@ -186,9 +194,17 @@ function filter() {
             })
             .then(json => {
                 removeChildren();
-                for (user of json.users) {
-                    const newTile = userTile(user);
-                    userTiles.appendChild(newTile);
+                for (filteredUser of json.users) {
+                    if(getSaved){
+                        if(myUser.savedUsers.includes(filteredUser._id)) {
+                            const newTile = userTile(filteredUser);
+                            userTiles.appendChild(newTile);
+                        }
+                    }
+                    else {
+                        const newTile = userTile(filteredUser);
+                        userTiles.appendChild(newTile);
+                    }
                 }
             })
     }
@@ -205,14 +221,15 @@ function getUser() {
         .then(json => {
             console.log("hi")
             if (json.success) {
-                user = json.user;
+                myUser = json.user;
             } else {
-                user = defaultUser;
+                myUser = null;
             }
+            constructList();
         })
         .catch(err => {
             console.log(err);
             //THESE ARE JUST FOR OFF_SERVER STUFF
-            user = defaultUser
+            myUser = null;
         })
 }
