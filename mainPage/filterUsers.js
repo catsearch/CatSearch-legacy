@@ -301,6 +301,9 @@ function buildHourArray(start, end) {
     for(let i = 0; i < 24; i++) {
         validHours.push(false);
     }
+    if (isNaN(start) || isNaN(end)) {
+        return validHours;
+    }
     let current = start;
     while(current != end) {
         validHours[current] = true;
