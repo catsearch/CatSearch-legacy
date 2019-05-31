@@ -74,13 +74,31 @@ const userTile = (user) => {
 
 const profilePicture = (picUrl) => {
     const profPic = document.createElement('img');
-    profPic.className = 'profile-picture';
     profPic.src = picUrl;
+
+    const profPicWrapper = document.createElement('div');
+    profPicWrapper.className = 'profile-picture-wrapper';
+
+    function handleResizing() {
+        if (profPic.naturalHeight > profPic.naturalWidth) {
+            profPic.height = profPicWrapper.offsetHeight;
+            profPic.width = profPic.height * (profPic.naturalWidth / profPic.naturalHeight);
+        } else {
+            profPic.width = profPicWrapper.offsetWidth;
+            profPic.height = profPic.width * (profPic.naturalHeight / profPic.naturalWidth);
+        }
+    }
+
     profPic.onerror = () => {
         profPic.src = defaultIcon;
     }
 
-    return profPic;
+    profPic.onload = () => {
+        handleResizing();
+    }
+
+    profPicWrapper.appendChild(profPic);
+    return profPicWrapper;
 }
 
 const saveIndicate = (user) => {

@@ -317,7 +317,8 @@ function buildHourArray(start, end) {
 }
 
 function getUser() {
-    fetch(apiUrl + userId, {
+    const fetchUrl = (userId !== null && userId !== "null")? apiUrl + userId : apiUrl;
+    fetch(fetchUrl, {
         method: "GET",
         headers: apiHeader
     })
@@ -325,7 +326,6 @@ function getUser() {
             return response.json();
         })
         .then(json => {
-            console.log("hi")
             if (json.success) {
                 myUser = json.user;
             } else {
@@ -335,7 +335,6 @@ function getUser() {
         })
         .catch(err => {
             console.log(err);
-            //THESE ARE JUST FOR OFF_SERVER STUFF
             myUser = null;
         })
 }

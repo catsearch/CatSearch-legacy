@@ -315,10 +315,14 @@ button:focus {
     box-shadow: 5px 5px rgba(0,0,0, 0.4);
 }
 
-.profile-picture {
-    height: 95%;
+.profile-picture-wrapper {
     margin: 2%;
-    border-radius: 2.5%;
+    height: 100%;
+    width: 15%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .user-info {
