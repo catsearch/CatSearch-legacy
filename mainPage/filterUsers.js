@@ -218,9 +218,12 @@ function filter() {
                         userTiles.appendChild(newTile);
                     }
                 }
+                maxPage = findMaxPage(newUsers.length);
+                setPage();
+                setPageButtonColors();
+                setTotalPageNumber();
             })
     }
-    
 
 };
 
@@ -300,6 +303,9 @@ function buildHourArray(start, end) {
     let validHours = [];
     for(let i = 0; i < 24; i++) {
         validHours.push(false);
+    }
+    if (isNaN(start) || isNaN(end)) {
+        return validHours;
     }
     let current = start;
     while(current != end) {

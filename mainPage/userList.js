@@ -168,9 +168,10 @@ function getUsers() {
                 if (users.length !== 0) {
                     getUser();
                     //constructList();
-                    maxPage = Math.floor(users.length  / 10);
+                    maxPage = findMaxPage(users.length);
                     setPageButtonColors();
                     setTotalPageNumber();
+                    setPage();
                 } else {
                     console.log("You deleted this user via Postman but didn't log out first :(");
                     constructSampleList();
@@ -185,9 +186,10 @@ function getUsers() {
         console.log("There are no users with those filters.");
     } else {
         constructList();
-        maxPage = Math.floor(users.length  / 10);
+        maxPage = findMaxPage(users.length);
         setPageButtonColors();
         setTotalPageNumber();
+        setPage();
     }
 }
 
@@ -198,6 +200,24 @@ if (externalSearch !== null) {
     externalSearch = null;
 } else {
     getUsers();
+}
+
+function findMaxPage(len) {
+    val = Math.floor(len  / 10);
+    if (len % 10 == 0) {
+        val = val -1
+    }
+    return val;
+}
+
+function setPage() {
+    if (maxPage === -1) {
+        pageInput.value = 0;
+        pageNum = -1;
+    } else {
+        pageInput.value = 1;
+        pageNum = 0;
+    }
 }
 
 function prevPage() {
