@@ -206,10 +206,6 @@ function filter() {
                 removeChildren();
                 let newUsers = json.users;
                 newUsers = filterTime(checkTimeArray, newUsers);
-                maxPage = findMaxPage(newUsers.length);
-                setPageButtonColors();
-                setTotalPageNumber();
-                setPage();
                 for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
@@ -222,6 +218,10 @@ function filter() {
                         userTiles.appendChild(newTile);
                     }
                 }
+                maxPage = findMaxPage(newUsers.length);
+                setPage();
+                setPageButtonColors();
+                setTotalPageNumber();
             })
     }
 

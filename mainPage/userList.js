@@ -213,8 +213,10 @@ function findMaxPage(len) {
 function setPage() {
     if (maxPage === -1) {
         pageInput.value = 0;
+        pageNum = -1;
     } else {
         pageInput.value = 1;
+        pageNum = 0;
     }
 }
 
