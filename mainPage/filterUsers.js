@@ -329,7 +329,6 @@ function getUser() {
         })
         .catch(err => {
             console.log(err);
-            //THESE ARE JUST FOR OFF_SERVER STUFF
             myUser = null;
         })
 }
