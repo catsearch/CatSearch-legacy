@@ -275,6 +275,7 @@ function edit() {
         profilePicture(profPicInput.value);
 
         saveUserInfo();
+        fetchUser();
     }
 }
 
