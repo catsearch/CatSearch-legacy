@@ -16,7 +16,7 @@ const filterFields = {
     "School" : ["Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
     "Area" : ["North", "Mid", "South"],
     "Cleanliness" : ["High", "Medium", "Low"],
-    "Smoking" : ["Smoking", "No"],
+    "Smoking" : ["Yes", "No"],
     "Playing Music" : ["Often", "Sometimes", "Never"]
 }
 
