@@ -206,18 +206,24 @@ function filter() {
                 removeChildren();
                 let newUsers = json.users;
                 newUsers = filterTime(checkTimeArray, newUsers);
+                if(getSaved) {
+                    users = [];
+                }
                 for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
-                            const newTile = userTile(filteredUser);
-                            userTiles.appendChild(newTile);
+                            users.push(filteredUser)
+                            //const newTile = userTile(filteredUser);
+                            //userTiles.appendChild(newTile);
                         }
                     }
                     else {
-                        const newTile = userTile(filteredUser);
-                        userTiles.appendChild(newTile);
+                        users = newUsers
+                        //const newTile = userTile(filteredUser);
+                        //userTiles.appendChild(newTile);
                     }
                 }
+                constructList();
                 maxPage = findMaxPage(newUsers.length);
                 setPage();
                 setPageButtonColors();

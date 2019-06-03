@@ -29,6 +29,10 @@ function search() {
                 } else {
                     //rip
                 }
+                maxPage = findMaxPage(newUsers.length);
+                setPage();
+                setPageButtonColors();
+                setTotalPageNumber();
             })
             .catch(err => {
                 console.log(err);
