@@ -155,90 +155,13 @@ function edit() {
         userNameField.innerHTML = "<input id=\"name-input\" type=\"text\" value=\"" + user.name + "\">";
 
         // Dropdown fields
-        userDropdownFields.innerHTML = "";
-        for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
-            const tempHTML = document.createElement("div");
-            tempHTML.setAttribute("class", "edit-field-wrapper");
-            const label = document.createElement("label");
-            label.innerHTML = fieldName;
-            label.setAttribute("class", "edit-field-label");
-            const select = document.createElement("select");
-            select.setAttribute("class", "edit-field-select");
-            select.setAttribute("id", fieldName.toLowerCase());
-            for (let [i, val] of fieldValues.entries()) {
-                let option = document.createElement("option");
-                option.setAttribute("value", i);
-                option.innerHTML += val;
-                if(val === user[fieldName.toLowerCase()]){
-                    option.selected = true;
-                }
-                select.appendChild(option);
-            }
-
-            tempHTML.appendChild(label);
-            tempHTML.appendChild(select);
-            tempHTML.classList.toggle("edit-field-active");
-            userDropdownFields.appendChild(tempHTML);
-        }
+        editDropdown();
 
         // Time
-        userTimeFields.innerHTML = ""
-        for (let name of ["Bedtime", "Wake-up"]){
-            // Big container
-            let timeSection = document.createElement("div");
-            timeSection.setAttribute("class", "time-sections-wrapper");
-            // Label
-            let timeLabel = document.createElement("label");
-            timeLabel.setAttribute("class", "time-label");
-            timeLabel.innerHTML += name;
-            // input container
-            let timeInputs = document.createElement("div");
-            timeInputs.setAttribute("class","time-sections")
-            // Start stuff
-            let timeStart = document.createElement("div");
-            timeStart.setAttribute("class", "time-input-wrapper");
-            let timeInputStart = document.createElement("input");
-            let timeLabelFrom = document.createElement("label");
-            
-            // End stuff
-            let timeEnd = document.createElement("div");
-            timeEnd.setAttribute("class", "time-input-wrapper");
-            let timeLabelTo = document.createElement("label");
-            let timeInputEnd = document.createElement("input");
-
-            timeInputStart.setAttribute("type", "time");
-            timeInputStart.setAttribute("id", name+"-start");
-            timeLabelFrom.innerHTML = "From:";
-
-            timeInputEnd.setAttribute("type", "time");
-            timeInputEnd.setAttribute("id", name+"-end");
-            timeLabelTo.innerHTML = "To:";
-            if (name === "Bedtime") {
-                timeInputStart.defaultValue = "21:00";
-                timeInputEnd.defaultValue = "00:00";
-            } else {
-                timeInputStart.defaultValue = "08:00";
-                timeInputEnd.defaultValue = "10:00";
-            }
-            timeStart.appendChild(timeLabelFrom);
-            timeStart.appendChild(timeInputStart);
-
-            timeEnd.appendChild(timeLabelTo);
-            timeEnd.appendChild(timeInputEnd);
-
-            timeInputs.appendChild(timeStart);
-            timeInputs.appendChild(timeEnd);
-
-            timeSection.appendChild(timeLabel);
-            timeSection.appendChild(timeInputs);
-            userTimeFields.append(timeSection)
-        }
+        editTime();
 
         // Blurb
-        userBlurbField.innerHTML = "<textarea id=\"blurb-field\"></textarea>";
-        userBlurbField.style.border = "2px solid black";
-        blurbField = document.getElementById("blurb-field");
-        blurbField.innerHTML = user.blurb
+        editBlurb();
     }
     // saving
     else {
@@ -277,6 +200,95 @@ function edit() {
         saveUserInfo();
         fetchUser();
     }
+}
+
+function editDropdown() {
+    userDropdownFields.innerHTML = "";
+    for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
+        const tempHTML = document.createElement("div");
+        tempHTML.setAttribute("class", "edit-field-wrapper");
+        const label = document.createElement("label");
+        label.innerHTML = fieldName;
+        label.setAttribute("class", "edit-field-label");
+        const select = document.createElement("select");
+        select.setAttribute("class", "edit-field-select");
+        select.setAttribute("id", fieldName.toLowerCase());
+        for (let [i, val] of fieldValues.entries()) {
+            let option = document.createElement("option");
+            option.setAttribute("value", i);
+            option.innerHTML += val;
+            if(val === user[fieldName.toLowerCase()]){
+                option.selected = true;
+            }
+            select.appendChild(option);
+        }
+
+        tempHTML.appendChild(label);
+        tempHTML.appendChild(select);
+        tempHTML.classList.toggle("edit-field-active");
+        userDropdownFields.appendChild(tempHTML);
+    }
+}
+
+function editTime() {
+    userTimeFields.innerHTML = ""
+    for (let name of ["Bedtime", "Wake-up"]){
+        // Big container
+        let timeSection = document.createElement("div");
+        timeSection.setAttribute("class", "time-sections-wrapper");
+        // Label
+        let timeLabel = document.createElement("label");
+        timeLabel.setAttribute("class", "time-label");
+        timeLabel.innerHTML += name;
+        // input container
+        let timeInputs = document.createElement("div");
+        timeInputs.setAttribute("class","time-sections")
+        // Start stuff
+        let timeStart = document.createElement("div");
+        timeStart.setAttribute("class", "time-input-wrapper");
+        let timeInputStart = document.createElement("input");
+        let timeLabelFrom = document.createElement("label");
+        
+        // End stuff
+        let timeEnd = document.createElement("div");
+        timeEnd.setAttribute("class", "time-input-wrapper");
+        let timeLabelTo = document.createElement("label");
+        let timeInputEnd = document.createElement("input");
+
+        timeInputStart.setAttribute("type", "time");
+        timeInputStart.setAttribute("id", name+"-start");
+        timeLabelFrom.innerHTML = "From:";
+
+        timeInputEnd.setAttribute("type", "time");
+        timeInputEnd.setAttribute("id", name+"-end");
+        timeLabelTo.innerHTML = "To:";
+        if (name === "Bedtime") {
+            timeInputStart.defaultValue = "21:00";
+            timeInputEnd.defaultValue = "00:00";
+        } else {
+            timeInputStart.defaultValue = "08:00";
+            timeInputEnd.defaultValue = "10:00";
+        }
+        timeStart.appendChild(timeLabelFrom);
+        timeStart.appendChild(timeInputStart);
+
+        timeEnd.appendChild(timeLabelTo);
+        timeEnd.appendChild(timeInputEnd);
+
+        timeInputs.appendChild(timeStart);
+        timeInputs.appendChild(timeEnd);
+
+        timeSection.appendChild(timeLabel);
+        timeSection.appendChild(timeInputs);
+        userTimeFields.append(timeSection)
+    }
+}
+
+function editBlurb() {
+    userBlurbField.innerHTML = "<textarea id=\"blurb-field\"></textarea>";
+    userBlurbField.style.border = "2px solid black";
+    blurbField = document.getElementById("blurb-field");
+    blurbField.innerHTML = user.blurb
 }
 
 function saveUserInfo() {
