@@ -48,6 +48,7 @@ const totalPages = document.getElementById("total-number-pages");
 let pageInput = document.getElementById("page-number-input");
 const errorPageControls = document.getElementsByClassName("error-page-controls");
 let errorMessageDisplayed = false;
+let loadCircle = document.getElementById("loading");
 
 const userTile = (user) => {
     const tile = document.createElement('div');
@@ -169,6 +170,7 @@ function constructSampleList() {
 }
 
 function getUsers() {
+    loadCircle.style.opacity = "1";
     hideEmptyText();
     if (!users) {
         const fetchUrl = (userId !== "null" && userId !== null) ? `${apiUrl + userId}/others` : apiUrl;
@@ -198,6 +200,9 @@ function getUsers() {
                     console.log("You deleted this user via Postman but didn't log out first :(");
                     constructSampleList();
                 }
+            })
+            .then(() => {
+                loadCircle.style.opacity = "0";
             })
             .catch(err => {
                 console.log(err);
