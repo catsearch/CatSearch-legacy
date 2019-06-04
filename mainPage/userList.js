@@ -184,12 +184,12 @@ function getUsers() {
             })
             .then(() => {
                 if (users.length !== 0) {
-                    getUser();
                     //constructList();
                     maxPage = findMaxPage(users.length);
                     setPageButtonColors();
                     setTotalPageNumber();
                     setPage();
+                    getUser();
                 } else {
                     console.log("You deleted this user via Postman but didn't log out first :(");
                     constructSampleList();
@@ -203,11 +203,11 @@ function getUsers() {
     } else if (users == []) {
         console.log("There are no users with those filters.");
     } else {
-        constructList();
         maxPage = findMaxPage(users.length);
         setPageButtonColors();
         setTotalPageNumber();
         setPage();
+        constructList();
     }
 }
 

@@ -229,6 +229,7 @@ input:focus {
     height:100%;
     font-size: 12pt;
     line-height: 1.5;
+    outline-width: none;
 }
 
 #name-input {

@@ -16,7 +16,7 @@ const filterFields = {
     "School" : ["Bienen", "McCormick", "Medill", "SESP", "SoC", "WCAS"],
     "Area" : ["North", "Mid", "South"],
     "Cleanliness" : ["High", "Medium", "Low"],
-    "Smoking" : ["Smoking", "No"],
+    "Smoking" : ["Yes", "No"],
     "Playing Music" : ["Often", "Sometimes", "Never"]
 }
 
@@ -206,22 +206,24 @@ function filter() {
                 removeChildren();
                 let newUsers = json.users;
                 newUsers = filterTime(checkTimeArray, newUsers);
+                if(getSaved) {
+                    users = [];
+                }
                 for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
-                            const newTile = userTile(filteredUser);
-                            userTiles.appendChild(newTile);
+                            users.push(filteredUser);
                         }
                     }
                     else {
-                        const newTile = userTile(filteredUser);
-                        userTiles.appendChild(newTile);
+                        users = newUsers;
                     }
                 }
                 maxPage = findMaxPage(newUsers.length);
                 setPage();
                 setPageButtonColors();
                 setTotalPageNumber();
+                constructList();
             })
     }
 
