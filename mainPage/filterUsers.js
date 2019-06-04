@@ -212,15 +212,11 @@ function filter() {
                 for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
-                            users.push(filteredUser)
-                            //const newTile = userTile(filteredUser);
-                            //userTiles.appendChild(newTile);
+                            users.push(filteredUser);
                         }
                     }
                     else {
-                        users = newUsers
-                        //const newTile = userTile(filteredUser);
-                        //userTiles.appendChild(newTile);
+                        users = newUsers;
                     }
                 }
                 constructList();
