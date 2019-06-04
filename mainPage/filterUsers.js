@@ -219,7 +219,7 @@ function filter() {
                         users = newUsers;
                     }
                 }
-                maxPage = findMaxPage(newUsers.length);
+                maxPage = findMaxPage(users.length);
                 setPage();
                 setPageButtonColors();
                 setTotalPageNumber();
