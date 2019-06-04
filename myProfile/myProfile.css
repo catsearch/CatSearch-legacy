@@ -248,6 +248,14 @@ input:focus {
     width: 92%;
 }
 
+#error-text {
+    display: none;
+    margin-top: 2%;
+    margin-left: 7%;
+    color: red;
+    font-size: 90%;
+}
+
 #prof-pic-header {
     display: none;
     margin-top: 5%;

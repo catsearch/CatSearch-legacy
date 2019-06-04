@@ -5,6 +5,7 @@ const editButton = document.getElementById("user-edit-button");
 const profPicTitle = document.getElementById("prof-pic-header");
 const profPicInput = document.getElementById("prof-pic-input");
 const searchingButton = document.getElementById("searching");
+const errorText = document.getElementById("error-text");
 const apiUrl = 'http://localhost:8080/user/';
 const apiHeader = {"Content-Type": "application/json"};
 let user = null;
@@ -148,6 +149,7 @@ function edit() {
     toggleSearchingButton();
     // editing
     if(!editing) {
+        errorText.style.display = "none";
         editButton.innerHTML = "Save";
         editing = true;
 
@@ -309,7 +311,10 @@ function profilePicture(picUrl) {
 
 function setDefaultPic() {
     profPic.src = defaultIcon;
-    profPicInput.value = "";
+    if (profPicInput.value != "") {
+        profPicInput.value = "";
+        errorText.style.display = "block";
+    }
 }
 
 const contactInfo = (user) => {

@@ -74,6 +74,7 @@ const userTile = (user) => {
 
 const profilePicture = (picUrl) => {
     const profPic = document.createElement('img');
+    profPic.alt = "Profile Picture";
     profPic.src = picUrl;
 
     const profPicWrapper = document.createElement('div');
@@ -151,8 +152,10 @@ function constructList() {
         if (i >= users.length) {
             break;
         } else {
-            const newTile = userTile(users[i]);
-            userTiles.appendChild(newTile);
+            if (users[i]) {
+                const newTile = userTile(users[i]);
+                userTiles.appendChild(newTile);
+            }
         }
     }
 }
@@ -166,7 +169,8 @@ function constructSampleList() {
 }
 
 function getUsers() {
-    if (!users && users != []) {
+    hideEmptyText();
+    if (!users) {
         const fetchUrl = (userId !== "null" && userId !== null) ? `${apiUrl + userId}/others` : apiUrl;
         fetch(fetchUrl, {
             method: "GET",
@@ -179,7 +183,7 @@ function getUsers() {
                 if (json.success) {
                     users = json.users;
                 } else {
-                    //there are no users!
+                    showEmptyText();
                 }
             })
             .then(() => {
@@ -200,8 +204,9 @@ function getUsers() {
                 constructSampleList();
                 return;
             })
-    } else if (users == []) {
-        console.log("There are no users with those filters.");
+    } else if (users.length === 0) {
+        showEmptyText();
+        constructList();
     } else {
         maxPage = findMaxPage(users.length);
         setPageButtonColors();
@@ -209,6 +214,15 @@ function getUsers() {
         setPage();
         constructList();
     }
+}
+
+const emptyText = document.getElementById("no-users");
+function showEmptyText() {
+    emptyText.style.display = "block";
+}
+
+function hideEmptyText() {
+    emptyText.style.display = "none";
 }
 
 let externalSearch = localStorage.getItem("externalSearch");
