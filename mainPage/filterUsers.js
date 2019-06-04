@@ -219,11 +219,11 @@ function filter() {
                         users = newUsers;
                     }
                 }
-                constructList();
                 maxPage = findMaxPage(newUsers.length);
                 setPage();
                 setPageButtonColors();
                 setTotalPageNumber();
+                constructList();
             })
     }
 
