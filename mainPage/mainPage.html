@@ -35,10 +35,10 @@
                 </div>
             </div>
             <div id="user-list">
-                <div id="user-tiles">
-                </div>
+                <div id="no-users">Oops! No users returned.</div>
+                <div id="user-tiles"></div>
                 <div class="error-page-controls">
-                    <label>Please input a valid page number</label>
+                    <label>Please input a valid page number.</label>
                 </div>
                 <div id="page-controls">
                     <button id="prev-page" class="page-buttons" onclick="prevPage();">Previous</button>
@@ -47,7 +47,7 @@
                         <input id="page-number-input" value=1 onkeyup="goToPage(event);" onfocusout="stayAtPage();">
                         <label id="total-number-pages">of </label>
                     </div>
-                    <button id="next-page" class = "page-buttons" onclick="nextPage();">Next</button>
+                    <button id="next-page" class="page-buttons" onclick="nextPage();">Next</button>
                 </div>
             <div>
         </div>

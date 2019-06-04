@@ -12,7 +12,6 @@ function search() {
     } else {
         let apiBody = {};
         apiBody.text = (externalSearch === null) ? searchBar.value : externalSearch; //externalSearch defined in userList.js
-        console.log(apiBody.text);
         fetch(apiUrl + `${userId}/search`, {
             method: "POST",
             headers: apiHeader,
@@ -23,11 +22,10 @@ function search() {
             })
             .then(json => {
                 if (json.success) {
-                    console.log(json.users);
                     users = json.users;
                     getUsers();
                 } else {
-                    //rip
+                    showEmptyText()
                 }
             })
             .catch(err => {

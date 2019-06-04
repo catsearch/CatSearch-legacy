@@ -289,6 +289,14 @@ button:focus {
     border: 1px solid black;
 }
 
+#no-users {
+    display: none;
+    margin-top: 3%;
+    align-self: center;
+    font-size: 125%;
+    font-weight: bold;
+}
+
 #user-tiles {
     display: block;
     padding: 1%;
