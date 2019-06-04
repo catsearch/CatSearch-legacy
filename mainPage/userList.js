@@ -74,6 +74,7 @@ const userTile = (user) => {
 
 const profilePicture = (picUrl) => {
     const profPic = document.createElement('img');
+    profPic.alt = "Profile Picture";
     profPic.src = picUrl;
 
     const profPicWrapper = document.createElement('div');
