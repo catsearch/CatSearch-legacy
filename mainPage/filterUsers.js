@@ -151,6 +151,7 @@ const validInputs = () => {
 }
 
 function filter() {
+    hideEmptyText();
     let apiFields = {};
 
     /*
@@ -171,7 +172,6 @@ function filter() {
         }
         apiFields[fieldName === "Playing Music"? "music" : fieldName.toLowerCase()] = currentArray;
     }
-    console.log(apiFields);
 
     const savedCheckbox = document.getElementById("savedCheckbox");
 
@@ -223,6 +223,9 @@ function filter() {
                 setPage();
                 setPageButtonColors();
                 setTotalPageNumber();
+                if (newUsers.length === 0) {
+                    showEmptyText();
+                }
                 constructList();
             })
     }
