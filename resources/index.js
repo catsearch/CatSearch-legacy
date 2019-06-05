@@ -1,1 +1,1 @@
-//window.location = "../mainPage/mainPage.html";
+window.location = "../mainPage/mainPage.html";
