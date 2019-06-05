@@ -2,7 +2,7 @@ const environment = "production";
 
 const config = {
     "development": "http://localhost:8081/",
-    "production": "http://catsearch-server.herokuapp.com/"
+    "production": "https://catsearch-server.herokuapp.com/"
 }
 
 const authRoute = `${config[environment]}auth/`
