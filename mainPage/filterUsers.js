@@ -213,15 +213,13 @@ function filter(getSaved) {
                 }
                 else {
                     newUsers = filterTime(checkTimeArray, newUsers);
+                    users = newUsers;
                 }
                 for (filteredUser of newUsers) {
                     if(getSaved){
                         if(myUser.savedUsers.includes(filteredUser._id)) {
                             users.push(filteredUser);
                         }
-                    }
-                    else {
-                        users = newUsers;
                     }
                 }
                 maxPage = findMaxPage(users.length);
