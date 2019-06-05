@@ -212,12 +212,14 @@ function getUsers() {
     } else if (users.length === 0) {
         showEmptyText();
         constructList();
+        loadCircle.style.opacity = "0";
     } else {
         maxPage = findMaxPage(users.length);
         setPageButtonColors();
         setTotalPageNumber();
         setPage();
         constructList();
+        loadCircle.style.opacity = "0";
     }
 }
 
