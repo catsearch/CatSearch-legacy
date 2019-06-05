@@ -3,7 +3,7 @@ const filterButton = document.getElementById('filter-button');
 let users = sessionStorage.getItem("users");
 let myUser = null;
 const userId = localStorage.getItem("userId");
-const apiUrl = 'http://localhost:8081/user/';
+const apiUrl = userRoute;
 const apiHeader = {"Content-Type": "application/json"};
 
 const yearElement = document.getElementById('filter-year');

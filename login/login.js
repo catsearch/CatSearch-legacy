@@ -3,7 +3,7 @@ const password = document.getElementById("password");
 const submit = document.getElementById("submit");
 const errorText = document.getElementById("error-text");
 
-const apiUrl = 'http://localhost:8081/auth/login/'
+const apiUrl = `${authRoute}login`;
 const apiHeader = {"Content-Type": "application/json"}
 
 submit.addEventListener('click', function() {
