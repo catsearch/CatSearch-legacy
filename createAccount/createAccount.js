@@ -5,7 +5,7 @@ const errorText = document.getElementById("error-text");
 const submit = document.getElementById("submit");
 const login = document.getElementById("login");
 
-const apiUrl = 'http://localhost:8080/auth/createAccount/'
+const apiUrl = 'http://localhost:8081/auth/createAccount/'
 const apiHeader = {"Content-Type": "application/json"}
 
 submit.addEventListener('click', function() {

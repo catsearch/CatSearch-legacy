@@ -3,7 +3,7 @@ const password = document.getElementById("password");
 const submit = document.getElementById("submit");
 const errorText = document.getElementById("error-text");
 
-const apiUrl = 'http://localhost:8080/auth/login/'
+const apiUrl = 'http://localhost:8081/auth/login/'
 const apiHeader = {"Content-Type": "application/json"}
 
 submit.addEventListener('click', function() {
@@ -83,8 +83,4 @@ function showErrorText(message) {
 
 document.getElementById("createAccount").addEventListener("click", () => {
     window.location = "../createAccount/createAccount.html";
-})
-
-document.getElementById("goToMain").addEventListener("click", () => {
-    window.location = "../mainPage/mainPage.html";
 })
