@@ -1,1 +1,1 @@
-window.location = "../CatSearch-client/mainPage/mainPage.html";
+window.location = "./mainPage/mainPage.html";
