@@ -61,6 +61,10 @@ function toggleDropdown() {
     }
 }
 
+function getSaved() {
+    filter(true);
+}
+
 searchBar.addEventListener("keyup", function(event) {
     // Number 13 is the "Enter" key on the keyboard
     if (event.keyCode === 13) {
@@ -98,6 +102,7 @@ function addDropdown(name) {
         <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
+            <a onclick="getSaved();">Saved Users</a>
             <a onclick="logout();">Log Out</a>
         </div>`
     dropdownText = document.getElementById("header-dropdown-text");

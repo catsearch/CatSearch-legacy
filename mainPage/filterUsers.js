@@ -125,9 +125,6 @@ function buildTimeFields(){
 }
 
 function init() {
-    if(userId) {
-        buildSavedCheckbox();
-    }
     /*buildYearList();*/
     buildFilterCheckboxes();
     buildTimeFields();
@@ -150,7 +147,7 @@ const validInputs = () => {
     return true;
 }
 
-function filter() {
+function filter(getSaved) {
     hideEmptyText();
     let apiFields = {};
 
@@ -164,18 +161,24 @@ function filter() {
 
     for (let [fieldName, fieldValues] of Object.entries(filterFields)) {
         let currentArray = [];
-        for (let [num, valueName] of fieldValues.entries()) {
-            const currentCheckbox = document.getElementById(valueName + "Checkbox");
-            if (currentCheckbox && currentCheckbox.checked) {
-                currentArray.push(valueName);
+        if(!getSaved) {
+            for (let [num, valueName] of fieldValues.entries()) {
+                const currentCheckbox = document.getElementById(valueName + "Checkbox");
+                if (currentCheckbox && currentCheckbox.checked) {
+                    currentArray.push(valueName);
+                }
             }
+        }
+        else{
+            for (let [num, valueName] of fieldValues.entries()) {
+                const currentCheckbox = document.getElementById(valueName + "Checkbox");
+                if (currentCheckbox && currentCheckbox.checked) {
+                    currentCheckbox.checked = false;
+                }
+            }  
         }
         apiFields[fieldName === "Playing Music"? "music" : fieldName.toLowerCase()] = currentArray;
     }
-
-    const savedCheckbox = document.getElementById("savedCheckbox");
-
-    let getSaved = savedCheckbox && savedCheckbox.checked;
 
     if(getSaved) {
         getUser();
@@ -205,9 +208,11 @@ function filter() {
             .then(json => {
                 removeChildren();
                 let newUsers = json.users;
-                newUsers = filterTime(checkTimeArray, newUsers);
                 if(getSaved) {
                     users = [];
+                }
+                else {
+                    newUsers = filterTime(checkTimeArray, newUsers);
                 }
                 for (filteredUser of newUsers) {
                     if(getSaved){
