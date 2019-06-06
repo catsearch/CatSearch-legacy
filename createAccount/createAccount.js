@@ -33,7 +33,7 @@ function createAccount() {
             submit.disabled = false;
             if (json.success) {
                 localStorage.setItem('userId', json._id);
-                window.location.href = '../mainPage/mainPage.html';
+                window.location.href = '../myProfile/myProfile.html';
             } else {
                 showErrorText("Account creation was unsuccessful.");
             }
