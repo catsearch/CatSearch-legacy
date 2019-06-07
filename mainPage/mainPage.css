@@ -111,15 +111,29 @@ input:focus {
 }
 
 #header-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20%;
-    text-align: center;
+    height: 100%;
     position: relative;
-    display: inline-block;
+}
+
+#header-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 3px;
 }
 
 #header-dropdown-text {
-    color: white;
+    color: black;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 100%;
 }
 
 #header-dropdown-content {
@@ -127,7 +141,7 @@ input:focus {
     position: absolute;
     cursor: pointer;
     background-color: #f1f1f1;
-    margin-top: 2%;
+    margin-top: 45%;
     right: 15%;
     left: 15%;
     width: 70%;
@@ -138,6 +152,7 @@ input:focus {
 #header-dropdown-content a {
     color: black;
     text-decoration: none;
+    text-align: center;
     padding: 8%;
     display: block;
     border-top: 1px solid #9d9d9d;
@@ -145,14 +160,11 @@ input:focus {
 
 #header-dropdown-content a:hover {background-color: #ddd}
 
-#login-button {
-    text-align: center;
-}
-
 #login-button-text {
     cursor: pointer;
-    color: white;
-    text-decoration-line: underline;
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
 }
 
 /* Filter Sidebar */

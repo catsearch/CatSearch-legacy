@@ -148,14 +148,18 @@ function removeChildren() {
 
 function constructList() {
     removeChildren();
-    let start = pageNum * 10;
-    for (let i = start; i < start + 10; i++) {
-        if (i >= users.length) {
-            break;
-        } else {
-            if (users[i]) {
-                const newTile = userTile(users[i]);
-                userTiles.appendChild(newTile);
+    if (users.length === 0) {
+        showEmptyText();
+    } else {
+        let start = pageNum * 10;
+        for (let i = start; i < start + 10; i++) {
+            if (i >= users.length) {
+                break;
+            } else {
+                if (users[i]) {
+                    const newTile = userTile(users[i]);
+                    userTiles.appendChild(newTile);
+                }
             }
         }
     }
