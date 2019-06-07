@@ -86,8 +86,8 @@ function addDropdown(name) {
 }
 
 function addLoginButton() {
-    headerMenu.innerHTML = `<div id="header-button">
-                                <span id="login-button-text" onclick="moveToLogin();">Sign In</span>
+    headerMenu.innerHTML = `<div id="header-button" onclick="moveToLogin();">
+                                <span id="login-button-text">Sign In</span>
                             </div>`
 }
 
