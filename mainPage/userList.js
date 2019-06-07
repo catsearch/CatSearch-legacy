@@ -1,3 +1,7 @@
+if (!(/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor))) {
+    window.location = 'https://www.google.com/chrome/';
+}
+
 const userTiles = document.getElementById('user-tiles');
 const defaultIcon = "../resources/DefaultProfile.png";
 const defaultUsers = [
