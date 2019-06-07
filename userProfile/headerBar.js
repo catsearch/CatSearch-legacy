@@ -76,7 +76,7 @@ function fetchUser() {
 
 function addDropdown(name) {
     headerMenu.innerHTML = `
-        <div id="header-button"><span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()">${name? name : "User"} &#x25BE</span></div>
+    <div id="header-button" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><span id="header-dropdown-text">${name? name : "User"} &#x25BE</span></div>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
             <a href="../mainPage/mainPage.html">Find Users</a>
