@@ -76,9 +76,10 @@ function fetchUser() {
 
 function addDropdown(name) {
     headerMenu.innerHTML = `
-        <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
+        <div id="header-button"><span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()">${name? name : "User"} &#x25BE</span></div>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
+            <a href="../mainPage/mainPage.html">Find Users</a>
             <a onclick="logout();">Log Out</a>
         </div>`
     dropdownText = document.getElementById("header-dropdown-text");
@@ -86,7 +87,9 @@ function addDropdown(name) {
 }
 
 function addLoginButton() {
-    headerMenu.innerHTML = `<div id="login-button"><span id="login-button-text" onclick="moveToLogin();">Login</span></div>`
+    headerMenu.innerHTML = `<div id="header-button">
+                                <span id="login-button-text" onclick="moveToLogin();">Sign In</span>
+                            </div>`
 }
 
 function logout() { 

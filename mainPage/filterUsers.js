@@ -149,6 +149,7 @@ const validInputs = () => {
 
 function filter(getSaved) {
     hideEmptyText();
+    loadCircle.style.opacity = "1";
     let apiFields = {};
 
     /*
@@ -194,6 +195,7 @@ function filter(getSaved) {
     }
 
     if (!validInputs()) {
+        loadCircle.style.opacity = "0";
         return;
     } else {
         const apiBody = JSON.stringify(apiFields);
@@ -226,6 +228,7 @@ function filter(getSaved) {
                 setPage();
                 setPageButtonColors();
                 setTotalPageNumber();
+                loadCircle.style.opacity = "0";
                 if (newUsers.length === 0) {
                     showEmptyText();
                 }

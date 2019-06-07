@@ -6,8 +6,10 @@ const searchBar = document.getElementById("search-bar");
 let mouse = false;
 
 function search() {
+    loadCircle.style.opacity = "1";
     if (searchBar.value === "" && externalSearch === null) {
         users = null;
+        loadCircle.style.opacity = "0";
         getUsers();
     } else {
         let apiBody = {};
@@ -21,14 +23,16 @@ function search() {
                 return response.json();
             })
             .then(json => {
+                loadCircle.style.opacity = "0";
                 if (json.success) {
                     users = json.users;
                     getUsers();
                 } else {
-                    showEmptyText()
+                    showEmptyText();
                 }
             })
             .catch(err => {
+                loadCircle.style.opacity = "0";
                 console.log(err);
             })
     }
@@ -99,7 +103,7 @@ function fetchUser() {
 
 function addDropdown(name) {
     headerMenu.innerHTML = `
-        <span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()"><u>${name? name : "User"}</u> &#x25BE</span>
+        <div id="header-button"><span id="header-dropdown-text" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);" onclick="toggleDropdown()">${name? name : "User"} &#x25BE</span></div>
         <div id="header-dropdown-content" onmouseover="mouseStatus(true);" onmouseout="mouseStatus(false);">
             <a href="../myProfile/myProfile.html">My Profile</a>
             <a onclick="getSaved(); toggleDropdown();">Saved Users</a>
@@ -110,13 +114,15 @@ function addDropdown(name) {
 }
 
 function addLoginButton() {
-    headerMenu.innerHTML = `<div id="login-button"><span id="login-button-text" onclick="moveToLogin();">Login</span></div>`
+    headerMenu.innerHTML = `<div id="header-button">
+                                <span id="login-button-text" onclick="moveToLogin();">Sign In</span>
+                            </div>`
 }
 
 function logout() { 
     if (window.confirm("Are you sure you want to logout?")) {
         localStorage.removeItem("userId");
-        moveToLogin();
+        window.location = "mainPage.html";
     }
 }
 
